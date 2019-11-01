@@ -11,6 +11,8 @@ gem 'webpacker', '~> 4.0'
 gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'bootstrap', '~> 4.3.1'
+
 group :development, :test do
   gem 'pry'
   gem 'rspec-rails', '~> 3.9.0'
