@@ -1,0 +1,27 @@
+<div class="container devise-form">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">
+        Create new league
+      </div>
+      <div class="card-body">
+        <%= form_for @league do |f| %>
+          <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <%= f.label :location %>
+            <%= f.text_field :location, class: 'form-control' %>
+          </div>
+          <div class="form-group form-check">
+            <%= f.check_box :public_league, class: 'form-check-input' %>
+            <%= f.label :public_league, class: 'form-check-label' %>
+          </div>
+          
+          <%= f.submit "Create League", class: 'btn btn-dark btn-block' %>
+        <% end %>      
+      </div>
+    </div>
+  </div>
+</div>
