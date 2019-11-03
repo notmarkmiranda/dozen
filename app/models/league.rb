@@ -3,7 +3,7 @@ class League < ApplicationRecord
   
   validates :name, uniqueness: true
   
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   
   after_create_commit :create_initial_admin
   
