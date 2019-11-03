@@ -1,0 +1,14 @@
+div.container > a.navbar-brand {
+  text-transform: uppercase;
+  color: red;
+  
+  & > span {
+    font-weight: bold;
+    color: white;
+  }
+  
+  &:hover {
+    text-decoration: none;
+    color: red;
+  }
+}
