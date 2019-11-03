@@ -1,4 +1,6 @@
 <div class="container">
   <%= link_to 'Create New League', new_league_path %>
-  DASHBOARD!
+  <% @leagues.each do |league| %>
+    <%= league.name %>
+  <% end %>
 </div>

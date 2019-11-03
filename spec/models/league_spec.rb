@@ -5,6 +5,9 @@ describe League, type: :model do
     it { should validate_uniqueness_of :name }
   end
   
-  describe 'relationships'
+  describe 'relationships' do 
+    it { should have_many :memberships }
+  end
+  
   describe 'methods'
 end
