@@ -11,9 +11,11 @@ gem 'webpacker', '~> 4.0'
 gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
-gem 'bootstrap', '~> 4.3.1'
+gem 'devise'
+gem 'pundit'
 
 group :development, :test do
+  gem 'factory_bot_rails'
   gem 'pry'
   gem 'rspec-rails', '~> 3.9.0'
 end
@@ -24,7 +26,9 @@ group :development do
 end
 
 group :test do
+  gem 'capybara'
   gem 'database_cleaner'
+  gem 'launchy'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false
 end
