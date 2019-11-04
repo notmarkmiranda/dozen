@@ -8,10 +8,10 @@ describe 'Admin can delete league', type: :feature do
   let(:league_name) { league.name }
   let(:user) { membership.user }
   
+  before { login_as(user, scope: :user) }
+  
   describe 'for admin on league' do
     let(:role) { 1 }
-    
-    before { login_as(user, scope: :user) }
     
     it 'delete the league and redirect to dashboard' do
       visit league_path(league)
@@ -20,6 +20,17 @@ describe 'Admin can delete league', type: :feature do
       
       expect(current_path).to eq(dashboard_path)
       expect(page).not_to have_content(league_name)
+    end
+  end
+  
+  describe 'for member on league' do
+    let(:role) { 0 }
+    
+    it 'does not show the delete button' do
+      visit league_path(league)
+      
+      expect(page).to have_content(league.name)
+      expect(page).not_to have_button('Delete league')
     end
   end
 end
