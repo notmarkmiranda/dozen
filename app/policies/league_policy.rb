@@ -12,13 +12,23 @@ class LeaguePolicy < ApplicationPolicy
     league.memberships.find_by(user: user)
   end
   
+  def edit?
+    user_is_admin?
+  end
+  
   def destroy?
-    league.memberships.find_by(user: user)&.admin?
+    user_is_admin?
   end
   
   class Scope < Scope
     def resolve
       scope.all
     end
+  end
+  
+  private
+  
+  def user_is_admin?
+    league.memberships.find_by(user: user)&.admin?
   end
 end

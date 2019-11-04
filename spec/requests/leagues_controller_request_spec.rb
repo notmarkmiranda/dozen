@@ -130,4 +130,7 @@ describe LeaguesController, type: :request do
       end
     end
   end
+  
+  describe 'GET#edit'
+  describe 'PATCH#update'
 end
