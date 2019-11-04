@@ -1,5 +1,7 @@
 class DashboardController < ApplicationController
   before_action :authenticate_user!
   
-  def show; end
+  def show
+    @leagues = current_user.leagues.decorate
+  end
 end

@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="league-actions">
+    <% if policy(@league).destroy? %>
+      <%= button_to "Delete league", @league, class: 'btn btn-outline-danger mr-2', method: :delete %>
+      <%= link_to "Edit league", edit_league_path(@league), class: 'btn btn-outline-secondary' %>
+    <% end %>
+  </div>
+  <%= @league.name %>
+</div>
