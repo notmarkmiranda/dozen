@@ -1,0 +1,16 @@
+<%= link_to league_path(league), class: "list-group-item list-group-item-action league-info" do %>
+  <div class="league-info">
+    <div class="league-location">
+      <small class="text-muted"><%= league.location %> | <%= league.public_text %></small>
+    </div>
+    <%= league.name %>
+    <div class="league-stats">
+      <small class="text-muted">
+        Game: 46 | Next Game: Not Scheduled | Average Pot: $118
+      </small>
+    </div>
+  </div>
+  <div class="user-role">
+    <small><%= league.admin_text %></small>
+  </div>
+<% end %>

@@ -1,33 +1,16 @@
 <div class="container">
-  <%= link_to 'Create New League', new_league_path %>
+  <div class="dashboard-actions mb-3">
+    <%= link_to 'Create New League', new_league_path, class: 'btn btn-outline-secondary' %>
+  </div>
   <div class="card">
     <div class="card-header">
       Leagues
     </div>
     <ul class="list-group list-group-flush">
       <% if @leagues.empty? %>
-        <li class="list-group-item">
-          You don't have any leagues, maybe try <%= link_to 'creating one', new_league_path %>.
-        </li>
+        <%= render partial: "no_leagues" %>
       <% else %>
-        <% @leagues.each do |league| %>
-          <li class="list-group-item league-info">
-            <div class="league-info">
-              <div class="league-location">
-                <small class="text-muted"><%= league.location %> | <%= league.public_text %></small>
-              </div>
-              <%= league.name %>
-              <div class="league-stats">
-                <small class="text-muted">
-                  Game: 46 | Next Game: Not Scheduled | Average Pot: $118
-                </small>
-              </div>
-            </div>
-            <div class="user-role">
-              <small><%= league.admin_text %></small>
-            </div>
-          </li>
-        <% end %>
+        <%= render partial: "league", collection: @leagues %>
       <% end %>
     </ul>
   </div>

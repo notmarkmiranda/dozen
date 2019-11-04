@@ -1,5 +1,10 @@
 class LeaguesController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create]
+  before_action :authenticate_user!, only: [:new, :create, :destroy]
+  
+  def show
+    @league = League.find(params[:id])
+    authorize @league
+  end
   
   def new
     @league = League.new
@@ -14,6 +19,13 @@ class LeaguesController < ApplicationController
       flash[:alert] = "Something went wrong"
       render :new
     end
+  end
+  
+  def destroy
+    @league = League.find(params[:id])
+    authorize @league
+    @league.destroy
+    redirect_to dashboard_path
   end
   
   private

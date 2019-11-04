@@ -3,6 +3,70 @@ require 'rails_helper'
 describe LeaguesController, type: :request do
   let(:user) { create(:user) }
   
+  describe 'GET#show' do
+    let(:league) { create(:league, public_league: public_league) }
+    
+    subject(:get_show) { get league_path(league) }
+    
+    describe 'public league' do
+      let(:public_league) { true }
+      
+      it 'has status 200' do
+        get_show
+        
+        expect(response).to have_http_status(200)
+      end
+    end
+    
+    describe 'private league' do
+      let(:public_league) { false }
+      
+      before do
+        sign_in(user)
+      end
+      
+      describe 'member or admin on league' do
+        before do
+          create(:membership, league: league, user: user, role: role)
+        end
+        
+        describe 'for member' do
+          let(:role) { 0 }
+          
+          it 'has status 200' do
+            get_show
+            
+            expect(response).to have_http_status(200)
+          end
+        end
+        
+        describe 'for admin' do
+          let(:role) { 1 }
+          
+          it 'has status 200' do
+            get_show
+            
+            expect(response).to have_http_status(200)
+          end
+        end
+      end
+      
+      describe 'for non-member / non-admin' do
+        it 'raises pundit not authorized error' do
+          expect { get_show }.to raise_error(Pundit::NotAuthorizedError)
+        end
+      end
+      
+      describe 'for visitor' do
+        before { sign_out(user) }
+        
+        it 'raises pundit not authorized error' do
+          expect { get_show }.to raise_error(Pundit::NotAuthorizedError)
+        end
+      end
+    end
+  end
+  
   describe 'GET#new' do
     subject(:get_new) { get new_league_path }
     
