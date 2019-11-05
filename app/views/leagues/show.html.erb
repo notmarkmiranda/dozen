@@ -1,15 +1,15 @@
-<div class="container">
+<div class="container mb-4">
   <div class="league-actions">
     <% if policy(@league).destroy? %>
       <%= button_to "Delete league", @league, class: 'btn btn-outline-danger mr-2', method: :delete %>
-      <%= link_to "Edit league", edit_league_path(@league), class: 'btn btn-outline-secondary' %>
+      <%= link_to "Edit league", edit_league_path(@league), class: 'btn btn-outline-secondary mr-4' %>
     <% end %>
   </div>
   <div class="league-show__info mt-4">
     <div class="league-show__name">
       <h2><%= @league.name %></h2>
-      <div class="league-show__location">
-        <small class="text-muted"><%= @league.location %></small>
+      <div class="league-show__location text-dark">
+        <%= @league.location %>
       </div>
     </div>
     <div class="row mt-4">
@@ -19,14 +19,15 @@
           <hr>
           <div class="row">
             <div class="col-md-6">
-              Games played: 64<br />
-              Start date: January 4, 2019<br />
-              Points leader: Michael Cassano - 24.79
+              Seasons Played: 4<br />
+              Games Played: 64<br />
+              Total Money: $1,290<br />
+              Points Leader: Michael Cassano - 24.79
             </div>
             <div class="col-md-6">
-              Total money: $1290<br />
-              Next game: not scheduled<br />
-              Cash leader: Mark Miranda - $200
+              Start Date: January 4, 2019<br />
+              Next Game: November 16, 2019<br />
+              Cash Leader: Mark Miranda - $200
             </div>
           </div>
         </div>
@@ -114,7 +115,7 @@
           </table>
         </div>
       </div>
-      <aside class="col-md-4 order-xs-0">
+      <aside class="col-md-4">
         <div class="league-show__game-results">
           <h4>Last Game Results</h4>
           <hr>
@@ -133,7 +134,8 @@
             <b>Location:</b> Mike's House<br />
             <b>Buy In:</b> $150<br />
             <b>Estimated Attendance:</b> 15<br />
-            <b>Estimated Pot Size:</b> $2,250
+            <b>Estimated Pot Size:</b> $2,250<br />
+            <b>Payout:</b> 1st: $1,135 - 2nd: $675 - 3rd: $450
           </div>
         </div>
       </aside>

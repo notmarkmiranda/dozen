@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :league do
-    name { "MyString" }
-    location { "MyString" }
+    name { "Super Duper" }
+    location { "Centennial" }
     public_league { false }
   end
 end
