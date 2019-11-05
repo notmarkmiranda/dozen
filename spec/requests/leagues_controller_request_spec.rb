@@ -112,6 +112,7 @@ describe LeaguesController, type: :request do
           post_create 
         }.to change(League, :count).by(1)
         .and change(Membership, :count).by(1)
+        .and change(Season, :count).by(1)
       end
     end
     
@@ -127,6 +128,7 @@ describe LeaguesController, type: :request do
           post_create
         }.to change(League, :count).by(0)
         .and change(Membership, :count).by(0)
+        .and change(Season, :count).by(0)
       end
     end
   end
