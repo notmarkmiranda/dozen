@@ -10,5 +10,19 @@ describe League, type: :model do
     it { should have_many :seasons }
   end
   
-  describe 'methods'
+  describe 'methods' do
+    let(:league) { create(:league) }
+    
+    describe '#active_season' do
+      subject(:active_season) { league.active_season }
+      
+      before { league.seasons.first.deactivate! }
+      
+      let!(:new_season) { create(:season, league: league, active_season: true) }
+      
+      it 'returns the active season' do
+        expect(active_season).to eq(new_season)
+      end
+    end
+  end
 end

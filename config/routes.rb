@@ -3,6 +3,11 @@ Rails.application.routes.draw do
   root "pages#index"
   
   resources :leagues
+  resources :seasons do
+    collection do
+      get 'confirm'
+    end
+  end
   
   get '/dashboard', to: 'dashboard#show', as: 'dashboard'
 end

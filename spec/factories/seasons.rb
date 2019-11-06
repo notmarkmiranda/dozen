@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :season do
-    league { nil }
-    active_season { false }
+    league
+    active_season { true }
     completed { false }
   end
 end

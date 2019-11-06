@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe 'Admin can edit league', type: :feature do
-  include Warden::Test::Helpers
-  
   let(:membership) { create(:membership, role: role) }
   let(:league) { membership.league }
   let(:user) { membership.user }

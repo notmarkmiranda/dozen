@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe 'User can create new league', type: :feature do
-  include Warden::Test::Helpers
-  
   let(:user) { create(:user) }
   let(:league_name) { "Super Duper League" }
   
