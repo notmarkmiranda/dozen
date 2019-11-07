@@ -34,6 +34,8 @@ describe 'Admin creating new season', type: :feature do
         end
         
         it 'clicking on Cancel' do
+          click_on "Cancel"
+          
           expect(current_path).to eq(league_path(league))
           expect(page).to have_content("Seasons: 1")
         end

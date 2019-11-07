@@ -11,17 +11,28 @@ class SeasonsController < ApplicationController
   end
   
   def confirm
-    # THIS IS WHERE YOU STOPPED
-    # RENDER A VIEW HERE
-    # REDIRECT BACK TO CREATE
-    # OR CREATE NEW ACTIONS 
-    # BASED ON WHAT WAS CHOSEN
+    @season = Season.find(params[:season_id])
+  end
+  
+  def deactivate
+    league = Season.find(params[:season_id]).league
+    league.seasons.deactivate_all!
+    league.seasons.create!
+    flash[:alert] = "New season created!"
+    redirect_to league_path(league)
+  end
+  
+  def leave
+    league = Season.find(params[:season_id]).league
+    league.seasons.create!(active_season: false)
+    flash[:alert] = "Inactive season created!"
+    redirect_to league_path(league)
   end
   
   private
   
   def confirmation
-    redirect_to confirm_seasons_path(league: @league) 
+    redirect_to season_confirm_path(@league.active_season) 
   end
   
   def season_params

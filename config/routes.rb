@@ -4,9 +4,9 @@ Rails.application.routes.draw do
   
   resources :leagues
   resources :seasons do
-    collection do
-      get 'confirm'
-    end
+    get 'confirm'
+    post 'deactivate'
+    post 'leave'
   end
   
   get '/dashboard', to: 'dashboard#show', as: 'dashboard'
