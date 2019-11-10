@@ -1,7 +1,8 @@
 require 'rails_helper'
 
 describe SeasonsController, type: :request do
-  let(:league) { create(:league) }
+  let!(:league) { create(:league) }
+  let(:season) { league.seasons.first }
 
   let(:season_params) do
     { season: { league_id: league.id } }
@@ -59,9 +60,53 @@ describe SeasonsController, type: :request do
     end
   end
 
-  describe 'GET#confirm'
+  describe 'GET#confirm' do
+    subject(:get_confirm) { get season_confirm_path(season) }
 
-  describe 'POST#deactivate'
+    it 'has 200 status' do
+      get_confirm
 
-  describe 'POST#leave'
+      expect(response).to have_http_status(200)
+    end
+  end
+
+  describe 'POST#deactivate' do
+    subject(:post_deactivate) { post season_deactivate_path(season) }
+
+    it 'creates a new season' do
+      expect { post_deactivate }.to change(Season, :count).by(1)
+    end
+
+    it 'deactivates other seasons' do
+      expect { 
+        post_deactivate; season.reload 
+      }.to change { season.active_season }
+    end
+
+    it 'has 302 status' do
+      post_deactivate
+
+      expect(response).to have_http_status(302)
+    end
+  end
+
+  describe 'POST#leave' do
+    subject(:post_leave) { post season_leave_path(season) }
+
+    it 'creates a new season' do
+      expect { post_leave }.to change(Season, :count).by(1)
+    end
+
+    it 'does not deactivate other season' do
+      expect {
+        post_leave; season.reload
+      }.not_to change { season.active_season }
+    end
+
+    it 'has 302 status' do
+      post_leave
+
+      expect(response).to have_http_status(302)
+    end
+  end
 end
