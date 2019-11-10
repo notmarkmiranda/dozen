@@ -5,6 +5,7 @@ class SeasonsController < ApplicationController
     if @league.seasons.create!
       flash[:alert] = "New season created."
     else
+      # NOTE: not sure we could ever hit this?
       flash[:alert] = "Something went wrong."
     end
     redirect_to @league

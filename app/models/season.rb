@@ -1,6 +1,10 @@
 class Season < ApplicationRecord
   belongs_to :league
   
+  def activate!
+    update!(active_season: true)
+  end
+
   def deactivate!
     update!(active_season: false)
   end
