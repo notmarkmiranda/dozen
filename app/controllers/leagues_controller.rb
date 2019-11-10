@@ -28,6 +28,7 @@ class LeaguesController < ApplicationController
 
   def update
     @league = League.find(params[:id])
+    authorize @league
     if @league.update(league_params)
       flash[:alert] = "League updated"
       redirect_to @league
@@ -49,6 +50,6 @@ class LeaguesController < ApplicationController
   def league_params
     params.require(:league)
       .permit(:name, :location, :public_league)
-      .merge(user_id: current_user.id)
+      .merge(user_id: current_user&.id)
   end
 end

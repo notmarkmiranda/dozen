@@ -2,10 +2,9 @@ require 'rails_helper'
 
 describe LeaguesController, type: :request do
   let(:user) { create(:user) }
+  let(:league) { create(:league, public_league: public_league) }
 
   describe 'GET#show' do
-    let(:league) { create(:league, public_league: public_league) }
-
     subject(:get_show) { get league_path(league) }
 
     describe 'public league' do
@@ -21,9 +20,7 @@ describe LeaguesController, type: :request do
     describe 'private league' do
       let(:public_league) { false }
 
-      before do
-        sign_in(user)
-      end
+      before { sign_in(user) }
 
       describe 'member or admin on league' do
         before do
@@ -152,6 +149,71 @@ describe LeaguesController, type: :request do
     end
   end
 
-  describe 'GET#edit'
-  describe 'PATCH#update'
+  describe 'GET#edit' do
+    let(:public_league) { true }
+
+    subject(:get_edit) { get edit_league_path(league) }
+
+    describe 'logged-in user' do
+      let(:user) { create(:membership, role: 1, league: league).user }
+      before { sign_in(user) }
+
+      it 'has status 200' do
+        get_edit
+
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    describe 'visitor' do
+      it 'raises pundit::NotAuthorizedError' do
+        expect {
+          get_edit
+        }.to raise_error(Pundit::NotAuthorizedError)
+      end
+    end
+  end
+
+  describe 'PATCH#update' do
+    let(:public_league) { false }
+    let(:league_params) { { league: { name: name } } }
+
+    subject(:patch_update) { patch league_path(league), params: league_params }
+
+    describe 'admin on league' do
+      let(:admin) { create(:membership, role: 1, league: league).user }
+
+      before { sign_in(admin) }
+
+      describe 'successful update' do
+        let(:name) { 'Update Name' }
+
+        it 'updates league' do
+          expect {
+            patch_update; league.reload
+          }.to change { league.name }
+        end
+      end
+
+      describe 'unsuccessful update' do
+        let(:name) { nil }
+
+        it 'does not update league' do
+          expect {
+            patch_update; league.reload
+          }.not_to change { league.name }
+        end
+      end
+    end
+
+    describe 'visitor' do
+      let(:name) { 'Super!' }
+
+      it 'raises NotAuthorizedError' do
+        expect{
+          patch_update
+        }.to raise_error(Pundit::NotAuthorizedError)
+      end
+    end
+  end
 end
