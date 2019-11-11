@@ -34,6 +34,10 @@ class ApplicationPolicy
     false
   end
 
+  def user_is_admin?(league)
+    league.memberships.find_by(user: user)&.admin?
+  end
+
   class Scope
     attr_reader :user, :scope
 

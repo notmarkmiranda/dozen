@@ -3,6 +3,11 @@
     <% if policy(@league).destroy? %>
       <%= button_to "Delete league", @league, class: 'btn btn-outline-danger mr-2', method: :delete %>
       <%= link_to "Edit league", edit_league_path(@league), class: 'btn btn-outline-secondary mr-4' %>
+    <% end %>
+    <% if @league.active_season %>
+      <%= link_to "Active season", season_path(@league.active_season), class: 'btn btn-outline-secondary mr-2' %>
+    <% end %>
+    <% if policy(@league).destroy? %>
       <%= button_to "Create new season", seasons_path(season: { league_id: @league.id }), class: 'btn btn-outline-secondary mr-2' %>
     <% end %>
   </div>

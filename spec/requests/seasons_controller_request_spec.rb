@@ -4,11 +4,66 @@ describe SeasonsController, type: :request do
   let!(:league) { create(:league) }
   let(:season) { league.seasons.first }
 
-  let(:season_params) do
-    { season: { league_id: league.id } }
+
+  describe 'GET#show' do
+    before { league.update(public_league: public_league) }
+
+    subject(:get_show) { get season_path(season) }
+
+    describe 'when the league is public' do
+      let(:public_league) { true }
+
+      it 'has 200 status' do
+        get_show
+
+        expect(response).to have_http_status(200)
+      end
+    end
+
+    describe 'when the league is private' do
+      let(:public_league) { false }
+
+      describe 'when user' do
+        let(:membership) { create(:membership, league: league, role: role) }
+        let(:user) { membership.user }
+
+        before { sign_in(user) }
+
+        describe 'is admin' do
+          let(:role) { 1 }
+
+          it 'has 200 status' do
+            get_show
+
+            expect(response).to have_http_status(200)
+          end
+        end
+
+        describe 'is member' do
+          let(:role) { 0 }
+
+          it 'has 200 status' do
+            get_show
+
+            expect(response).to have_http_status(200)
+          end
+        end
+      end
+
+      describe 'when visitor' do
+        let(:role) { 0 }
+
+        it 'raises Pundit::NotAuthorizedError' do
+            expect {
+              get_show
+            }.to raise_error(Pundit::NotAuthorizedError)
+        end
+      end
+    end
   end
 
   describe 'POST#create' do
+    let(:season_params) { { season: { league_id: league.id } } }
     subject(:post_create) { post seasons_path, params: season_params }
 
     describe 'league without other active seasons' do
@@ -78,8 +133,8 @@ describe SeasonsController, type: :request do
     end
 
     it 'deactivates other seasons' do
-      expect { 
-        post_deactivate; season.reload 
+      expect {
+        post_deactivate; season.reload
       }.to change { season.active_season }
     end
 
