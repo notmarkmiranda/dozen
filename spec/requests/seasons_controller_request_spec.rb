@@ -38,7 +38,7 @@ describe SeasonsController, type: :request do
             expect(response).to have_http_status(200)
           end
         end
-
+        
         describe 'is member' do
           let(:role) { 0 }
 
