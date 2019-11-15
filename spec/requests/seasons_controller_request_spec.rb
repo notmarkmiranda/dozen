@@ -38,7 +38,7 @@ describe SeasonsController, type: :request do
             expect(response).to have_http_status(200)
           end
         end
-        
+
         describe 'is member' do
           let(:role) { 0 }
 
@@ -115,6 +115,10 @@ describe SeasonsController, type: :request do
     end
   end
 
+  pending 'DELETE#destroy'
+
+  pending 'POST#complete'
+
   describe 'GET#confirm' do
     subject(:get_confirm) { get season_confirm_path(season) }
 
@@ -164,4 +168,6 @@ describe SeasonsController, type: :request do
       expect(response).to have_http_status(302)
     end
   end
+
+  describe 'POST#uncomplete'
 end
