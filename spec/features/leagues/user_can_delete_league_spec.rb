@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe 'Admin can delete league', type: :feature do
-  include Warden::Test::Helpers
-  
   let(:membership) { create(:membership, role: role) }
   let(:league) { membership.league }
   let(:league_name) { league.name }

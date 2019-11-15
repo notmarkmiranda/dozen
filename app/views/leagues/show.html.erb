@@ -1,9 +1,150 @@
-<div class="container">
+<div class="container mb-4">
   <div class="league-actions">
     <% if policy(@league).destroy? %>
       <%= button_to "Delete league", @league, class: 'btn btn-outline-danger mr-2', method: :delete %>
-      <%= link_to "Edit league", edit_league_path(@league), class: 'btn btn-outline-secondary' %>
+      <%= link_to "Edit league", edit_league_path(@league), class: 'btn btn-outline-secondary mr-4' %>
+    <% end %>
+    <% if @league.active_season %>
+      <%= link_to "Active season", season_path(@league.active_season), class: 'btn btn-outline-secondary mr-2' %>
+    <% end %>
+    <% if policy(@league).destroy? %>
+      <%= button_to "Create new season", seasons_path(season: { league_id: @league.id }), class: 'btn btn-outline-secondary mr-2' %>
     <% end %>
   </div>
-  <%= @league.name %>
+  <div class="league-show__info mt-4">
+    <div class="league-show__name">
+      <h2><%= @league.name %></h2>
+      <div class="league-show__location text-dark">
+        <%= @league.location %>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-8">
+        <div class="league-show__overview-stats">
+          <h4>League Overview</h4>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              Seasons: <%= @league.seasons.count %><br />
+              Games Played: 64<br />
+              Total Money: $1,290<br />
+              Points Leader: Michael Cassano - 24.79
+            </div>
+            <div class="col-md-6">
+              Start Date: January 4, 2019<br />
+              Next Game: November 16, 2019<br />
+              Cash Leader: Mark Miranda - $200
+            </div>
+          </div>
+        </div>
+        <div class="league-show__overview-standings mt-4">
+          <h4>Standings</h4>
+          <table class="table table-striped table-responsive-md">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Player</th>
+                <th scope="col">Points</th>
+                <th scope="col">Winnings</th>
+                <th scope="col">Games</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>Mark Miranda</td>
+                <td>27.25</td>
+                <td>$127</td>
+                <td>9</td>
+              </tr>
+              <tr>
+                <th scope="row">2</th>
+                <td>Michael Cassano</td>
+                <td>25.60</td>
+                <td>$120</td>
+                <td>9</td>
+              </tr>
+              <tr>
+                <th scope="row">3</th>
+                <td>Tyler Merry</td>
+                <td>25.50</td>
+                <td>$119</td>
+                <td>8</td>
+              </tr>
+              <tr>
+                <th scope="row">4</th>
+                <td>Marshall Houston</td>
+                <td>25.20</td>
+                <td>$117</td>
+                <td>9</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="league-show__overview-standings mt-4">
+          <h4>Games</h4>
+          <table class="table table-striped table-responsive-md">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">Date / Time</th>
+                <th scope="col">Winner</th>
+                <th scope="col">Pot Size</th>
+                <th scope="col"># of Players</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>October 12, 2019</td>
+                <td>Mark Miranda</td>
+                <td>$119</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td>September 27, 2019</td>
+                <td>Michael Cassano</td>
+                <td>$250</td>
+                <td>12</td>
+              </tr>
+              <tr>
+                <td>August 15, 2019</td>
+                <td>Tyler Merry</td>
+                <td>$120</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>July 10, 2019</td>
+                <td>Marshall Houston</td>
+                <td>$197</td>
+                <td>11</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <aside class="col-md-4">
+        <div class="league-show__game-results">
+          <h4>Last Game Results</h4>
+          <hr>
+          <div class="league-show__last-game">
+            <b>Date / Time:</b> October 12, 2019<br />
+            <b>Winner:</b> Mark Miranda<br />
+            <b>Pot Size:</b> $119<br />
+            <b># of Players:</b> 7
+          </div>
+        </div>
+        <div class="league-show__next-scheduled-game mt-4">
+          <h4>Next Scheduled Game</h4>
+          <hr>
+          <div class="league-show__next-scheduled-game">
+            <b>Date / Time:</b> November 16, 2019<br />
+            <b>Location:</b> Mike's House<br />
+            <b>Buy In:</b> $150<br />
+            <b>Estimated Attendance:</b> 15<br />
+            <b>Estimated Pot Size:</b> $2,250<br />
+            <b>Payout:</b> 1st: $1,135 - 2nd: $675 - 3rd: $450
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
 </div>

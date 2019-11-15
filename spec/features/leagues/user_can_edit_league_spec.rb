@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 describe 'Admin can edit league', type: :feature do
-  include Warden::Test::Helpers
-  
   let(:membership) { create(:membership, role: role) }
   let(:league) { membership.league }
   let(:user) { membership.user }
@@ -22,7 +20,7 @@ describe 'Admin can edit league', type: :feature do
       click_link "Edit league"
       fill_in "Name", with: new_name
       click_button "Update League"
-      
+
       expect(current_path).to eq(league_path(league))
       expect(page).to have_content(new_name)
       expect(page).not_to have_content(old_name)

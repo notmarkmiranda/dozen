@@ -1,0 +1,6 @@
+<div class="container">
+  <% if policy(@season).user_is_admin?(@season.league) %>
+    <%= @season.complete_or_uncomplete_buttons %>
+    <%= button_to "Delete Season", season_path(@season), class: 'btn btn-outline-danger mr-2', method: :delete %>
+  <% end %>
+</div>

@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row season-confirmation__container">
+    <div class="col-md-5">
+      <h3>Warning!</h3>
+      <p class="season-confirmation__text">
+        You have an existing season that is still active.
+      </p>
+      <p class="season-confirmation__text">
+        Do you want to deactivate your current season and create the new one? Or just create a new one without activating it?
+      </p>
+      <div class="season-confirmation__actions">
+        <%= button_to "Deactivate current season", season_deactivate_path(@season), class: 'btn btn-outline-danger btn-block mt-4' %>
+        <%= button_to "Leave current season", season_leave_path(@season), class: 'btn btn-outline-secondary btn-block mt-4' %>
+        <%= link_to "Cancel", league_path(@season.league), class: 'btn btn-outline-secondary btn-block mt-4'  %>
+      </div>
+    </div>
+  </div>
+</div>
