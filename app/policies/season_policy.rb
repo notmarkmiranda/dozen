@@ -15,7 +15,19 @@ class SeasonPolicy < ApplicationPolicy
     league.memberships.find_by(user: user)
   end
 
+  def destroy?
+    user_is_admin?(league)
+  end
 
+  # NON-REST ACTIONS
+
+  def complete?
+    user_is_admin?(league)
+  end
+
+  def uncomplete?
+    user_is_admin?(league)
+  end
 
   class Scope < Scope
     def resolve

@@ -18,6 +18,7 @@ class SeasonsController < ApplicationController
 
   def destroy
     season = Season.find(params[:id])
+    authorize season
     league = season.league
     season.destroy
     redirect_to league
@@ -26,6 +27,7 @@ class SeasonsController < ApplicationController
   # NON-REST ACTIONS :(
   def complete
     season = Season.find(params[:season_id])
+    authorize season
     season.deactivate_and_complete!
     redirect_to season.league
   end
@@ -51,6 +53,7 @@ class SeasonsController < ApplicationController
 
   def uncomplete
     season = Season.find(params[:season_id])
+    authorize season
     season.activate_and_uncomplete!
     redirect_to season.league
   end
