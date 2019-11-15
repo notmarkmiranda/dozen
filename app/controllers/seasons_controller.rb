@@ -16,6 +16,13 @@ class SeasonsController < ApplicationController
     redirect_to @league
   end
 
+  def destroy
+    season = Season.find(params[:id])
+    league = season.league
+    season.destroy
+    redirect_to league
+  end
+
   # NON-REST ACTIONS :(
   def complete
     season = Season.find(params[:season_id])
