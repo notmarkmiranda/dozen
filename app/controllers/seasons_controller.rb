@@ -19,7 +19,7 @@ class SeasonsController < ApplicationController
   # NON-REST ACTIONS :(
   def complete
     season = Season.find(params[:season_id])
-    season.update!(completed: true, active_season: false)
+    season.deactivate_and_complete!
     redirect_to season.league
   end
 
@@ -44,7 +44,7 @@ class SeasonsController < ApplicationController
 
   def uncomplete
     season = Season.find(params[:season_id])
-    season.update!(completed: false, active_season: true)
+    season.activate_and_uncomplete!
     redirect_to season.league
   end
 

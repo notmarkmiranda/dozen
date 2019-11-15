@@ -1,3 +1,5 @@
 <div class="container">
-  <%= @season.complete_or_uncomplete_buttons %>
+  <% if policy(@season).user_is_admin?(@season.league) %>
+    <%= @season.complete_or_uncomplete_buttons %>
+  <% end %>
 </div>

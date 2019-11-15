@@ -15,6 +15,8 @@ class SeasonPolicy < ApplicationPolicy
     league.memberships.find_by(user: user)
   end
 
+
+
   class Scope < Scope
     def resolve
       scope.all

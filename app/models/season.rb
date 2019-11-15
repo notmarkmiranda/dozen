@@ -2,11 +2,28 @@ class Season < ApplicationRecord
   belongs_to :league
 
   def activate!
+    # TODO: deactivate other seasons?
     update!(active_season: true)
+  end
+
+  def activate_and_uncomplete!
+    activate! && uncompleted!
+  end
+
+  def completed!
+    update!(completed: true)
   end
 
   def deactivate!
     update!(active_season: false)
+  end
+
+  def deactivate_and_complete!
+    deactivate! && completed!
+  end
+
+  def uncompleted!
+    update!(completed: false)
   end
 
   def not_completed?
