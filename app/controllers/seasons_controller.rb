@@ -1,6 +1,6 @@
 class SeasonsController < ApplicationController
   def show
-    @season = Season.find(params[:id])
+    @season = Season.find(params[:id]).decorate
     authorize @season
   end
 
@@ -14,6 +14,13 @@ class SeasonsController < ApplicationController
       flash[:alert] = "Something went wrong."
     end
     redirect_to @league
+  end
+
+  # NON-REST ACTIONS :(
+  def complete
+    season = Season.find(params[:season_id])
+    season.update!(completed: true, active_season: false)
+    redirect_to season.league
   end
 
   def confirm
@@ -33,6 +40,12 @@ class SeasonsController < ApplicationController
     league.seasons.create!(active_season: false)
     flash[:alert] = "Inactive season created!"
     redirect_to league_path(league)
+  end
+
+  def uncomplete
+    season = Season.find(params[:season_id])
+    season.update!(completed: false, active_season: true)
+    redirect_to season.league
   end
 
   private
