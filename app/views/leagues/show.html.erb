@@ -120,42 +120,28 @@
             </tbody>
           </table>
         </div>
-        <div class="league-show__overview-games mt-4">
+        <div class="league-show__overview-seasons mt-4">
           <h4>Seasons</h4>
-          <table class="table table-striped table-responsive-md">
+          <table class="table table-hover table-striped table-responsive-md">
             <thead class="thead-dark">
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Winner / Current Leader</th>
-                <th scope="col">Pot Size</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
                 <th scope="col"># of Games</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>Mark Miranda</td>
-                <td>$119</td>
-                <td>7</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Michael Cassano</td>
-                <td>$250</td>
-                <td>12</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Tyler Merry</td>
-                <td>$120</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>Marshall Houston</td>
-                <td>$197</td>
-                <td>11</td>
-              </tr>
+              <% @league.seasons.decorate.each do |season| %>
+                <tr class="league-show__seasons-table" data-link="<%= season_path(season) %>">
+                  <td><%= season.number_in_order %></td>
+                  <td><%= ["Mark", "Mike", "Tyler", "Marshall"].shuffle.pop %></td>
+                  <td>September 1, 2019</td>
+                  <td>N/A</td>
+                  <td><%= [24, 29, 67].shuffle.pop %></td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         </div>
