@@ -66,7 +66,10 @@ describe SeasonsController, type: :request do
     let(:season_params) { { season: { league_id: league.id } } }
     subject(:post_create) { post seasons_path, params: season_params }
 
+    before { login_as(user) }
+
     describe 'league without other active seasons' do
+      let(:role) { 1 }
       before { league.seasons.deactivate_all! }
 
       describe 'happy path, season gets created' do
@@ -91,6 +94,8 @@ describe SeasonsController, type: :request do
     end
 
     describe 'league with other active season' do
+      let(:role) { 1 }
+
       before { league.seasons.last.activate! }
 
       it 'has an active season' do
@@ -162,7 +167,11 @@ describe SeasonsController, type: :request do
   end
 
   describe 'POST#deactivate' do
+    let(:role) { 1 }
+
     subject(:post_deactivate) { post season_deactivate_path(season) }
+
+    before { login_as(user) }
 
     it 'creates a new season' do
       expect { post_deactivate }.to change(Season, :count).by(1)
@@ -182,7 +191,11 @@ describe SeasonsController, type: :request do
   end
 
   describe 'POST#leave' do
+    let(:role) { 1 }
+
     subject(:post_leave) { post season_leave_path(season) }
+
+    before { login_as(user) }
 
     it 'creates a new season' do
       expect { post_leave }.to change(Season, :count).by(1)

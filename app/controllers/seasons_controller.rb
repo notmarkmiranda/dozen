@@ -6,6 +6,7 @@ class SeasonsController < ApplicationController
 
   def create
     @league = League.find(season_params[:league_id])
+    authorize @league, policy_class: SeasonPolicy
     return confirmation if @league.seasons.any_active?
     if @league.seasons.create!
       flash[:alert] = "New season created."
@@ -37,7 +38,9 @@ class SeasonsController < ApplicationController
   end
 
   def deactivate
-    league = Season.find(params[:season_id]).league
+    season = Season.find(params[:season_id])
+    authorize season
+    league = season.league
     league.seasons.deactivate_all!
     league.seasons.create!
     flash[:alert] = "New season created!"
@@ -45,7 +48,9 @@ class SeasonsController < ApplicationController
   end
 
   def leave
-    league = Season.find(params[:season_id]).league
+    season = Season.find(params[:season_id])
+    authorize season
+    league = season.league
     league.seasons.create!(active_season: false)
     flash[:alert] = "Inactive season created!"
     redirect_to league_path(league)
