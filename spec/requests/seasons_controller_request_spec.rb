@@ -169,6 +169,46 @@ describe SeasonsController, type: :request do
     end
   end
 
+  describe 'POST#count' do
+    let(:role) { 1 }
+
+    subject(:post_count) { post season_count_path(season) }
+
+    before { login_as(user) }
+
+    describe 'when count_in_standings is false' do
+      before { season.uncount! }
+
+      it 'changes count_in_standings to true' do
+        expect {
+          post_count; season.reload
+        }.to change{ season.count_in_standings }.to(true)
+      end
+
+      it 'has 302 status' do
+        post_count
+
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe 'when count_in_standings is true' do
+      before { season.count! }
+
+      it 'does not change count_in_standings from true' do
+        expect {
+          post_count; season.reload
+        }.not_to change { season.count_in_standings }.from(true)
+      end
+
+      it 'has 302 status' do
+        post_count
+
+        expect(response).to have_http_status(302)
+      end
+    end
+  end
+
   describe 'POST#deactivate' do
     let(:role) { 1 }
 
@@ -238,6 +278,46 @@ describe SeasonsController, type: :request do
       post_uncomplete
 
       expect(response).to have_http_status(302)
+    end
+  end
+
+  describe 'POST#uncount' do
+    let(:role) { 1 }
+
+    subject(:post_uncount) { post season_uncount_path(season) }
+
+    before { login_as(user) }
+
+    describe 'when count_in_standings is false' do
+      before { season.uncount! }
+
+      it 'does not changes count_in_standings from false' do
+        expect {
+          post_uncount; season.reload
+        }.not_to change{ season.count_in_standings }.from(false)
+      end
+
+      it 'has 302 status' do
+        post_uncount
+
+        expect(response).to have_http_status(302)
+      end
+    end
+
+    describe 'when count_in_standings is true' do
+      before { season.count! }
+
+      it 'changes count_in_standings to false' do
+        expect {
+          post_uncount; season.reload
+        }.to change { season.count_in_standings }.to(false)
+      end
+
+      it 'has 302 status' do
+        post_uncount
+
+        expect(response).to have_http_status(302)
+      end
     end
   end
 end

@@ -1,8 +1,7 @@
 class SeasonsController < ApplicationController
-  def show
-    @season = Season.find(params[:id]).decorate
-    authorize @season
-  end
+  before_action :load_and_authorize_season, except: [:create]
+
+  def show; end
 
   def create
     @league = League.find(season_params[:league_id])
@@ -18,37 +17,26 @@ class SeasonsController < ApplicationController
   end
 
   def destroy
-    season = Season.find(params[:id])
-    authorize season
-    league = season.league
-    season.destroy
+    league = @season.league
+    @season.destroy
     redirect_to league
   end
 
   # NON-REST ACTIONS :(
   def complete
-    season = Season.find(params[:season_id])
-    authorize season
-    season.deactivate_and_complete!
-    redirect_to season.league
+    @season.deactivate_and_complete!
+    redirect_to @season.league
   end
 
-  def confirm
-    @season = Season.find(params[:season_id])
-    authorize @season
-  end
+  def confirm; end
 
   def count
-    season = Season.find(params[:season_id])
-    authorize season
-    season.count!
-    redirect_to season
+    @season.count!
+    redirect_to @season
   end
 
   def deactivate
-    season = Season.find(params[:season_id])
-    authorize season
-    league = season.league
+    league = @season.league
     league.seasons.deactivate_all!
     league.seasons.create!
     flash[:alert] = "New season created!"
@@ -56,35 +44,35 @@ class SeasonsController < ApplicationController
   end
 
   def leave
-    season = Season.find(params[:season_id])
-    authorize season
-    league = season.league
+    league = @season.league
     league.seasons.create!(active_season: false)
     flash[:alert] = "Inactive season created!"
     redirect_to league_path(league)
   end
 
   def uncomplete
-    season = Season.find(params[:season_id])
-    authorize season
-    season.activate_and_uncomplete!
-    redirect_to season.league
+    @season.activate_and_uncomplete!
+    redirect_to @season.league
   end
 
   def uncount
-    season = Season.find(params[:season_id])
-    authorize season
-    season.uncount!
-    redirect_to season
+    @season.uncount!
+    redirect_to @season
   end
 
   private
+
+  def season_params
+    params.require(:season).permit(:league_id, :active_season, :completed)
+  end
 
   def confirmation
     redirect_to season_confirm_path(@league.active_season)
   end
 
-  def season_params
-    params.require(:season).permit(:league_id, :active_season, :completed)
+  def load_and_authorize_season
+    id = params[:id] || params[:season_id]
+    @season = Season.find(id).decorate
+    authorize @season
   end
 end
