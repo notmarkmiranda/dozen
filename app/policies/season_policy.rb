@@ -1,12 +1,10 @@
 class SeasonPolicy < ApplicationPolicy
-  attr_reader :league,
-              :season,
+  attr_reader :season,
               :user
 
   def initialize(user, season)
     @user = user
     @season = season
-    @league = season.league
   end
 
   def show?
@@ -15,11 +13,41 @@ class SeasonPolicy < ApplicationPolicy
     league.memberships.find_by(user: user)
   end
 
+  def create?
+    user_is_admin?(season)
+  end
 
+  def destroy?
+    user_is_admin?(league)
+  end
+
+  def deactivate?
+    user_is_admin?(league)
+  end
+
+  def leave?
+    user_is_admin?(league)
+  end
+
+  # NON-REST ACTIONS
+
+  def complete?
+    user_is_admin?(league)
+  end
+
+  def uncomplete?
+    user_is_admin?(league)
+  end
 
   class Scope < Scope
     def resolve
       scope.all
     end
+  end
+
+  private
+
+  def league
+    season&.league
   end
 end

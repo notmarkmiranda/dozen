@@ -5,6 +5,9 @@ describe SeasonsController, type: :request do
   let(:season) { league.seasons.first }
 
 
+  let(:membership) { create(:membership, league: league, role: role) }
+  let(:user) { membership.user }
+
   describe 'GET#show' do
     before { league.update(public_league: public_league) }
 
@@ -24,9 +27,6 @@ describe SeasonsController, type: :request do
       let(:public_league) { false }
 
       describe 'when user' do
-        let(:membership) { create(:membership, league: league, role: role) }
-        let(:user) { membership.user }
-
         before { sign_in(user) }
 
         describe 'is admin' do
@@ -66,7 +66,10 @@ describe SeasonsController, type: :request do
     let(:season_params) { { season: { league_id: league.id } } }
     subject(:post_create) { post seasons_path, params: season_params }
 
+    before { login_as(user) }
+
     describe 'league without other active seasons' do
+      let(:role) { 1 }
       before { league.seasons.deactivate_all! }
 
       describe 'happy path, season gets created' do
@@ -91,6 +94,8 @@ describe SeasonsController, type: :request do
     end
 
     describe 'league with other active season' do
+      let(:role) { 1 }
+
       before { league.seasons.last.activate! }
 
       it 'has an active season' do
@@ -115,9 +120,41 @@ describe SeasonsController, type: :request do
     end
   end
 
-  pending 'DELETE#destroy'
+  describe 'DELETE#destroy' do
+    let(:role) { 1 }
+    subject(:delete_destroy) { delete season_path(season) }
 
-  pending 'POST#complete'
+    before { sign_in(user) }
+
+    it 'changes season count' do
+      expect {
+        delete_destroy
+      }.to change(Season, :count).by(-1)
+    end
+
+    it 'has 302 status' do
+      delete_destroy
+
+      expect(response).to have_http_status(302)
+    end
+  end
+
+  describe 'POST#complete' do
+    let(:role) { 1 }
+    subject(:post_complete) { post season_complete_path(season) }
+
+    before do
+      season.activate_and_uncomplete!
+      login_as(user)
+    end
+
+    it 'should change active_season and completed' do
+      expect {
+        post_complete; season.reload
+      }.to change { season.active_season }
+      .and change { season.completed }
+    end
+  end
 
   describe 'GET#confirm' do
     subject(:get_confirm) { get season_confirm_path(season) }
@@ -130,7 +167,11 @@ describe SeasonsController, type: :request do
   end
 
   describe 'POST#deactivate' do
+    let(:role) { 1 }
+
     subject(:post_deactivate) { post season_deactivate_path(season) }
+
+    before { login_as(user) }
 
     it 'creates a new season' do
       expect { post_deactivate }.to change(Season, :count).by(1)
@@ -150,7 +191,11 @@ describe SeasonsController, type: :request do
   end
 
   describe 'POST#leave' do
+    let(:role) { 1 }
+
     subject(:post_leave) { post season_leave_path(season) }
+
+    before { login_as(user) }
 
     it 'creates a new season' do
       expect { post_leave }.to change(Season, :count).by(1)
@@ -169,5 +214,27 @@ describe SeasonsController, type: :request do
     end
   end
 
-  describe 'POST#uncomplete'
+  describe 'POST#uncomplete' do
+    let(:role) { 1 }
+
+    subject(:post_uncomplete) { post season_uncomplete_path(season) }
+
+    before do
+      season.deactivate_and_complete!
+      login_as(user)
+    end
+
+    it 'uncompletes and activates season' do
+      expect {
+        post_uncomplete; season.reload
+      }.to change { season.active_season }
+      .and change { season.completed }
+    end
+
+    it 'has 302 status' do
+      post_uncomplete
+
+      expect(response).to have_http_status(302)
+    end
+  end
 end

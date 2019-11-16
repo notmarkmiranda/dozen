@@ -4,7 +4,7 @@ class League < ApplicationRecord
   validates :name, uniqueness: true, presence: true
 
   has_many :memberships, dependent: :destroy
-  has_many :seasons, dependent: :destroy
+  has_many :seasons, -> { in_created_order }, class_name: 'Season', dependent: :destroy
 
   after_create_commit :create_initial_admin
   after_create_commit :create_initial_season
