@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     post 'leave'
     post 'complete'
     post 'uncomplete'
+    post 'count'
+    post 'uncount'
   end
 
   get '/dashboard', to: 'dashboard#show', as: 'dashboard'

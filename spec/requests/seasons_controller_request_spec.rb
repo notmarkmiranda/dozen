@@ -157,7 +157,10 @@ describe SeasonsController, type: :request do
   end
 
   describe 'GET#confirm' do
+    let(:role) { 1 }
     subject(:get_confirm) { get season_confirm_path(season) }
+
+    before { login_as(user) }
 
     it 'has 200 status' do
       get_confirm

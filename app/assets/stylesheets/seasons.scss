@@ -9,3 +9,17 @@
   flex-direction: column;
   margin-top: 10px;
 }
+
+.season-actions {
+  display: flex;
+  align-items: flex-end;
+
+  & > div.count-buttons {
+    display: flex;
+    flex-direction: column;
+  }
+
+  div.btn-group form{
+    display: inline;
+  }
+}

@@ -16,6 +16,10 @@ class Season < ApplicationRecord
     update!(completed: true)
   end
 
+  def count!
+    update!(count_in_standings: true)
+  end
+
   def deactivate!
     update!(active_season: false)
   end
@@ -34,6 +38,10 @@ class Season < ApplicationRecord
 
   def uncompleted!
     update!(completed: false)
+  end
+
+  def uncount!
+    update!(count_in_standings: false)
   end
 
   def self.any_active?
