@@ -21,6 +21,16 @@ class SeasonPolicy < ApplicationPolicy
     user_is_admin?(league)
   end
 
+  # NON-REST ACTIONS
+
+  def confirm?
+    user_is_admin?(league)
+  end
+
+  def count?
+    user_is_admin?(league)
+  end
+
   def deactivate?
     user_is_admin?(league)
   end
@@ -29,13 +39,15 @@ class SeasonPolicy < ApplicationPolicy
     user_is_admin?(league)
   end
 
-  # NON-REST ACTIONS
-
   def complete?
     user_is_admin?(league)
   end
 
   def uncomplete?
+    user_is_admin?(league)
+  end
+
+  def uncount?
     user_is_admin?(league)
   end
 

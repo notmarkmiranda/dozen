@@ -1,6 +1,15 @@
 <div class="container">
-  <% if policy(@season).user_is_admin?(@season.league) %>
-    <%= @season.complete_or_uncomplete_buttons %>
-    <%= button_to "Delete Season", season_path(@season), class: 'btn btn-outline-danger mr-2', method: :delete %>
-  <% end %>
+  <div class="season-actions">
+    <% if policy(@season).user_is_admin?(@season.league) %>
+      <%= @season.complete_or_uncomplete_buttons %>
+      <%= button_to "Delete Season", season_path(@season), class: 'btn btn-outline-danger mr-2', method: :delete %>
+      <div class="count-buttons">
+        <label for="something">Count in Overall Standings</label>
+        <div class="btn-group" role="group" aria-label="Basic example">
+          <%= link_to "On", season_count_path(@season), method: :post, id: 'on-button', class: "btn btn-outline-secondary #{@season.active_class}" %>
+          <%= link_to "Off", season_uncount_path(@season), method: :post, id: 'off-button', class: "btn btn-outline-secondary #{@season.inactive_class}" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
 </div>

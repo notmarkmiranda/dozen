@@ -35,6 +35,14 @@ class SeasonsController < ApplicationController
 
   def confirm
     @season = Season.find(params[:season_id])
+    authorize @season
+  end
+
+  def count
+    season = Season.find(params[:season_id])
+    authorize season
+    season.count!
+    redirect_to season
   end
 
   def deactivate
@@ -61,6 +69,13 @@ class SeasonsController < ApplicationController
     authorize season
     season.activate_and_uncomplete!
     redirect_to season.league
+  end
+
+  def uncount
+    season = Season.find(params[:season_id])
+    authorize season
+    season.uncount!
+    redirect_to season
   end
 
   private
