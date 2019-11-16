@@ -33,7 +33,9 @@ class Season < ApplicationRecord
   end
 
   def number_in_order
-    league.seasons.index(self) + 1
+    number = league.seasons.index(self) + 1
+    return "#{number}*" if active_season
+    number
   end
 
   def uncompleted!

@@ -9,6 +9,6 @@ a.list-group-item.league-info {
   cursor: pointer;
 }
 
-tr.league-show__seasons-table.active-season {
-  background-color: #dc3545 !important;
+tr.league-show__seasons-table.active-season, tr.league-show__seasons-table.active-season:hover {
+  color: #d9534f;
 }

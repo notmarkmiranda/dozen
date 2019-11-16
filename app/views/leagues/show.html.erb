@@ -133,7 +133,20 @@
               </tr>
             </thead>
             <tbody>
-              <%= render partial: 'season_cell', collection: @league.seasons.decorate, as: :season %>
+              <% if @league.seasons.any? %>
+                <%=  render partial: 'season_cell', collection: @league.seasons.decorate, as: :season %>
+                <tr>
+                  <td colspan="5">
+                    <small class="muted-text">*Active Season</small>
+                  </td>
+                </tr>
+              <% else %>
+                <tr>
+                  <td colspan="5">
+                    <small class="muted-text">You have no seasons, create one!</small>
+                  </td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         </div>

@@ -169,6 +169,8 @@ describe SeasonsController, type: :request do
     end
   end
 
+  pending 'POST#count'
+
   describe 'POST#deactivate' do
     let(:role) { 1 }
 
@@ -240,4 +242,6 @@ describe SeasonsController, type: :request do
       expect(response).to have_http_status(302)
     end
   end
+
+  pending 'POST#uncount'
 end

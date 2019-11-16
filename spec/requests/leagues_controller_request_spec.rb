@@ -216,4 +216,26 @@ describe LeaguesController, type: :request do
       end
     end
   end
+
+  describe 'DELETE#destroy' do
+    let(:public_league) { true }
+    let(:membership) { create(:membership, league: league, role: 1) }
+    let(:user) { membership.user }
+
+    subject(:delete_destroy) { delete league_path(league) }
+
+    before { sign_in(user) }
+
+    it 'deletes a league' do
+      expect {
+        delete_destroy
+      }.to change(League, :count).by(-1)
+    end
+
+    it 'has 302 status' do
+      delete_destroy
+
+      expect(response).to have_http_status(302)
+    end
+  end
 end
