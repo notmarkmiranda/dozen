@@ -1,7 +1,11 @@
 class SeasonDecorator < ApplicationDecorator
   delegate_all
 
-  def active_class
+  def active_season_class
+    "active-season" if season.active_season?
+  end
+
+  def counted_class
     season.count_in_standings? ? 'active' : 'inactive'
   end
 
@@ -9,7 +13,7 @@ class SeasonDecorator < ApplicationDecorator
     season.completed ? uncomplete_button : complete_button
   end
 
-  def inactive_class
+  def uncounted_class
     !season.count_in_standings? ? 'active' : 'inactive'
   end
 

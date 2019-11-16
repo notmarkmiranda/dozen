@@ -6,8 +6,8 @@
       <div class="count-buttons">
         <label for="something">Count in Overall Standings</label>
         <div class="btn-group" role="group" aria-label="Basic example">
-          <%= link_to "On", season_count_path(@season), method: :post, id: 'on-button', class: "btn btn-outline-secondary #{@season.active_class}" %>
-          <%= link_to "Off", season_uncount_path(@season), method: :post, id: 'off-button', class: "btn btn-outline-secondary #{@season.inactive_class}" %>
+          <%= link_to "On", season_count_path(@season), method: :post, id: 'on-button', class: "btn btn-outline-secondary #{@season.counted_class}" %>
+          <%= link_to "Off", season_uncount_path(@season), method: :post, id: 'off-button', class: "btn btn-outline-secondary #{@season.uncounted_class}" %>
         </div>
       </div>
     <% end %>

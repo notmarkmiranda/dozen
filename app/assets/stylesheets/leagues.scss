@@ -8,3 +8,7 @@ a.list-group-item.league-info {
 .league-show__seasons-table {
   cursor: pointer;
 }
+
+tr.league-show__seasons-table.active-season {
+  background-color: #dc3545 !important;
+}
