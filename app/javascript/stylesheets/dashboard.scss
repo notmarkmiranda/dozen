@@ -1,0 +1,14 @@
+.dashboard-actions, .league-actions, .game-actions {
+  display: flex;
+  flex-direction: row;
+
+  & > a {
+    text-transform: uppercase;
+    font-size: 0.8em;
+  }
+
+  & > form.button_to > input.btn {
+    text-transform: uppercase;
+    font-size: 0.8em
+  }
+}
