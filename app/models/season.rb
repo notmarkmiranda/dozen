@@ -1,5 +1,6 @@
 class Season < ApplicationRecord
   belongs_to :league
+  has_many :games
 
   scope :in_created_order, -> { order(created_at: :asc) }
 
