@@ -5,8 +5,12 @@ class GameDecorator < ApplicationDecorator
     h.number_to_currency(buy_in, precision: 0)
   end
 
-  def full_date_and_time
-    date.strftime('%B %-e, %Y at %l:%M %p')
+  def league_name
+    season.league.name
+  end
+
+  def league_location
+    season.league.location
   end
 
   def player_text

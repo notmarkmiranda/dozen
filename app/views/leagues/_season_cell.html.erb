@@ -1,7 +1,7 @@
 <tr class="league-show__seasons-table <%= season.active_season_class %>" data-link="<%= season_path(season) %>">
-  <td><%= season.number_in_order %></td>
+  <td><%= season.number_in_order_text %></td>
   <td><%= ["Mark", "Mike", "Tyler", "Marshall"].shuffle.pop %></td>
-  <td>September 1, 2019</td>
-  <td>N/A</td>
+  <td><%= season.start_date %></td>
+  <td><%= season.end_date %></td>
   <td><%= [24, 29, 67].shuffle.pop %></td>
 </tr>

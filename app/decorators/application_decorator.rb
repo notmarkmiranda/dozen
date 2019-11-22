@@ -1,8 +1,9 @@
 class ApplicationDecorator < Draper::Decorator
-  # Define methods for all decorated objects.
-  # Helpers are accessed through `helpers` (aka `h`). For example:
-  #
-  #   def percent_amount
-  #     h.number_to_percentage object.amount, precision: 2
-  #   end
+  def full_date_and_time(date)
+    date.strftime('%B %-e, %Y at %l:%M %p')
+  end
+
+  def date_and_year(date)
+    date.strftime('%B %Y')
+  end
 end

@@ -5,11 +5,6 @@ class Game < ApplicationRecord
 
   delegate :league, to: :season, prefix: true
 
-  def league_name
-    season.league.name
-  end
-
-  def league_location
-    season.league.location
-  end
+  scope :in_date_order, -> { order(date: :asc) }
+  scope :in_reverse_date_order, -> { order(date: :desc) }
 end

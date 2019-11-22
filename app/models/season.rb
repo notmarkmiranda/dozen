@@ -29,13 +29,16 @@ class Season < ApplicationRecord
     deactivate! && completed!
   end
 
+  def games_count
+    games.count
+  end
+
   def not_completed?
     !completed?
   end
 
   def number_in_order
     number = league.seasons.index(self) + 1
-    return "#{number}*" if active_season
     number
   end
 
