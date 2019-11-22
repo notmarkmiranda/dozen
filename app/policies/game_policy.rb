@@ -7,8 +7,30 @@ class GamePolicy < ApplicationPolicy
     @game = game
   end
 
+  def show?
+    return true if league.public_league?
+    return false unless user
+    league.memberships.find_by(user: user)
+  end
+
+  def new?
+    user_is_admin?(league)
+  end
+
+  def create?
+    user_is_admin?(league)
+  end
+
+  def edit?
+    user_is_admin?(league)
+  end
+
+  def update?
+    user_is_admin?(league)
+  end
+
   def destroy?
-    user_is_admin?(game.season.league)
+    user_is_admin?(league)
   end
 
   class Scope < Scope

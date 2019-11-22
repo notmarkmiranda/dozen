@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :game do
-    season { nil }
+    season
     league { nil }
     completed { false }
     buy_in { 100 }

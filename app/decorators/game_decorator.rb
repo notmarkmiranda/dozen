@@ -2,7 +2,7 @@ class GameDecorator < ApplicationDecorator
   delegate_all
 
   def buy_in_text
-    h.number_to_currency(buy_in)
+    h.number_to_currency(buy_in, precision: 0)
   end
 
   def full_date_and_time
