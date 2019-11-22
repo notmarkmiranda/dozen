@@ -1,5 +1,8 @@
 <div class="container mb-4">
   <div class="game-actions">
+    <%= link_to league_path(@game.season_league), class: 'btn btn-outline-secondary mr-4' do %>
+      <i class="fas fa-angle-left"></i> Back to League
+    <% end %>
     <% if policy(@game).destroy? %>
       <%= button_to 'Delete game', @game, class: 'btn btn-outline-danger mr-2', method: :delete %>
       <%= link_to 'Edit game', edit_game_path(@game), class: 'btn btn-outline-secondary mr-4' %>

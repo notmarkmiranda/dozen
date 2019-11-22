@@ -3,6 +3,8 @@ class Game < ApplicationRecord
   belongs_to :season, optional: true
   belongs_to :league, optional: true
 
+  delegate :league, to: :season, prefix: true
+
   def league_name
     season.league.name
   end
