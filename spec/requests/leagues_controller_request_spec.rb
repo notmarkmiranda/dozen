@@ -23,9 +23,7 @@ describe LeaguesController, type: :request do
       before { sign_in(user) }
 
       describe 'member or admin on league' do
-        before do
-          create(:membership, league: league, user: user, role: role)
-        end
+        before { create(:membership, league: league, user: user, role: role) }
 
         describe 'for member' do
           let(:role) { 0 }

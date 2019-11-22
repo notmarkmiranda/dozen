@@ -14,11 +14,13 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'devise'
 gem 'draper'
 gem 'pundit'
+gem 'bootstrap', '~>4.3.1'
 
 group :development, :test do
   gem 'factory_bot_rails'
   gem 'pry'
   gem 'rspec-rails', '~> 3.9.0'
+  gem 'selenium-webdriver'
 end
 
 group :development do

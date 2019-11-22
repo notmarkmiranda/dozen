@@ -1,0 +1,37 @@
+<div class="container mb-4">
+  <div class="game-actions">
+    <% if policy(@game).destroy? %>
+      <%= button_to 'Delete game', @game, class: 'btn btn-outline-danger mr-2', method: :delete %>
+      <%= link_to 'Edit game', edit_game_path(@game), class: 'btn btn-outline-secondary mr-4' %>
+    <% end %>
+  </div>
+  <div class="game-show__info mt-4">
+    <div class="league-show__league-name">
+      <h2><%= @game.league_name %></h2>
+      <div class="league-show__location text-dark">
+        <%= @game.league_location %>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-md-8">
+        <div class="game-show__overview-stats">
+          <h4>Game Overview</h4>
+          <small class="text-muted">Game #10 of Season #3</small>
+          <hr>
+          <div class="row">
+            <div class="col-md-6">
+              <b>Date & Time:</b> <%= @game.full_date_and_time %><br />
+              <b>Address:</b> <%= @game.address %><br />
+              <b>Rebuys:</b> <%= @game.rebuy_text %><br />
+            </div>
+            <div class="col-md-6">
+              <b>Buy in:</b> <%= @game.buy_in_text %><br />
+              <%= @game.player_text %><br />
+              <%= @game.pot_text %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
