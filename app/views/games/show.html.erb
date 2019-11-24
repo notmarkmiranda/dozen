@@ -75,7 +75,7 @@
                     <%= form_for @player do |f| %>
                       <%= f.hidden_field :game_id, value: @player.game_id %>
                       <%= f.select :user_id, @game.available_players, { prompt: 'Choose a Player' }, class: 'form-control mb-1', id: 'player-select' %>
-                      <%= f.submit 'Finish player' %>
+                      <%= f.submit 'Finish player', class: 'btn btn-sm btn-outline-secondary' %>
                     <% end %>
                   </td>
                 </tr>

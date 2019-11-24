@@ -26,6 +26,15 @@ describe 'Admin can remove finished player from game', type: :feature do
       end
     end
 
-    pending 'is member'
+    describe 'is member' do
+      let(:role) { 0 }
+
+      it 'does not have a delete button' do
+        visit game_path(game)
+
+        expect(page).to have_content(league.name)
+        expect(page).not_to have_selector('btn.delete-button')
+      end
+    end
   end
 end
