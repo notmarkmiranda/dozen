@@ -66,6 +66,7 @@
                   </tr>
                 <% end %>
               <% end %>
+                <% if policy(@game).create? %>
                 <td colspan="3">
                   <%= form_for @player do |f| %>
                     <%= f.hidden_field :game_id, value: @player.game_id %>
@@ -73,6 +74,7 @@
                     <%= f.submit 'Finish player' %>
                   <% end %>
                 </td>
+                <% end %>
               </tr>
             </tbody>
           </table>

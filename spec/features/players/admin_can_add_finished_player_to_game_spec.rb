@@ -29,6 +29,15 @@ describe 'Admin can add finished player to game', type: :feature do
       end
     end
 
-    describe 'is member'
+    describe 'is member' do
+      let(:role) { 0 }
+
+      it 'should not have Finish player button' do
+        visit game_path(game)
+
+        expect(page).to have_content(league.name)
+        expect(page).not_to have_button('Finish player')
+      end
+    end
   end
 end
