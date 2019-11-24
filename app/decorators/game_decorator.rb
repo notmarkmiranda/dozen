@@ -36,6 +36,7 @@ class GameDecorator < ApplicationDecorator
   end
 
   def estimated_pot
-    h.number_to_currency(players * buy_in, precision: 0)
+    count = players_count || 0
+    h.number_to_currency(count * buy_in, precision: 0)
   end
 end

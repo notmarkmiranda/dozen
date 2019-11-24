@@ -2,6 +2,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id]).decorate
     authorize @game
+    @player = @game.players.new
   end
 
   def new
@@ -57,7 +58,7 @@ class GamesController < ApplicationController
       :buy_in,
       :add_ons,
       :address,
-      :players,
+      :players_count,
       :date
     )
   end

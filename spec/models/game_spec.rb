@@ -8,6 +8,7 @@ describe Game, type: :model do
   describe 'relationships' do
     it { should belong_to(:season).without_validating_presence }
     it { should belong_to(:league).without_validating_presence }
+    it { should have_many :players }
   end
 
   describe 'methods'
