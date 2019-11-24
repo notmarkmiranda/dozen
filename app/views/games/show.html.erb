@@ -59,6 +59,9 @@
                         <%= button_to '#', class: 'btn', disabled: player == @game.saved_players.last do %>
                           <i class="fas fa-angle-down"></i>
                         <% end %>
+                        <%= button_to player, class: 'btn delete-button', method: :delete do %>
+                          <i class="fas fa-times"></i>
+                        <% end %>
                       </td>
                     <% end %>
                     <th scope="row"><%= player.order_in_place(index, @game.players_count) %></th>
@@ -66,16 +69,17 @@
                   </tr>
                 <% end %>
               <% end %>
-                <% if policy(@game).create? %>
-                <td colspan="3">
-                  <%= form_for @player do |f| %>
-                    <%= f.hidden_field :game_id, value: @player.game_id %>
-                    <%= f.select :user_id, @game.available_players, { prompt: 'Choose a Player' }, class: 'form-control mb-1', id: 'player-select' %>
-                    <%= f.submit 'Finish player' %>
-                  <% end %>
-                </td>
-                <% end %>
-              </tr>
+              <% if policy(@game).create? %>
+                <tr>
+                  <td colspan="3">
+                    <%= form_for @player do |f| %>
+                      <%= f.hidden_field :game_id, value: @player.game_id %>
+                      <%= f.select :user_id, @game.available_players, { prompt: 'Choose a Player' }, class: 'form-control mb-1', id: 'player-select' %>
+                      <%= f.submit 'Finish player' %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         </div>
