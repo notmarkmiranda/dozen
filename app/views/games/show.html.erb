@@ -37,7 +37,7 @@
 
         <div class="game-show__overview-standings mt-4">
           <h4>Game Standings</h4>
-          <table class="table table-striped table-responsive-md">
+          <table class="table table-striped table-responsive-md game-standings">
             <thead class="thead-dark">
               <tr>
                 <% if @game.not_completed? %>
@@ -49,14 +49,14 @@
             </thead>
             <tbody>
               <% if @game.players.any? %>
-                <% @game.saved_players.each_with_index do |player, index| %>
+                <% @game.finished_players.each_with_index do |player, index| %>
                   <tr class="game-standing">
                     <% if @game.not_completed? %>
                       <td class="up-down-button">
                         <%= button_to '#', class: 'btn', disabled: index.zero? do %>
                           <i class="fas fa-angle-up"></i>
                         <% end %>
-                        <%= button_to '#', class: 'btn', disabled: player == @game.saved_players.last do %>
+                        <%= button_to '#', class: 'btn', disabled: player == @game.finished_players.last do %>
                           <i class="fas fa-angle-down"></i>
                         <% end %>
                         <%= button_to player, class: 'btn delete-button', method: :delete do %>
@@ -69,19 +69,51 @@
                   </tr>
                 <% end %>
               <% end %>
-              <% if policy(@game).create? %>
-                <tr>
-                  <td colspan="3">
-                    <%= form_for @player do |f| %>
-                      <%= f.hidden_field :game_id, value: @player.game_id %>
-                      <%= f.select :user_id, @game.available_players, { prompt: 'Choose a Player' }, class: 'form-control mb-1', id: 'player-select' %>
-                      <%= f.submit 'Finish player', class: 'btn btn-sm btn-outline-secondary' %>
-                    <% end %>
-                  </td>
+            </tbody>
+          </table>
+
+          <h4>Rebuys or Add-On Players</h4>
+          <small class="text-muted">
+            These players must be resolved before game can be completed.
+          </small>
+          <hr>
+          <table class="table table-striped table-responsive-md">
+            <thead class="thead-dark">
+              <tr>
+                <% if @game.not_completed? %>
+                  <th scope="col"></th>
+                <% end %>
+                <th scope="col">#</th>
+                <th scope="col">Player</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @game.rebuyers.each do |player| %>
+                <tr class="rebuyer">
+                  <td></td>
+                  <td></td>
+                  <td><%= player.user_full_name %></td>
                 </tr>
               <% end %>
             </tbody>
           </table>
+
+          <% if policy(@game).create? %>
+
+              <div colspan="3">
+                <%= form_for @player do |f| %>
+                  <%= f.hidden_field :game_id, value: @player.game_id %>
+                  <%= f.select :user_id, @game.available_players, { prompt: 'Choose a Player' }, class: 'form-control mb-1', id: 'player-select' %>
+                  <div class="form-group">
+                    <%= f.label :additional_expense, 'Rebuy or Add-on' %>
+                    <%= f.text_field :additional_expense, class: 'form-control' %>
+                  </div>
+                  <%= f.submit 'Finish player', class: 'btn btn-sm btn-outline-secondary' %>
+                  <%= f.submit 'Add Rebuy or Add-on Only', class: 'btn btn-sm btn-outline-secondary' %>
+                <% end %>
+              </div>
+
+          <% end %>
         </div>
       </div>
     </div>
