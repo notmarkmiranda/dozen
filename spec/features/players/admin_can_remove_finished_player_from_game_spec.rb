@@ -4,7 +4,7 @@ describe 'Admin can remove finished player from game', type: :feature do
   let(:game) { create(:game, completed: false) }
   let(:league) { game.season_league }
 
-  let!(:player) { create(:player, game: game, finished_at: Time.now.utc, finishing_place: nil) }
+  let!(:player) { create(:player, game: game, finished_at: Time.now.utc, finishing_place: nil, finishing_order: 1) }
 
   describe 'when user' do
     let(:membership) { create(:membership, league: league, role: role) }
