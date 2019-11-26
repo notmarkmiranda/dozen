@@ -24,7 +24,12 @@ class Game < ApplicationRecord
     players.count
   end
 
+  def players_except_self(player)
+    players.where.not(id: player.id)
+  end
+
   def rebuyers
+    # binding.pry
     players.where('additional_expense > ? AND finishing_place IS ? AND finishing_order IS ?', 0, nil, nil)
   end
 

@@ -9,6 +9,17 @@ class PlayersController < ApplicationController
     redirect_to pc.game
   end
 
+  def update
+    player = Player.find(params[:id])
+    pu = PlayerUpdater.new(player, params[:commit])
+    if pu.save
+      flash[:alert] = "Player update"
+    else
+      flash[:alert] = pu.errors.join(', ')
+    end
+    redirect_to pu.game
+  end
+
   def destroy
     player = Player.find(params[:id])
     game = player.game
