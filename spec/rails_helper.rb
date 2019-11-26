@@ -37,13 +37,13 @@ end
 RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
-  
+
   # FactoryBot methods included in specs
   config.include FactoryBot::Syntax::Methods
-  
+
   # sign_in and sign_out for request specs
   config.include Devise::Test::IntegrationHelpers, type: :request
-  
+
   # allows login_as in feature specs
   config.include Warden::Test::Helpers
 
