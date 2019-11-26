@@ -29,7 +29,6 @@ class Game < ApplicationRecord
   end
 
   def rebuyers
-    # binding.pry
     players.where('additional_expense > ? AND finishing_place IS ? AND finishing_order IS ?', 0, nil, nil)
   end
 

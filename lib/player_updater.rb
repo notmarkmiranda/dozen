@@ -1,4 +1,8 @@
+require './lib/concerns/player_helper'
+
 class PlayerUpdater
+  include PlayerHelper
+
   attr_accessor :commit,
                 :errors,
                 :game,
@@ -15,14 +19,6 @@ class PlayerUpdater
     if commit == :additional_to_finished
       find_finishing_order
       player.save
-    end
-  end
-
-  private
-
-  def find_finishing_order
-    if game.players_except_self(player).empty?
-      player.finishing_order = 1
     end
   end
 end

@@ -1,4 +1,8 @@
+require './lib/concerns/player_helper'
+
 class PlayerCreator
+  include ::PlayerHelper
+
   attr_accessor :commit,
                 :errors,
                 :game,
@@ -31,15 +35,6 @@ class PlayerCreator
     else
       self.errors = @player.errors.full_messages
       return false
-    end
-  end
-
-  private
-
-  def find_finishing_order
-    if @game.players.empty?
-      player.finishing_order = 1
-    else
     end
   end
 
