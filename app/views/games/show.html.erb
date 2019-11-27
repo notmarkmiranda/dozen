@@ -118,7 +118,7 @@
                   <%= f.select :user_id, @game.available_players, { prompt: 'Choose a Player' }, class: 'form-control mb-1', id: 'player-select' %>
                   <div class="form-group">
                     <%= f.label :additional_expense, 'Rebuy or Add-on' %>
-                    <%= f.text_field :additional_expense, class: 'form-control' %>
+                    <%= f.text_field :additional_expense, value: '', placeholder: 'rebuy or add-on', class: 'form-control' %>
                   </div>
                   <%= f.submit 'Finish player', class: 'btn btn-sm btn-outline-secondary' %>
                   <%= f.submit 'Add Rebuy or Add-on Only', class: 'btn btn-sm btn-outline-secondary' %>
