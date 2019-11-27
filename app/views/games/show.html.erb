@@ -49,7 +49,7 @@
               </tr>
             </thead>
             <tbody>
-              <% if @game.players.any? %>
+              <% if @game.finished_players.any? %>
                 <% @game.finished_players.each_with_index do |player, index| %>
                   <tr class="game-standing">
                     <% if @game.not_completed? %>
@@ -69,10 +69,15 @@
                     <td class="grow"><%= player.user_full_name %></td>
                   </tr>
                 <% end %>
+              <% else %>
+                <tr>
+                  <td colspan="51"> There are no finished players just yet, check back later!</td>
+                </tr>
               <% end %>
             </tbody>
           </table>
 
+          <% if @game.rebuyers.any? %>
           <h4>Rebuys or Add-On Players</h4>
           <small class="text-muted">
             These players must be resolved before game can be completed.
@@ -110,6 +115,7 @@
               <% end %>
             </tbody>
           </table>
+          <% end %>
 
           <% if policy(@game).create? %>
 
