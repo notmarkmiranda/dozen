@@ -20,18 +20,20 @@ class PlayerUpdater
       find_finishing_order
       player.save
     elsif commit == :move_up || commit == :move_down
-      current_player_place = player.finishing_order
-      swap_player_place = other_player_place(current_player_place, commit)
-      swap_player = game.players.find_by(finishing_order: swap_player_place)
+      current_player_index = game.finished_players.index(player)
+      swap_player_index = other_player_index(commit, current_player_index)
+      swap_player = game.finished_players[swap_player_index]
+      current_player_order = player.finishing_order
+      swap_player_order = swap_player.finishing_order
 
-      swap_player.finishing_order = current_player_place
-      player.finishing_order = swap_player_place
+      player.finishing_order = swap_player_order
+      swap_player.finishing_order = current_player_order
       [swap_player, player].each(&:save)
     end
   end
 
-  def other_player_place(place, commit)
-    return place + 1 if commit == :move_up
-    place - 1
+  def other_player_index(commit, index)
+    return index - 1 if commit == :move_up
+    index + 1
   end
 end
