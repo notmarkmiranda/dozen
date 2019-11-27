@@ -34,7 +34,7 @@ class Game < ApplicationRecord
 
   def finished_players
     ActiveSupport::Deprecation.silence do
-      players.where.not(id: nil, finishing_order: nil).order(finishing_order: :asc).decorate
+      players.where.not(id: nil, finishing_order: nil).order(finishing_order: :desc).decorate
     end
   end
 end

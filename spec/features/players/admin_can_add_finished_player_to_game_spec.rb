@@ -41,7 +41,7 @@ describe 'Admin can add finished player to game', type: :feature do
 
           expect(current_path).to eq(game_path(game))
           standings = page.all("tr.game-standing")
-          within(standings[-1]) do
+          within(standings[0]) do
             expect(page).to have_content(Player.last.user_full_name)
           end
         end

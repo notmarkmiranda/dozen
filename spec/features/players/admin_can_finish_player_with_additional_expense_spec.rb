@@ -46,7 +46,7 @@ describe 'Admin can finish player with additional expense', type: :feature do
           end
 
           within('table.game-standings') do
-            expect(page).to have_content("First #{Player.last.user_full_name}")
+            expect(page).to have_content("Last #{Player.last.user_full_name}")
           end
         end
       end
@@ -61,7 +61,7 @@ describe 'Admin can finish player with additional expense', type: :feature do
 
           expect(current_path).to eq(game_path(game))
           expect(page).to have_content(league.name)
-          
+
           within('table.game-rebuyers') do
             expect(page).not_to have_content(Player.first.user_full_name)
           end
