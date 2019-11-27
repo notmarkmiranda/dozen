@@ -1,8 +1,9 @@
 <div class="container mb-4">
   <div class="game-actions">
-    <%= link_to league_path(@game.season_league), class: 'btn btn-outline-secondary mr-4' do %>
+    <%= link_to league_path(@game.season_league), class: 'btn btn-outline-secondary mr-2' do %>
       <i class="fas fa-angle-left"></i> Back to League
     <% end %>
+    <%= link_to 'View Season', @game.season, class: 'btn btn-outline-secondary mr-4' %>
     <% if policy(@game).destroy? %>
       <%= button_to 'Delete game', @game, class: 'btn btn-outline-danger mr-2', method: :delete %>
       <%= link_to 'Edit game', edit_game_path(@game), class: 'btn btn-outline-secondary mr-4' %>
@@ -19,7 +20,7 @@
       <div class="col-md-8">
         <div class="game-show__overview-stats">
           <h4>Game Overview</h4>
-          <small class="text-muted">Game #10 of Season #3</small>
+          <small class="text-muted">Game #10 of <%= link_to "Season ##{@game.season.number_in_order}", @game.season %></small>
           <hr>
           <div class="row">
             <div class="col-md-6">
