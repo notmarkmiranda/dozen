@@ -3,6 +3,10 @@ td.up-down-button {
   flex-direction: row;
 }
 
+tr.game-standing > td.grow,  tr.game-standing > th, tr.rebuyer > td.grow {
+  vertical-align: baseline;
+}
+
 td.grow {
   width: 100%;
 }
