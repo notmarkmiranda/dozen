@@ -67,7 +67,6 @@ describe 'Admin can finish player with additional expense', type: :feature do
           end
 
           within('table.game-standings') do
-            save_and_open_page
             expect(page).to have_content("Last #{Player.first.user_full_name}")
           end
         end
