@@ -13,7 +13,6 @@ describe 'Admin can edit league', type: :feature do
   describe 'for admin on league' do
     let(:role) { 1 }
 
-
     it 'updates the league and redirect to league path' do
       visit league_path(league)
 

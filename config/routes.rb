@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     post 'uncount'
   end
   resources :games
+  resources :players
 
   get '/dashboard', to: 'dashboard#show', as: 'dashboard'
 end
