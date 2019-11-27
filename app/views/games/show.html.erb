@@ -53,10 +53,10 @@
                   <tr class="game-standing">
                     <% if @game.not_completed? %>
                       <td class="up-down-button">
-                        <%= button_to player_path(player, commit: 'move up'), class: 'btn move-up-standings', method: :patch, disabled: index.zero? do %>
+                        <%= button_to player_path(player, commit: 'move up'), class: 'btn move-up-standing', method: :patch, disabled: index.zero? do %>
                           <i class="fas fa-angle-up"></i>
                         <% end %>
-                        <%= button_to '#', class: 'btn', disabled: player == @game.finished_players.last do %>
+                        <%= button_to player_path(player, commit: 'move down'), class: 'btn move-down-standing', method: :patch, disabled: player == @game.finished_players.last do %>
                           <i class="fas fa-angle-down"></i>
                         <% end %>
                         <%= button_to player, class: 'btn delete-button', method: :delete do %>
@@ -65,7 +65,7 @@
                       </td>
                     <% end %>
                     <th scope="row"><%= player.order_in_place(index, @game.players_count) %></th>
-                    <td class="grow"><%= player.user_full_name %> | <%= player.finishing_order %></td>
+                    <td class="grow"><%= player.user_full_name %></td>
                   </tr>
                 <% end %>
               <% end %>

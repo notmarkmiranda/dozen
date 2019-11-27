@@ -28,7 +28,7 @@ describe 'Admin can move player up in standings', type: :feature do
           expect(page).to have_content(@players[0].user_full_name)
         end
 
-        all('.move-up-standing').last.click
+        all('.move-down-standing').first.click
 
         expect(current_path).to eq(game_path(game))
         expect(page).to have_content(league.name)
