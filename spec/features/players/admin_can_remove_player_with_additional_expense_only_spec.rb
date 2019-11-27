@@ -21,9 +21,8 @@ describe 'Admin can remove player with additional expense only', type: :feature 
 
         expect(current_path).to eq(game_path(game))
         expect(page).to have_content(league.name)
-        within('table.game-rebuyers') do
-          expect(page).not_to have_content(player.user_full_name)
-        end
+        expect(page).not_to have_css('table.game-rebuyers')
+
       end
     end
 
