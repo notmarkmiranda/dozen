@@ -6,7 +6,7 @@ FactoryBot.define do
     buy_in { 100 }
     add_ons { false }
     address { "123 Fake St. Denver, CO 80000" }
-    players_count { 25 }
+    estimated_players_count { 25 }
     date { "2030-5-9 17:30:00" }
   end
 end

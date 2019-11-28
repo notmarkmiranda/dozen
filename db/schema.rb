@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_25_043916) do
+ActiveRecord::Schema.define(version: 2019_11_28_160203) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,7 +22,7 @@ ActiveRecord::Schema.define(version: 2019_11_25_043916) do
     t.integer "buy_in"
     t.boolean "add_ons"
     t.string "address"
-    t.integer "players_count"
+    t.integer "estimated_players_count"
     t.datetime "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
