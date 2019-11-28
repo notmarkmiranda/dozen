@@ -33,7 +33,7 @@ class GameDecorator < ApplicationDecorator
   private
 
   def estimated_player_text
-    "<b>Estimated Players:</b> #{players_count}".html_safe
+    "<b>Estimated Players:</b> #{estimated_players_count}".html_safe
   end
 
   def estimated_pot_text
@@ -41,7 +41,7 @@ class GameDecorator < ApplicationDecorator
   end
 
   def estimated_pot
-    count = players_count || 0
+    count = estimated_players_count || 0
     h.number_to_currency(count * buy_in, precision: 0)
   end
 end

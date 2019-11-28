@@ -58,7 +58,7 @@ class GamesController < ApplicationController
       :buy_in,
       :add_ons,
       :address,
-      :players_count,
+      :estimated_players_count,
       :date
     )
   end
