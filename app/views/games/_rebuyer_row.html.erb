@@ -1,0 +1,17 @@
+<tr class="rebuyer">
+  <% if @game.not_completed? %>
+    <td class="up-down-button">
+      <%= button_to player_path(player, commit: 'additional to finished'), class: 'btn finish-additional-button', method: :patch do %>
+        <i class="fas fa-check"></i>
+      <% end %>
+      <%= button_to player, class: 'btn remove-additional-button', method: :delete do %>
+        <i class="fas fa-times"></i>
+      <% end %>
+      <%= button_to '#', class: 'btn' do %>
+        <i class="fas fa-pen"></i>
+      <% end %>
+    </td>
+  <% end %>
+  <td></td>
+  <td class="grow"><%= player.user_full_name %></td>
+</tr>

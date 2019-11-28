@@ -1,0 +1,15 @@
+<h4>Game Overview</h4>
+<small class="text-muted">Game #10 of <%= link_to "Season ##{@game.season.number_in_order}", @game.season %></small>
+<hr>
+<div class="row">
+  <div class="col-md-6">
+    <b>Date & Time:</b> <%= @game.full_date_and_time(@game.date) %><br />
+    <b>Address:</b> <%= @game.address %><br />
+    <b>Rebuys:</b> <%= @game.rebuy_text %><br />
+  </div>
+  <div class="col-md-6">
+    <b>Buy in:</b> <%= @game.buy_in_text %><br />
+    <%= @game.player_text %><br />
+    <%= @game.pot_text %>
+  </div>
+</div>

@@ -19,120 +19,12 @@
     <div class="row mt-4">
       <div class="col-md-8">
         <div class="game-show__overview-stats">
-          <h4>Game Overview</h4>
-          <small class="text-muted">Game #10 of <%= link_to "Season ##{@game.season.number_in_order}", @game.season %></small>
-          <hr>
-          <div class="row">
-            <div class="col-md-6">
-              <b>Date & Time:</b> <%= @game.full_date_and_time(@game.date) %><br />
-              <b>Address:</b> <%= @game.address %><br />
-              <b>Rebuys:</b> <%= @game.rebuy_text %><br />
-            </div>
-            <div class="col-md-6">
-              <b>Buy in:</b> <%= @game.buy_in_text %><br />
-              <%= @game.player_text %><br />
-              <%= @game.pot_text %>
-            </div>
-          </div>
+          <%= render partial: 'overview' %>
         </div>
-
         <div class="game-show__overview-standings mt-4">
-          <h4>Game Standings</h4>
-          <table class="table table-striped table-responsive-md game-standings">
-            <thead class="thead-dark">
-              <tr>
-                <% if @game.not_completed? %>
-                  <th scope="col"></th>
-                <% end %>
-                <th scope="col">#</th>
-                <th scope="col">Player</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if @game.finished_players.any? %>
-                <% @game.finished_players.each_with_index do |player, index| %>
-                  <tr class="game-standing">
-                    <% if @game.not_completed? %>
-                      <td class="up-down-button">
-                        <%= button_to player_path(player, commit: 'move up'), class: 'btn move-up-standing', method: :patch, disabled: index.zero? do %>
-                          <i class="fas fa-angle-up"></i>
-                        <% end %>
-                        <%= button_to player_path(player, commit: 'move down'), class: 'btn move-down-standing', method: :patch, disabled: player == @game.finished_players.last do %>
-                          <i class="fas fa-angle-down"></i>
-                        <% end %>
-                        <%= button_to player, class: 'btn delete-button', method: :delete do %>
-                          <i class="fas fa-times"></i>
-                        <% end %>
-                      </td>
-                    <% end %>
-                    <th scope="row"><%= player.order_in_place(index, @game.finished_players.count) %></th>
-                    <td class="grow"><%= player.user_full_name %></td>
-                  </tr>
-                <% end %>
-              <% else %>
-                <tr>
-                  <td colspan="51"> There are no finished players just yet, check back later!</td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-
-          <% if @game.rebuyers.any? %>
-          <h4>Rebuys or Add-On Players</h4>
-          <small class="text-muted">
-            These players must be resolved before game can be completed.
-          </small>
-          <hr>
-          <table class="table table-striped table-responsive-md game-rebuyers">
-            <thead class="thead-dark">
-              <tr>
-                <% if @game.not_completed? %>
-                  <th scope="col"></th>
-                <% end %>
-                <th scope="col">#</th>
-                <th scope="col">Player</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% @game.rebuyers.each do |player| %>
-                <tr class="rebuyer">
-                  <% if @game.not_completed? %>
-                    <td class="up-down-button">
-                      <%= button_to player_path(player, commit: 'additional to finished'), class: 'btn finish-additional-button', method: :patch do %>
-                        <i class="fas fa-check"></i>
-                      <% end %>
-                      <%= button_to player, class: 'btn remove-additional-button', method: :delete do %>
-                        <i class="fas fa-times"></i>
-                      <% end %>
-                      <%= button_to '#', class: 'btn' do %>
-                        <i class="fas fa-pen"></i>
-                      <% end %>
-                    </td>
-                  <% end %>
-                  <td></td>
-                  <td class="grow"><%= player.user_full_name %></td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
-          <% end %>
-
-          <% if policy(@game).create? %>
-
-              <div>
-                <%= form_for @player do |f| %>
-                  <%= f.hidden_field :game_id, value: @player.game_id %>
-                  <%= f.select :user_id, @game.available_players, { prompt: 'Choose a Player' }, class: 'form-control mb-1', id: 'player-select' %>
-                  <div class="form-group">
-                    <%= f.label :additional_expense, 'Rebuy or Add-on' %>
-                    <%= f.text_field :additional_expense, value: '', placeholder: 'rebuy or add-on', class: 'form-control' %>
-                  </div>
-                  <%= f.submit 'Finish player', class: 'btn btn-sm btn-outline-secondary' %>
-                  <%= f.submit 'Add Rebuy or Add-on Only', class: 'btn btn-sm btn-outline-secondary' %>
-                <% end %>
-              </div>
-
-          <% end %>
+          <%= render partial: 'game_standings' %>
+          <%= render partial: 'game_rebuyers' %>
+          <%= render partial: 'new_player_form' %>
         </div>
       </div>
     </div>
