@@ -20,10 +20,6 @@ class Game < ApplicationRecord
     !completed?
   end
 
-  def players_count
-    players.count
-  end
-
   def players_except_self(player)
     players.where.not(id: player.id)
   end
