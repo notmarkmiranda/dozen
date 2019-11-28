@@ -25,10 +25,15 @@ class GameDecorator < ApplicationDecorator
     add_ons? ? 'Allows rebuys or add-ons' : 'Does not allow rebuys or add-ons'
   end
 
+  def winner_name
+    return 'Not completed' if game.not_completed?
+    'Oops'
+  end
+
   private
 
   def estimated_player_text
-    "<b>Estimated Players:</b> #{players}".html_safe
+    "<b>Estimated Players:</b> #{players_count}".html_safe
   end
 
   def estimated_pot_text
