@@ -1,0 +1,19 @@
+<h4>Game Standings</h4>
+<table class="table table-striped table-responsive-md game-standings">
+  <thead class="thead-dark">
+    <tr>
+      <% if @game.not_completed? %>
+        <th scope="col"></th>
+      <% end %>
+      <th scope="col">#</th>
+      <th scope="col">Player</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if @game.finished_players.any? %>
+      <%= render partial: 'standing_row', collection: @game.finished_players, as: :player %>
+    <% else %>
+      <%= render partial: 'no_finished_players' %>
+    <% end %>
+  </tbody>
+</table>

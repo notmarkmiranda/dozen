@@ -1,0 +1,21 @@
+<% if @game.rebuyers.any? %>
+  <h4>Rebuys or Add-On Players</h4>
+  <small class="text-muted">
+    These players must be resolved before game can be completed.
+  </small>
+  <hr>
+  <table class="table table-striped table-responsive-md game-rebuyers">
+    <thead class="thead-dark">
+      <tr>
+        <% if @game.not_completed? %>
+          <th scope="col"></th>
+        <% end %>
+        <th scope="col">#</th>
+        <th scope="col">Player</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render partial: 'rebuyer_row', collection: @game.rebuyers, as: :player %>
+    </tbody>
+  </table>
+<% end %>
