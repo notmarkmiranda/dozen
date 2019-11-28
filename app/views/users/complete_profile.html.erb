@@ -1,0 +1,20 @@
+<div class="container devise-form">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">
+        Complete Profile
+      </div>
+      <div class="card-body">
+        <%= form_for @user do |f| %>
+          <div class="field form-group">
+            <%= f.label :first_name %>
+            <%= f.text_field :first_name, class: 'form-control' %>
+          </div>
+          <div class="field form-group">
+            <%= f.label :last_name %>
+            <%= f.text_field :last_name, class: 'form-control' %>
+          </div>
+          <div class="actions">
+            <%= f.submit 'Complete profile', class: 'btn btn-dark btn-block' %>
+          </div>
+        <% end %>
