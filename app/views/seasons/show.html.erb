@@ -98,30 +98,14 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>October 12, 2019</td>
-                <td>Mark Miranda</td>
-                <td>$119</td>
-                <td>7</td>
-              </tr>
-              <tr>
-                <td>September 27, 2019</td>
-                <td>Michael Cassano</td>
-                <td>$250</td>
-                <td>12</td>
-              </tr>
-              <tr>
-                <td>August 15, 2019</td>
-                <td>Tyler Merry</td>
-                <td>$120</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>July 10, 2019</td>
-                <td>Marshall Houston</td>
-                <td>$197</td>
-                <td>11</td>
-              </tr>
+              <% @season.games.in_reverse_date_order.decorate.each do |game| %>
+                <tr class="season-show__games-table" data-link="<%= game_path(game) %>">
+                  <td><%= game.full_date(game.date) %></td>
+                  <td><%= game.winner_name %></td>
+                  <td><%= game.pot_text %></td>
+                  <td><%= game.player_text %></td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         </div>
