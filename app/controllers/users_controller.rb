@@ -2,8 +2,9 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def update
-    return unless params[:commit].parameterize.underscore.to_sym == :complete_profile && current_user.id == params[:id].to_i
+    return unless params[:commit].parameterize.underscore.to_sym == :complete_profile
     current_user.update(user_params)
+    redirect_to dashboard_path
   end
 
   def complete_profile
