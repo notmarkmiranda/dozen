@@ -3,10 +3,7 @@ class UsersController < ApplicationController
 
   def update
     return unless params[:commit].parameterize.underscore.to_sym == :complete_profile && current_user.id == params[:id].to_i
-    if current_user.update(user_params)
-      flash[:alert] = 'User updated'
-      redirect_to dashboard_path
-    end
+    current_user.update(user_params)
   end
 
   def complete_profile
