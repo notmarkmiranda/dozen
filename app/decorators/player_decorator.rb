@@ -1,6 +1,10 @@
 class PlayerDecorator < ApplicationDecorator
   delegate_all
 
+  def additional_amount_text
+    h.number_to_currency(additional_expense, precision: 0)
+  end
+
   def order_in_place(index=nil, total_players)
     return player.finishing_place if game.completed?
     return "Last" if index.zero? && total_players == 1

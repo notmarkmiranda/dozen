@@ -20,12 +20,13 @@ describe 'Admin can add player to game with additional expense only', type: :fea
         visit game_path(game)
 
         find('#player-select').find(:xpath, 'option[2]').select_option
-        fill_in 'Rebuy or Add-on', with: '125'
+        fill_in 'Rebuy or Add-on', with: '1250'
         click_button 'Add Rebuy or Add-on Only'
 
         expect(current_path).to eq(game_path(game))
         within('tr.rebuyer') do
           expect(page).to have_content(user.full_name)
+          expect(page).to have_content('$1,250')
         end
         within('table.game-standings') do
           expect(page).not_to have_content(user.full_name)
