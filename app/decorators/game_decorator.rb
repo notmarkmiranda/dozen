@@ -29,6 +29,14 @@ class GameDecorator < ApplicationDecorator
     add_ons? ? 'Allows rebuys or add-ons' : 'Does not allow rebuys or add-ons'
   end
 
+  def table_pot_text
+    completed? ? 'SOMETHING' : overview_estimated_pot_text
+  end
+
+  def table_player_text
+    completed? ? 'SOMETHING' : estimated_players_count
+  end
+
   def winner_name
     return 'Not completed' if game.not_completed?
     'Oops'
@@ -47,5 +55,9 @@ class GameDecorator < ApplicationDecorator
   def estimated_pot
     count = estimated_players_count || 0
     h.number_to_currency(count * buy_in, precision: 0)
+  end
+
+  def overview_estimated_pot_text
+    estimated_pot
   end
 end
