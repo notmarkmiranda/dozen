@@ -22,10 +22,8 @@ class PlayersController < ApplicationController
 
   def destroy
     player = Player.find(params[:id])
-    # game = player.game
     pu = PlayerUpdater.new(player, params[:commit])
     pu.save
-    # player.destroy
     redirect_to pu.game
   end
 
