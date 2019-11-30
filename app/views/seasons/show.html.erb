@@ -99,7 +99,7 @@
             </thead>
             <tbody>
               <% @season.games.in_reverse_date_order.decorate.each do |game| %>
-                <tr class="season-show__games-table" data-link="<%= game_path(game) %>">
+                <tr class="season-show__games-table <%= game.incomplete_class %>" data-link="<%= game_path(game) %>">
                   <td><%= game.full_date(game.date) %></td>
                   <td><%= game.winner_name %></td>
                   <td><%= game.pot_text %></td>

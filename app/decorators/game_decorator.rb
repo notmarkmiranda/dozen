@@ -5,6 +5,10 @@ class GameDecorator < ApplicationDecorator
     h.number_to_currency(buy_in, precision: 0)
   end
 
+  def incomplete_class
+    not_completed? ? 'text-danger' : 'completed-game'
+  end
+
   def league_name
     season.league.name
   end
