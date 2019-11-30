@@ -236,4 +236,14 @@ describe LeaguesController, type: :request do
       expect(response).to have_http_status(302)
     end
   end
+
+  describe 'GET#public_leagues' do
+    subject(:get_public_leagues) { get public_leagues_path }
+
+    it 'has 200 status' do
+      get_public_leagues
+
+      expect(response).to have_http_status(200)
+    end
+  end
 end

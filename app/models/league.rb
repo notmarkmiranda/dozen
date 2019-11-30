@@ -9,6 +9,8 @@ class League < ApplicationRecord
   after_create_commit :create_initial_admin
   after_create_commit :create_initial_season
 
+  scope :public_leagues, -> { where(public_league: true).order(name: :asc) }
+
   def active_season
     seasons.find_by(active_season: true)
   end
