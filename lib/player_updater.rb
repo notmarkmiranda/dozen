@@ -29,6 +29,11 @@ class PlayerUpdater
       player.finishing_order = swap_player_order
       swap_player.finishing_order = current_player_order
       [swap_player, player].each(&:save)
+    elsif commit == :delete_player
+      player.destroy
+    elsif commit == :move_to_rebuyers
+      player.finishing_order, player.finishing_place = nil
+      player.save
     end
   end
 
