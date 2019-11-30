@@ -93,8 +93,9 @@
               <tr>
                 <th scope="col">Date / Time</th>
                 <th scope="col">Winner</th>
-                <th scope="col">Pot Size</th>
+                <th scope="col">Buy In</th>
                 <th scope="col"># of Players</th>
+                <th scope="col">Pot Size</th>
               </tr>
             </thead>
             <tbody>
@@ -102,8 +103,9 @@
                 <tr class="season-show__games-table <%= game.incomplete_class %>" data-link="<%= game_path(game) %>">
                   <td><%= game.full_date(game.date) %></td>
                   <td><%= game.winner_name %></td>
-                  <td><%= game.pot_text %></td>
-                  <td><%= game.player_text %></td>
+                  <td><%= game.buy_in_text %></td>
+                  <td><%= game.table_player_text %></td>
+                  <td><%= game.table_pot_text %></td>
                 </tr>
               <% end %>
             </tbody>
