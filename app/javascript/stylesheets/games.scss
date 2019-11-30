@@ -1,10 +1,18 @@
+table.game-standings, table.game-rebuyers {
+  & > thead.thead-dark > tr {
+    white-space: nowrap;
+  }
+}
+
 td.up-down-button {
   display: flex;
   flex-direction: row;
 }
 
-tr.game-standing > td.grow,  tr.game-standing > th, tr.rebuyer > td.grow {
-  vertical-align: baseline;
+tr.game-standing, tr.rebuyer {
+  & > td.grow, & > th, & > td {
+    vertical-align: baseline;
+  }
 }
 
 td.grow {

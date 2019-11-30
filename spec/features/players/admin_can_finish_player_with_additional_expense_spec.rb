@@ -37,11 +37,13 @@ describe 'Admin can finish player with additional expense', type: :feature do
 
           find(:css, '.finish-additional-button').click
 
+          last_player = Player.last.decorate
+
           expect(current_path).to eq(game_path(game))
           expect(page).to have_content(league.name)
           expect(page).not_to have_css('table.game-rebuyers')
           within('table.game-standings') do
-            expect(page).to have_content("Last #{Player.last.user_full_name}")
+            expect(page).to have_content("Last #{last_player.additional_amount_text} #{last_player.user_full_name}")
           end
         end
       end
@@ -57,12 +59,14 @@ describe 'Admin can finish player with additional expense', type: :feature do
           expect(current_path).to eq(game_path(game))
           expect(page).to have_content(league.name)
 
+          first_player = Player.first.decorate
+
           within('table.game-rebuyers') do
-            expect(page).not_to have_content(Player.first.user_full_name)
+            expect(page).not_to have_content(first_player.user_full_name)
           end
 
           within('table.game-standings') do
-            expect(page).to have_content("Last #{Player.first.user_full_name}")
+            expect(page).to have_content("Last #{first_player.additional_amount_text} #{first_player.user_full_name}")
           end
         end
       end

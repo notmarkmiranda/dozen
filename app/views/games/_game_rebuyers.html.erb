@@ -10,12 +10,12 @@
         <% if @game.not_completed? %>
           <th scope="col"></th>
         <% end %>
-        <th scope="col">#</th>
+        <th scope="col">Rebuy / Add On</th>
         <th scope="col">Player</th>
       </tr>
     </thead>
     <tbody>
-      <%= render partial: 'rebuyer_row', collection: @game.rebuyers, as: :player %>
+      <%= render partial: 'rebuyer_row', collection: @game.rebuyers.decorate, as: :player %>
     </tbody>
   </table>
 <% end %>
