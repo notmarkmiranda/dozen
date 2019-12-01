@@ -32,6 +32,7 @@ describe 'Admin can move player up in standings', type: :feature do
 
         expect(current_path).to eq(game_path(game))
         expect(page).to have_content(league.name)
+        expect(page).to have_content('Player moved')
         standings = page.all("tr.game-standing")
         within(standings[0]) do
           expect(page).to have_content(@players[0].user_full_name)

@@ -3,8 +3,17 @@ require './lib/concerns/player_helper'
 class PlayerUpdater
   include PlayerHelper
 
+  FLASH_ALERTS = {
+    additional_to_finished: 'Player added to final standings',
+    move_up: 'Player moved',
+    move_down: 'Player moved',
+    delete_player: 'Player deleted',
+    move_to_rebuyers: 'Player moved back to rebuyers'
+  }
+
   attr_accessor :commit,
                 :errors,
+                :flash_alert,
                 :game,
                 :player
 
@@ -13,9 +22,11 @@ class PlayerUpdater
     @game = player.game
     @errors = []
     @commit = commit.parameterize.underscore.to_sym
+    @flash_alert = nil
   end
 
   def save
+    @flash_alert = FLASH_ALERTS[commit]
     if commit == :additional_to_finished
       find_finishing_order
       player.save
