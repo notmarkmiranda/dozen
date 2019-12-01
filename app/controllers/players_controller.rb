@@ -13,7 +13,7 @@ class PlayersController < ApplicationController
     player = Player.find(params[:id])
     pu = PlayerUpdater.new(player, params[:commit])
     if pu.save
-      flash[:alert] = "Player update"
+      flash[:alert] = pu.flash_alert
     else
       flash[:alert] = pu.errors.join(', ')
     end
@@ -24,6 +24,7 @@ class PlayersController < ApplicationController
     player = Player.find(params[:id])
     pu = PlayerUpdater.new(player, params[:commit])
     pu.save
+    flash[:alert] = pu.flash_alert
     redirect_to pu.game
   end
 

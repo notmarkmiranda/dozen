@@ -33,6 +33,7 @@ describe 'Admin can remove finished player from game', type: :feature do
           find(:css, '.delete-button').click
 
           expect(current_path).to eq(game_path(game))
+          expect(page).to have_content('Player deleted')
           expect(page).to have_content(league.name)
           expect(page).not_to have_selector('tr.game-standing')
         end
@@ -67,6 +68,7 @@ describe 'Admin can remove finished player from game', type: :feature do
 
           expect(current_path).to eq(game_path(game))
           expect(page).to have_content(league.name)
+          expect(page).to have_content('Player moved back to rebuyers')
           expect(page).not_to have_selector('tr.game-standing')
 
           last_player = Player.last

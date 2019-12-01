@@ -23,6 +23,7 @@ describe 'Admin can finish player with additional expense', type: :feature do
           expect(current_path).to eq(game_path(game))
           expect(page).to have_content(league.name)
           expect(page).not_to have_css('table.game-rebuyers')
+          expect(page).to have_content('Player added to final standings')
           within('table.game-standings') do
             expect(page).to have_content(Player.first.user_full_name)
           end
