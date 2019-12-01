@@ -45,6 +45,10 @@ class LeaguesController < ApplicationController
     redirect_to dashboard_path
   end
 
+  def public_leagues
+    @leagues = League.public_leagues
+  end
+
   private
 
   def league_params
