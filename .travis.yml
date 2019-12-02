@@ -4,16 +4,17 @@ rvm:
 env:
   matrix:
   - DB=postgresql
+addons:
+  chrome: stable
+before_install:
+- gem install bundler
+- "rm ${BUNDLE_GEMFILE}.lock"
+- google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
 before_script:
 - cp config/database.travis.yml config/database.yml
 - psql -c 'create database travis_ci_test;' -U postgres
 - RAILS_ENV=test bundle exec rake db:create db:migrate --trace
-- wget http://chromedriver.storage.googleapis.com/2.27/chromedriver_linux64.zip
-- unzip chromedriver_linux64.zip
-- sudo apt-get install libnss3
-- sudo apt-get --only-upgrade install google-chrome-stable
-- sudo cp chromedriver /usr/local/bin/.
-- sudo chmod +x /usr/local/bin/chromedriver
+- bundle exec rake db:test:prepare
 - export DISPLAY=:99.0
 - sh -e /etc/init.d/xvfb start
 - sleep 3
