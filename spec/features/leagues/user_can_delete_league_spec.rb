@@ -16,7 +16,7 @@ describe 'Admin can delete league', type: :feature, js: true do
 
       click_button "Delete league"
       page.driver.browser.switch_to.alert.accept
-      sleep(0.1)
+      # sleep(0.1)
 
       expect(current_path).to eq(dashboard_path)
       expect(page).not_to have_content(league_name)
