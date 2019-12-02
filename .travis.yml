@@ -4,6 +4,21 @@ rvm:
 env:
   matrix:
   - DB=postgresql
+addons:
+  chrome: stable
+  apt:
+    packages:
+      - chromium-chromedriver
+before_script:
+  # include ChromeDriver in PATH
+  - ln --symbolic /usr/lib/chromium-browser/chromedriver "${HOME}/bin/chromedriver"
+  # start Chrome and listen on localhost
+  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+before_install:
+- wget https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-linux64.tar.gz
+- mkdir geckodriver
+- tar -xzf geckodriver-v0.11.1-linux64.tar.gz -C geckodriver
+- export PATH=$PATH:$PWD/geckodriver
 before_script:
 - cp config/database.travis.yml config/database.yml
 - psql -c 'create database travis_ci_test;' -U postgres

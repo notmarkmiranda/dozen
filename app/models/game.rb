@@ -2,7 +2,7 @@ class Game < ApplicationRecord
   validates :buy_in, presence: true
   belongs_to :season, optional: true
   belongs_to :league, optional: true
-  has_many :players
+  has_many :players, dependent: :destroy
 
   delegate :league, to: :season, prefix: true
 

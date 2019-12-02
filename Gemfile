@@ -32,6 +32,7 @@ end
 group :test do
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'geckodriver-helper'
   gem 'launchy'
   gem 'shoulda-matchers'
   gem 'simplecov', require: false

@@ -45,7 +45,7 @@ class GamesController < ApplicationController
     league = game.season.league
     authorize game
     game.destroy
-    redirect_to league_path(league)
+    redirect_to league
   end
 
   private

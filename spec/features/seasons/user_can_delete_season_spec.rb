@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'User can delete season', type: :feature do
+describe 'User can delete season', type: :feature, js: true do
   let(:season) { create(:season) }
   let(:league) { season.league }
 
@@ -18,6 +18,8 @@ describe 'User can delete season', type: :feature do
         visit season_path(season)
 
         click_button 'Delete Season'
+        page.driver.browser.switch_to.alert.accept
+        sleep(0.1)
 
         expect(current_path).to eq(league_path(league))
         expect(page).to have_content("Seasons: #{season_count}")
