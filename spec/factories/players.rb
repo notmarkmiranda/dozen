@@ -7,4 +7,10 @@ FactoryBot.define do
     additional_expense { 0 }
     finished_at { DateTime.now.utc }
   end
+
+  after(:create) do |player, evaluator|
+    if player.class == Player
+      create :membership, league: player.game.season_league, user: player.user
+    end
+  end
 end
