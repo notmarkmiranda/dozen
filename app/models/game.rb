@@ -11,7 +11,8 @@ class Game < ApplicationRecord
 
   def available_players
     all_users = season_league.memberships.map(&:user)
-    available_users = (all_users - finished_players.map(&:user))
+    available_users = (all_users - finished_players.map(&:user) - rebuyers.map(&:user))
+
     decorated_users = UserDecorator.decorate_collection(available_users).sort_by(&:full_name)
     decorated_users.collect { |user| [user.full_name, user.id] }
   end
