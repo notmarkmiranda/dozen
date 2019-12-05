@@ -46,7 +46,7 @@ class LeaguesController < ApplicationController
   end
 
   def public_leagues
-    @leagues = League.public_leagues
+    @leagues = League.public_leagues.decorate
   end
 
   private
