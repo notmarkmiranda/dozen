@@ -1,0 +1,18 @@
+<div class="container devise-form">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">
+        Edit Rebuy or Add-On
+      </div>
+      <div class="card-body">
+        <%= form_for @player do |f| %>
+          <div class="form-group">
+            <%= f.label :additional_expense, 'Rebuy or Add-on' %>
+            <%= f.text_field :additional_expense, class: 'form-control' %>
+          </div>
+          <%= f.submit 'Update player', class: 'btn btn-dark btn-block' %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

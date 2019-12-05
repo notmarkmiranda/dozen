@@ -7,7 +7,7 @@
       <%= button_to player_path(player, commit: 'delete player'), class: 'btn remove-additional-button', method: :delete do %>
         <i class="fas fa-times"></i>
       <% end %>
-      <%= button_to '#', class: 'btn' do %>
+      <%= link_to edit_player_path(player), class: 'btn edit-rebuyer' do %>
         <i class="fas fa-pen"></i>
       <% end %>
     </td>

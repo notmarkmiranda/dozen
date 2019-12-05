@@ -10,6 +10,9 @@
       <%= button_to player_path(player, commit: player.additional_expense_commit?), class: 'btn delete-button', method: :delete do %>
         <i class="fas fa-times"></i>
       <% end %>
+      <%= link_to edit_player_path(player), class: 'btn edit-finished' do %>
+        <i class="fas fa-pen"></i>
+      <% end %>
     </td>
   <% end %>
   <th scope="row"><%= player.order_in_place(player_counter, @game.finished_players.count) %></th>
