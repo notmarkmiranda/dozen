@@ -9,9 +9,13 @@ class PlayersController < ApplicationController
     redirect_to pc.game
   end
 
+  def edit
+    @player = Player.find(params[:id])
+  end
+
   def update
     player = Player.find(params[:id])
-    pu = PlayerUpdater.new(player, params[:commit])
+    pu = PlayerUpdater.new(player, params[:commit], params_filter)
     if pu.save
       flash[:alert] = pu.flash_alert
     else
@@ -29,6 +33,10 @@ class PlayersController < ApplicationController
   end
 
   private
+
+  def params_filter
+    params[:player] ? player_params : nil
+  end
 
   def player_params
     params.require(:player).permit(

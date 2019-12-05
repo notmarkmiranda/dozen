@@ -8,17 +8,20 @@ class PlayerUpdater
     move_up: 'Player moved',
     move_down: 'Player moved',
     delete_player: 'Player deleted',
-    move_to_rebuyers: 'Player moved back to rebuyers'
+    move_to_rebuyers: 'Player moved back to rebuyers',
+    update_player: 'Player updated'
   }
 
   attr_accessor :commit,
                 :errors,
                 :flash_alert,
                 :game,
+                :params,
                 :player
 
-  def initialize(player, commit)
+  def initialize(player, commit, params=nil)
     @player = player
+    @params = params
     @game = player.game
     @errors = []
     @commit = commit.parameterize.underscore.to_sym
@@ -45,6 +48,8 @@ class PlayerUpdater
     elsif commit == :move_to_rebuyers
       player.finishing_order, player.finishing_place = nil
       player.save
+    elsif commit == :update_player
+      player.update(params) 
     end
   end
 

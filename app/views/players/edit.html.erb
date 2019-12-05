@@ -1,0 +1,5 @@
+<%= form_for @player do |f| %>
+  <%= f.label :additional_expense, 'Rebuy or Add-on' %>
+  <%= f.text_field :additional_expense %>
+  <%= f.submit 'Update player' %>
+<% end %>
