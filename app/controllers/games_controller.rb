@@ -48,6 +48,20 @@ class GamesController < ApplicationController
     redirect_to league
   end
 
+  def complete
+    @game = Game.find(params[:id])
+    authorize @game
+    # do something here?
+    #
+    # check to see if there are any players without finishing orders and don't finish the game if so
+    gc = GameCompleter.new(@game)
+    gc.save
+    flash[:alert] = gc.alerts.join(', ')
+
+    # otherwise, new PORO for completing the game + calculating scores on a game?
+    redirect_to @game
+  end
+
   private
 
   def game_params

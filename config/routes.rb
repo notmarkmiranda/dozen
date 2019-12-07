@@ -18,7 +18,13 @@ Rails.application.routes.draw do
     post 'count'
     post 'uncount'
   end
-  resources :games
+
+  resources :games do
+    member do
+      post '/complete', to: 'games#complete'
+    end
+  end
+
   resources :players
 
   get '/dashboard', to: 'dashboard#show', as: 'dashboard'
