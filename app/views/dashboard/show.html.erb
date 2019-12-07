@@ -2,16 +2,5 @@
   <div class="dashboard-actions mb-3">
     <%= link_to 'Create New League', new_league_path, class: 'btn btn-outline-secondary' %>
   </div>
-  <div class="card">
-    <div class="card-header">
-      Leagues
-    </div>
-    <ul class="list-group list-group-flush">
-      <% if @leagues.empty? %>
-        <%= render partial: "no_leagues" %>
-      <% else %>
-        <%= render partial: "league", collection: @leagues %>
-      <% end %>
-    </ul>
-  </div>
+  <%= render partial: 'shared/leagues_table', locals: { title: 'Leagues' } %>
 </div>

@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-header">
+    <%= title %>
+  </div>
+  <ul class="list-group list-group-flush">
+    <% if @leagues.empty? %>
+      <%= render partial: "shared/no_leagues" %>
+    <% else %>
+      <%= render partial: "shared/league", collection: @leagues %>
+    <% end %>
+  </ul>
+</div>
+
