@@ -7,6 +7,11 @@
     <% if policy(@game).destroy? %>
       <%= button_to 'Delete game', @game, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger mr-2', method: :delete %>
       <%= link_to 'Edit game', edit_game_path(@game), class: 'btn btn-outline-secondary mr-4' %>
+      <% if @game.completed? %>
+        <%= button_to 'Uncomplete game', '#', class: 'btn btn-outline-secondary' %>
+      <% else %>
+        <%= button_to 'Complete game', complete_game_path(@game), class: 'btn btn-outline-secondary' %>
+      <% end %>
     <% end %>
   </div>
   <div class="game-show__info mt-4">
@@ -24,7 +29,9 @@
         <div class="game-show__overview-standings mt-4">
           <%= render partial: 'game_standings' %>
           <%= render partial: 'game_rebuyers' %>
-          <%= render partial: 'new_player_form' %>
+          <% unless @game.completed? %>
+            <%= render partial: 'new_player_form' %>
+          <% end %>
         </div>
       </div>
     </div>

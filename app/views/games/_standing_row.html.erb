@@ -18,4 +18,8 @@
   <th scope="row"><%= player.order_in_place(player_counter, @game.finished_players.count) %></th>
   <td><%= player.additional_amount_text %></td>
   <td class="grow"><%= player.user_full_name %></td>
+  <% if @game.completed? %>
+    <td><%= player.finishing_place %></td>
+    <td><%= player.score %></td>
+  <% end %>
 </tr>

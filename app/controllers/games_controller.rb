@@ -48,6 +48,15 @@ class GamesController < ApplicationController
     redirect_to league
   end
 
+  def complete
+    @game = Game.find(params[:id])
+    authorize @game
+    gc = GameCompleter.new(@game)
+    gc.save
+    flash[:alert] = gc.alerts.join(', ')
+    redirect_to @game
+  end
+
   private
 
   def game_params
