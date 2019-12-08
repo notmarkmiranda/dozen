@@ -7,8 +7,8 @@ describe 'Admin can complete game', type: :feature do
   let(:user) { membership.user }
   let!(:player_1) { create(:player, game: game, finishing_order: first_order, additional_expense: 0, finishing_place: nil) }
   let!(:player_2) { create(:player, game: game, finishing_order: second_order, additional_expense: 1, finishing_place: nil) }
-  let(:first_place_score) { 2.645 }
-  let(:second_place_score) { 1.825 }
+  let(:first_place_score) { 2.65 }
+  let(:second_place_score) { 1.83 }
 
   describe 'when admin' do
     before { login_as(user, scope: :user) }

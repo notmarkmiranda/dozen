@@ -51,9 +51,17 @@ class GamesController < ApplicationController
   def complete
     @game = Game.find(params[:id])
     authorize @game
-    gc = GameCompleter.new(@game)
+    gc = GameCompleter.new(@game, params[:action])
     gc.save
     flash[:alert] = gc.alerts.join(', ')
+    redirect_to @game
+  end
+
+  def uncomplete
+    @game = Game.find(params[:id])
+    authorize @game
+    gc = GameCompleter.new(@game, params[:action])
+    gc.save
     redirect_to @game
   end
 

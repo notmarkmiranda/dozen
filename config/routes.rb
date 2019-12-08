@@ -22,6 +22,7 @@ Rails.application.routes.draw do
   resources :games do
     member do
       post '/complete', to: 'games#complete'
+      post '/uncomplete', to: 'games#uncomplete'
     end
   end
 
