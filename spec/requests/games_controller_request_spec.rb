@@ -142,6 +142,16 @@ describe GamesController, type: :request do
 
           expect(response).to have_http_status(200)
         end
+
+        describe 'when game is completed' do
+          before { game.update(completed: true) }
+
+          it 'raises an error' do
+            expect {
+              get_edit
+            }.to raise_error(Pundit::NotAuthorizedError)
+          end
+        end
       end
 
       describe 'is member' do

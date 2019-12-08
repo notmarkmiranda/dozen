@@ -22,7 +22,7 @@ class GamePolicy < ApplicationPolicy
   end
 
   def edit?
-    user_is_admin?(league)
+    user_is_admin?(league) && game.not_completed?
   end
 
   def update?
