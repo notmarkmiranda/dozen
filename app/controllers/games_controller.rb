@@ -51,9 +51,6 @@ class GamesController < ApplicationController
   def complete
     @game = Game.find(params[:id])
     authorize @game
-    # do something here?
-    #
-    # check to see if there are any players without finishing orders and don't finish the game if so
     gc = GameCompleter.new(@game)
     gc.save
     flash[:alert] = gc.alerts.join(', ')

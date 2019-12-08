@@ -251,4 +251,8 @@ describe GamesController, type: :request do
       end
     end
   end
+
+  pending 'POST#complete'
+  
+  pending 'POST#uncomplete'
 end
