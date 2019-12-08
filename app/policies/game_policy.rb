@@ -37,6 +37,10 @@ class GamePolicy < ApplicationPolicy
     user_is_admin?(league)
   end
 
+  def uncomplete?
+    user_is_admin?(league)
+  end
+
   class Scope < Scope
     def resolve
       scope.all

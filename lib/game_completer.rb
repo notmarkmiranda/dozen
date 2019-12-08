@@ -1,22 +1,31 @@
 class GameCompleter
-  attr_reader :alerts,
+  attr_reader :action,
+              :alerts,
               :game,
               :players
 
-  def initialize(game)
+  def initialize(game, action)
     @game = game
+    @action = action.parameterize.underscore.to_sym
     @players = game.players
     @alerts = []
   end
 
   def save
-    return rebuyers_remaining if game.rebuyers.any?
-    return no_players if game.players.count < 2
-    players.in_place_order.each_with_index do |player, index|
-      player.update(finishing_place: index + 1)
-      player.calculate_score(game.players.count, game.buy_in)
+    if action == :complete
+      return rebuyers_remaining if game.rebuyers.any?
+      return no_players if game.players.count < 2
+      players.in_place_order.each_with_index do |player, index|
+        player.update(finishing_place: index + 1)
+        player.calculate_score(game.players.count, game.buy_in)
+      end
+      @game.update!(completed: true)
+    elsif action == :uncomplete
+      players.each do |player|
+        player.update(finishing_place: nil, score: nil)
+        game.update(completed: false)
+      end
     end
-    @game.update!(completed: true)
   end
 
   private
