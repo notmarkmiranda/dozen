@@ -14,7 +14,7 @@ class GameCompleter
   def save
     if action == :complete
       return rebuyers_remaining if game.rebuyers.any?
-      return no_players if game.players.count < 2
+      return no_players if game.finished_players.count < 2
       players.in_place_order.each_with_index do |player, index|
         player.update(finishing_place: index + 1)
         player.calculate_score(game.players.count, game.buy_in)
@@ -23,8 +23,8 @@ class GameCompleter
     elsif action == :uncomplete
       players.each do |player|
         player.update(finishing_place: nil, score: nil)
-        game.update(completed: false)
       end
+      game.update(completed: false)
     end
   end
 
