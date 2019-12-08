@@ -47,5 +47,37 @@ describe 'Admin can complete game', type: :feature do
         expect(page).to have_button('Complete game')
       end
     end
+
+    describe 'when there are no finished players' do
+      let(:first_order) { nil }
+      let(:second_order) { nil }
+
+      before { game.players.destroy_all}
+
+      it 'does not complete the game' do
+        visit game_path(game)
+
+        click_button 'Complete game'
+        expect(current_path).to eq(game_path(game))
+        expect(page).to have_button('Complete game')
+        expect(page).not_to have_button('Uncomplete game')
+      end
+    end
+
+    describe 'when there is only one finished player' do
+      let(:first_order) { 1 }
+      let(:second_order) { 2 }
+      
+      before { game.players.last.destroy }
+
+      it 'does not complete the game' do
+        visit game_path(game)
+
+        click_button 'Complete game'
+        expect(current_path).to eq(game_path(game))
+        expect(page).to have_button('Complete game')
+        expect(page).not_to have_button('Uncomplete game')
+      end
+    end
   end
 end

@@ -54,8 +54,6 @@ class GamesController < ApplicationController
     gc = GameCompleter.new(@game)
     gc.save
     flash[:alert] = gc.alerts.join(', ')
-
-    # otherwise, new PORO for completing the game + calculating scores on a game?
     redirect_to @game
   end
 
