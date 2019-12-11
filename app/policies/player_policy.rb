@@ -8,6 +8,10 @@ class PlayerPolicy < ApplicationPolicy
     user_is_admin?(@player.game.season_league)
   end
 
+  def update?
+    user_is_admin?(@player.game.season_league)
+  end
+
   class Scope < Scope
     def resolve
       scope.all

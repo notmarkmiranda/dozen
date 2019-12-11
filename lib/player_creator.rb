@@ -20,8 +20,6 @@ class PlayerCreator
   end
 
   def save
-    # THIS IS WHERE YOU STOPPED
-    # NEED TO SPLIT ON COMMIT TYPE SWITCH CASE? OR EXTRACT OT IT'S OWN LIB / CLASS?
     @player  = Player.new(params)
     @game = @player.game
     PlayerPolicy.new(current_user, @player).create?
@@ -29,6 +27,7 @@ class PlayerCreator
       add_finished_time_to_params
       find_finishing_order
     elsif commit == :add_rebuy_or_add_on_only
+      # TODO: What do we do here?
     end
 
     if @player.save

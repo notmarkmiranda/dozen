@@ -13,13 +13,15 @@ class PlayerUpdater
   }
 
   attr_accessor :commit,
+                :current_user,
                 :errors,
                 :flash_alert,
                 :game,
                 :params,
                 :player
 
-  def initialize(player, commit, params=nil)
+  def initialize(current_user, player, commit, params=nil)
+    @current_user = current_user
     @player = player
     @params = params
     @game = player.game
@@ -29,6 +31,7 @@ class PlayerUpdater
   end
 
   def save
+    PlayerPolicy.new(current_user, @player).update?
     @flash_alert = FLASH_ALERTS[commit]
     if commit == :additional_to_finished
       find_finishing_order
