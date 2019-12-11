@@ -5,6 +5,8 @@ describe PlayersController, type: :request do
     subject(:post_create) { post players_path, params: player_params }
 
     let(:game) { create(:game) }
+    let(:league) { game.season_league }
+    let(:membership) { create(:membership, league: league, role: 1) }
     let(:user) { create(:user) }
     let(:player_params) do 
       {
@@ -21,11 +23,12 @@ describe PlayersController, type: :request do
       }
     end
 
+    before { sign_in(user) }
+
     describe 'when commit is finish player' do
       let(:additional_expense) { 0 }
       let(:commit) { 'Finish player' }
 
-      # TODO: this test should fail because of logins?
       it 'creates a new player' do
         expect {
           post_create

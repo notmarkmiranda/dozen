@@ -1,6 +1,7 @@
 class PlayersController < ApplicationController
   def create
-    pc = PlayerCreator.new(player_params, params[:commit])
+    #authorize Player
+    pc = PlayerCreator.new(player_params, params[:commit], current_user)
     if pc.save
       flash[:alert] = "Player finished"
     else

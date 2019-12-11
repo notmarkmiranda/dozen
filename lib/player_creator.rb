@@ -4,17 +4,19 @@ class PlayerCreator
   include ::PlayerHelper
 
   attr_accessor :commit,
+                :current_user,
                 :errors,
                 :game,
                 :params,
                 :player
 
-  def initialize(params, commit)
+  def initialize(params, commit, current_user)
     @params = params
     @player = nil
     @game = nil
     @errors = []
     @commit = commit.parameterize.underscore.to_sym
+    @current_user = current_user
   end
 
   def save
@@ -22,7 +24,7 @@ class PlayerCreator
     # NEED TO SPLIT ON COMMIT TYPE SWITCH CASE? OR EXTRACT OT IT'S OWN LIB / CLASS?
     @player  = Player.new(params)
     @game = @player.game
-
+    PlayerPolicy.new(current_user, @player).create?
     if commit == :finish_player
       add_finished_time_to_params
       find_finishing_order
