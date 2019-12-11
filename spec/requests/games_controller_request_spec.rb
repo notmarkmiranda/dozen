@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe GamesController, type: :request do
-  let(:game) { create(:game) }
+  let(:game) { create(:game, completed: false) }
   let(:season) { game.season }
   let(:league) { season.league }
   let(:membership) { create(:membership, league: league, role: role) }
@@ -301,5 +301,21 @@ describe GamesController, type: :request do
     end
   end
   
-  pending 'POST#uncomplete'
+  describe 'POST#uncomplete' do
+    subject(:post_uncomplete) { post uncomplete_game_path(game); game.reload }
+
+    let(:role) { 1 }
+
+    before do 
+      game.update(completed: true)
+      sign_in(user)
+    end
+
+    it 'uncompletes a game' do
+      expect {
+        post_uncomplete
+      }.to change { game.completed }
+    end
+
+  end
 end
