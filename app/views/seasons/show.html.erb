@@ -99,13 +99,19 @@
               </tr>
             </thead>
             <tbody>
-              <% @season.games.in_reverse_date_order.decorate.each do |game| %>
-                <tr class="season-show__games-table <%= game.incomplete_class %>" data-link="<%= game_path(game) %>">
-                  <td><%= game.full_date(game.date) %></td>
-                  <td><%= game.winner_name %></td>
-                  <td><%= game.buy_in_text %></td>
-                  <td><%= game.table_player_text %></td>
-                  <td><%= game.table_pot_text %></td>
+              <% if @season.games.any? %>
+                <% @season.games.in_reverse_date_order.decorate.each do |game| %>
+                  <tr class="season-show__games-table <%= game.incomplete_class %>" data-link="<%= game_path(game) %>">
+                    <td><%= game.full_date(game.date) %></td>
+                    <td><%= game.winner_name %></td>
+                    <td><%= game.buy_in_text %></td>
+                    <td><%= game.table_player_text %></td>
+                    <td><%= game.table_pot_text %></td>
+                  </tr>
+                <% end %>
+              <% else %>
+                <tr class="season-show__games-table">
+                  <td colspan="5">No games just yet, check back later!</td>
                 </tr>
               <% end %>
             </tbody>
