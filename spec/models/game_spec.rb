@@ -65,8 +65,33 @@ describe Game, type: :model do
       end
     end
 
-    pending '#rebuyers'
+    describe 'shared players' do
+      let!(:rebuyer) { create(:player, finishing_order: nil, finishing_place: nil, additional_expense: 1, game: game) }
+      let!(:finisher) { create(:player, finishing_order: 1, finishing_place: nil, additional_expense: 1, game: game) }
 
-    pending '#finished_players'
+      describe '#rebuyers' do
+        subject(:game_rebuyers) { game.rebuyers }
+
+        it 'returns rebuyers' do
+          expect(game_rebuyers).to include(rebuyer)
+        end
+
+        it 'does not return finisher' do
+          expect(game_rebuyers).not_to include(finisher)
+        end
+      end
+
+      describe '#finished_players' do
+        subject(:game_finished_players) { game.finished_players }
+
+        it 'returns finishers' do
+          expect(game_finished_players).to include(finisher)
+        end
+
+        it 'does not return rebuyers' do
+          expect(game_finished_players).not_to include(rebuyer)
+        end
+      end
+    end
   end
 end

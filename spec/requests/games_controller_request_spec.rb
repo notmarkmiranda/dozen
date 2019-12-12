@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe GamesController, type: :request do
-  let(:game) { create(:game) }
+  let(:game) { create(:game, completed: false) }
   let(:season) { game.season }
   let(:league) { season.league }
   let(:membership) { create(:membership, league: league, role: role) }
@@ -262,7 +262,60 @@ describe GamesController, type: :request do
     end
   end
 
-  pending 'POST#complete'
+  describe 'POST#complete' do
+    subject(:post_complete) { post complete_game_path(game); game.reload }
+
+    let(:role) { 1 }
+
+    before { sign_in(user) }
+
+    describe 'with more than 1 finished players' do
+      before { create_list(:player, 2, game: game) }
+
+      it 'completes a game' do
+        expect {
+          post_complete
+        }.to change { game.completed }
+      end
+    end
+
+    describe 'with no finished players' do
+      it 'does not complete the game' do
+        expect {
+          post_complete
+        }.not_to change { game.completed }
+      end
+    end
+
+    describe 'with rebuyers remaining' do
+      before do 
+        create_list(:player, 2, game: game)
+        create(:player, game: game, additional_expense: 1, finishing_order: nil, score: nil, finishing_place: nil)
+      end
+
+      it 'does not complete the game' do
+        expect {
+          post_complete
+        }.not_to change { game.completed }
+      end
+    end
+  end
   
-  pending 'POST#uncomplete'
+  describe 'POST#uncomplete' do
+    subject(:post_uncomplete) { post uncomplete_game_path(game); game.reload }
+
+    let(:role) { 1 }
+
+    before do 
+      game.update(completed: true)
+      sign_in(user)
+    end
+
+    it 'uncompletes a game' do
+      expect {
+        post_uncomplete
+      }.to change { game.completed }
+    end
+
+  end
 end

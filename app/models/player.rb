@@ -2,9 +2,11 @@ class Player < ApplicationRecord
   belongs_to :game
   belongs_to :user
 
-  scope :in_place_order, ->  { order(finishing_order: :desc) }
+  scope :in_place_order, ->  { order(finishing_order: :desc).decorate }
 
-  def additional_expense_commit?
+  validates :game, uniqueness: { scope: :user_id }
+
+  def additional_expense_commit
     return :delete_player if additional_expense == 0 || additional_expense.nil?
     :move_to_rebuyers
   end
@@ -14,10 +16,6 @@ class Player < ApplicationRecord
     denominator = finishing_place + 1
     score = ((Math.sqrt(numerator) / denominator))
     set_score(score)
-  end
-
-  def user_full_name
-    user&.decorate&.full_name
   end
 
   private

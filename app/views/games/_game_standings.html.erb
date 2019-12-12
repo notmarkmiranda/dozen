@@ -2,7 +2,7 @@
 <table class="table table-striped table-responsive-md game-standings">
   <thead class="thead-dark">
     <tr>
-      <% if @game.not_completed? %>
+      <% if @game.not_completed? && policy(@game).create? %>
         <th scope="col"></th>
       <% end %>
       <th scope="col">#</th>

@@ -1,6 +1,6 @@
 class PlayersController < ApplicationController
   def create
-    pc = PlayerCreator.new(player_params, params[:commit])
+    pc = PlayerCreator.new(player_params, params[:commit], current_user)
     if pc.save
       flash[:alert] = "Player finished"
     else
@@ -15,7 +15,7 @@ class PlayersController < ApplicationController
 
   def update
     player = Player.find(params[:id])
-    pu = PlayerUpdater.new(player, params[:commit], params_filter)
+    pu = PlayerUpdater.new(current_user, player, params[:commit], params_filter)
     if pu.save
       flash[:alert] = pu.flash_alert
     else
@@ -26,7 +26,7 @@ class PlayersController < ApplicationController
 
   def destroy
     player = Player.find(params[:id])
-    pu = PlayerUpdater.new(player, params[:commit])
+    pu = PlayerUpdater.new(current_user, player, params[:commit])
     pu.save
     flash[:alert] = pu.flash_alert
     redirect_to pu.game

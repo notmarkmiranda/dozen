@@ -5,7 +5,6 @@ describe 'Admin can add finished player to game', type: :feature do
   let(:league) { game.season_league }
 
   let!(:membership_2) { create(:membership, league: league, role: 0) }
-  # let!(:user_2) { membership_2.user.decorate }
 
   describe 'when user' do
     let(:membership) { create(:membership, league: league, role: role) }
@@ -25,7 +24,7 @@ describe 'Admin can add finished player to game', type: :feature do
 
           expect(current_path).to eq(game_path(game))
           within('tr.game-standing') do
-            expect(page).to have_content(Player.last.user_full_name)
+            expect(page).to have_content(Player.last.decorate.user_full_name)
           end
         end
       end
@@ -42,7 +41,7 @@ describe 'Admin can add finished player to game', type: :feature do
           expect(current_path).to eq(game_path(game))
           standings = page.all("tr.game-standing")
           within(standings[0]) do
-            expect(page).to have_content(Player.last.user_full_name)
+            expect(page).to have_content(Player.last.decorate.user_full_name)
           end
         end
       end

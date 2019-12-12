@@ -91,21 +91,6 @@ describe 'User can view active season', type: :feature do
         end
       end
 
-      # TODO: dont' know if these last two are testable from a feature spec?
-      # should maybe be tested in the request spec?
-      xdescribe 'is neither admin or member' do
-        let(:role) { 0 }
-        let(:user) { create(:user) }
-
-        before { login_as(user, scope: :user) }
-
-        xit 'raises NotAuthorizedError' do
-          visit season_path(season)
-
-        end
-      end
     end
-
-    xdescribe 'when visitor'
   end
 end
