@@ -5,7 +5,7 @@ describe 'Admin can move player up in standings', type: :feature do
   let(:league) { game.season_league }
   before do
     @players = []
-    2.times { |n| @players << create(:player, game: game, finishing_order: n + 1) }
+    2.times { |n| @players << create(:player, game: game, finishing_order: n + 1).decorate }
   end
 
   describe 'when user' do
@@ -43,6 +43,15 @@ describe 'Admin can move player up in standings', type: :feature do
       end
     end
 
-    pending 'is member'
+    describe 'is member' do
+      let(:role) { 0 }
+
+      it 'does not show move up button' do
+        visit game_path(game)
+
+        expect(page).to have_content(league.name)
+        expect(page).not_to have_css('.move-up-standing')
+      end
+    end
   end
 end

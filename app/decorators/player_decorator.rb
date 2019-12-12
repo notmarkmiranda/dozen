@@ -12,6 +12,10 @@ class PlayerDecorator < ApplicationDecorator
     return "First" if index.zero?
   end
 
+  def user_full_name
+    user&.decorate&.full_name
+  end
+
   private
 
   def game

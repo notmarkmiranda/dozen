@@ -3,7 +3,7 @@ require 'rails_helper'
 describe 'Admin can finish player with additional expense', type: :feature do
   let(:game) { create(:game) }
   let(:league) { game.season_league }
-  let!(:player) { create(:player, game: game, finishing_place: nil, additional_expense: 123, finishing_order: nil) }
+  let!(:player) { create(:player, game: game, finishing_place: nil, additional_expense: 123, finishing_order: nil).decorate }
 
   describe 'when user' do
     let(:membership) { create(:membership, league: league, role: role) }
@@ -25,7 +25,7 @@ describe 'Admin can finish player with additional expense', type: :feature do
           expect(page).not_to have_css('table.game-rebuyers')
           expect(page).to have_content('Player added to final standings')
           within('table.game-standings') do
-            expect(page).to have_content(Player.first.user_full_name)
+            expect(page).to have_content(Player.first.decorate.user_full_name)
           end
         end
       end

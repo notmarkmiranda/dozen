@@ -71,7 +71,7 @@ describe 'Admin can remove finished player from game', type: :feature do
           expect(page).to have_content('Player moved back to rebuyers')
           expect(page).not_to have_selector('tr.game-standing')
 
-          last_player = Player.last
+          last_player = Player.last.decorate
           within('tr.rebuyer') do
             expect(page).to have_content(last_player.user_full_name)
           end
