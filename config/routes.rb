@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   resources :users, only: [:show, :update]
   resources :leagues
 
-  get '/public_leagues', to: 'leagues#public_leagues', as: 'public_leagues'
+  get '/public-leagues', to: 'leagues#public_leagues', as: 'public_leagues'
 
   resources :seasons do
     get 'confirm'
@@ -23,6 +23,8 @@ Rails.application.routes.draw do
     member do
       post '/complete', to: 'games#complete'
       post '/uncomplete', to: 'games#uncomplete'
+      get '/new-user', to: 'games#new_user'
+      post '/create-user', to: 'games#create_user'
     end
   end
 

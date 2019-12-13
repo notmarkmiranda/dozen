@@ -1,0 +1,9 @@
+<%= form_for @user, url: create_user_game_path(@game) do |f| %>
+  <%= f.label :email, 'E-Mail Address' %>
+  <%= f.text_field :email %>
+  <%= f.label :first_name %>
+  <%= f.text_field :first_name %>
+  <%= f.label :last_name %>
+  <%= f.text_field :last_name %>
+  <%= f.submit 'Create player' %>
+<% end %>

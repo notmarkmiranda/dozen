@@ -3,7 +3,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id]).decorate
     authorize @game
     @player = @game.players.new
-  end
+  end 
 
   def new
     season = Season.find(game_params[:season_id])
@@ -65,6 +65,21 @@ class GamesController < ApplicationController
     redirect_to @game
   end
 
+  def new_user
+    @user = User.new 
+    @game = Game.find(params[:id])
+  end
+
+  def create_user
+    game = Game.find(params[:id])
+    authorize(game)
+    uc = UserCreator.new(game_user_params, game)
+    if uc.save
+    else
+    end
+    redirect_to game
+  end
+
   private
 
   def game_params
@@ -79,4 +94,13 @@ class GamesController < ApplicationController
       :date
     )
   end
+
+  def game_user_params
+    params.require(:user).permit(
+      :email, 
+      :first_name, 
+      :last_name
+    )
+  end
+
 end

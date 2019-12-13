@@ -1,5 +1,6 @@
 <% if policy(@game).create? %>
     <div>
+      <h4>Add player to game</h4>
       <%= form_for @player do |f| %>
         <%= f.hidden_field :game_id, value: @player.game_id %>
         <%= f.select :user_id, @game.available_players, { prompt: 'Choose a Player' }, class: 'form-control mb-1', id: 'player-select' %>
@@ -10,5 +11,9 @@
         <%= f.submit 'Finish player', class: 'btn btn-sm btn-outline-secondary' %>
         <%= f.submit 'Add Rebuy or Add-on Only', class: 'btn btn-sm btn-outline-secondary' %>
       <% end %>
+      <div class="devise-links">
+        <%= link_to 'Add new player', new_user_game_path(@game) %> 
+        <!-- THIS IS WHERE YOU STOPPED // -->
+      </div>
     </div>
 <% end %>
