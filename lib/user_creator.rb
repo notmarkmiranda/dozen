@@ -1,6 +1,6 @@
 class UserCreator
-  #attr_accessor :user
-  attr_reader :game,
+  attr_reader :alerts,
+              :game,
               :user,
               :user_params
 
@@ -17,8 +17,11 @@ class UserCreator
     if new_user.save
       @user = new_user 
       create_membership
+      @alerts << "New user created for #{new_user.decorate.full_name}"
+      return true
     else
-       
+      @alerts << new_user.errors.full_messages
+      return false
     end
   end
 
