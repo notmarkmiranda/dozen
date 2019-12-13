@@ -8,7 +8,7 @@ describe 'Admin can add finished player to game', type: :feature do
 
   describe 'when user' do
     let(:membership) { create(:membership, league: league, role: role) }
-    let(:user) { membership.user }
+    let(:user) { membership.user.decorate }
 
     before { login_as(user, scope: :user) }
 
@@ -19,7 +19,8 @@ describe 'Admin can add finished player to game', type: :feature do
         it 'should redirect back to game_path and have player#user#truncated_name' do
           visit game_path(game)
 
-          find('#player-select').find(:xpath, 'option[2]').select_option
+          #find('#player-select').find(:xpath, 'option[2]').select_option
+          select(user.full_name, from: 'player-select')
           click_button('Finish player')
 
           expect(current_path).to eq(game_path(game))
@@ -35,7 +36,8 @@ describe 'Admin can add finished player to game', type: :feature do
         it 'should create another player' do
           visit game_path(game)
 
-          find('#player-select').find(:xpath, 'option[2]').select_option
+          #find('#player-select').find(:xpath, 'option[2]').select_option
+          select(user.full_name, from: 'player-select')
           click_button 'Finish player'
 
           expect(current_path).to eq(game_path(game))
