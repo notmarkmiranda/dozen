@@ -74,9 +74,8 @@ class GamesController < ApplicationController
     game = Game.find(params[:id])
     authorize(game)
     uc = UserCreator.new(game_user_params, game)
-    if uc.save
-    else
-    end
+    uc.save
+    flash[:alert] = uc.alerts.join(', ')
     redirect_to game
   end
 
