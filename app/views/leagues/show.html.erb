@@ -82,43 +82,7 @@
           </table>
         </div>
         <div class="league-show__overview-games mt-4">
-          <h4>Games</h4>
-          <table class="table table-striped table-responsive-md">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Date / Time</th>
-                <th scope="col">Winner</th>
-                <th scope="col">Pot Size</th>
-                <th scope="col"># of Players</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>October 12, 2019</td>
-                <td>Mark Miranda</td>
-                <td>$119</td>
-                <td>7</td>
-              </tr>
-              <tr>
-                <td>September 27, 2019</td>
-                <td>Michael Cassano</td>
-                <td>$250</td>
-                <td>12</td>
-              </tr>
-              <tr>
-                <td>August 15, 2019</td>
-                <td>Tyler Merry</td>
-                <td>$120</td>
-                <td>10</td>
-              </tr>
-              <tr>
-                <td>July 10, 2019</td>
-                <td>Marshall Houston</td>
-                <td>$197</td>
-                <td>11</td>
-              </tr>
-            </tbody>
-          </table>
+          <%= render partial: 'shared/games_table.html.erb', locals: { object: @league } %>
         </div>
         <div class="league-show__overview-seasons mt-4">
           <h4>Seasons</h4>

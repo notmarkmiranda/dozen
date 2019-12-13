@@ -87,35 +87,7 @@
           </table>
         </div>
         <div class="league-show__overview-games mt-4">
-          <h4>Games</h4>
-          <table class="table table-striped table-responsive-md">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">Date / Time</th>
-                <th scope="col">Winner</th>
-                <th scope="col">Buy In</th>
-                <th scope="col"># of Players</th>
-                <th scope="col">Pot Size</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if @season.games.any? %>
-                <% @season.games.in_reverse_date_order.decorate.each do |game| %>
-                  <tr class="season-show__games-table <%= game.incomplete_class %>" data-link="<%= game_path(game) %>">
-                    <td><%= game.full_date(game.date) %></td>
-                    <td><%= game.winner_name %></td>
-                    <td><%= game.buy_in_text %></td>
-                    <td><%= game.table_player_text %></td>
-                    <td><%= game.table_pot_text %></td>
-                  </tr>
-                <% end %>
-              <% else %>
-                <tr class="season-show__games-table">
-                  <td colspan="5">No games just yet, check back later!</td>
-                </tr>
-              <% end %>
-            </tbody>
-          </table>
+          <%= render partial: 'shared/games_table.html.erb', locals: { object: @season } %>
         </div>
       </div>
       <aside class="col-md-4">
