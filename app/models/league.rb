@@ -5,6 +5,7 @@ class League < ApplicationRecord
 
   has_many :memberships, dependent: :destroy
   has_many :seasons, -> { in_created_order }, class_name: 'Season', dependent: :destroy
+  has_many :games, through: :seasons
 
   after_create_commit :create_initial_admin
   after_create_commit :create_initial_season

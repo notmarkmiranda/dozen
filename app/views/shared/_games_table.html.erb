@@ -1,0 +1,21 @@
+<h4>Games</h4>
+<table class="table table-striped table-responsive-md">
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Date / Time</th>
+      <th scope="col">Winner</th>
+      <th scope="col">Buy In</th>
+      <th scope="col"># of Players</th>
+      <th scope="col">Pot Size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% if object.games.any? %>
+      <%= render partial: 'shared/game_row', collection: object.games.in_reverse_date_order.decorate, as: :game %>
+    <% else %>
+      <tr class="season-show__games-table">
+        <td colspan="5">No games just yet, check back later!</td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
