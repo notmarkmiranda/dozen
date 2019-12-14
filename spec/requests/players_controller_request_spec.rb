@@ -49,8 +49,8 @@ describe PlayersController, type: :request do
           post_create
         }.to change(Player, :count).by(1)
 
-        expect(Player.last.finishing_order).to be_nil
-        expect(Player.last.additional_expense).to eq(1)
+        expect(game.players.last.finishing_order).to be_nil
+        expect(game.players.last.additional_expense).to eq(1)
       end
     end
   end
