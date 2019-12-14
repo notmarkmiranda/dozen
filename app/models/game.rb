@@ -1,4 +1,6 @@
 class Game < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
   validates :buy_in, presence: true
   belongs_to :season, optional: true
   belongs_to :league, optional: true

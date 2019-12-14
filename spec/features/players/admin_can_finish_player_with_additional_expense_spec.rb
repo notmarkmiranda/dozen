@@ -38,7 +38,7 @@ describe 'Admin can finish player with additional expense', type: :feature do
 
           find(:css, '.finish-additional-button').click
 
-          last_player = Player.last.decorate
+          last_player = game.players.last.decorate
 
           expect(current_path).to eq(game_path(game))
           expect(page).to have_content(league.name)
@@ -60,7 +60,7 @@ describe 'Admin can finish player with additional expense', type: :feature do
           expect(current_path).to eq(game_path(game))
           expect(page).to have_content(league.name)
 
-          first_player = Player.first.decorate
+          first_player = game.players.first.decorate
 
           within('table.game-rebuyers') do
             expect(page).not_to have_content(first_player.user_full_name)

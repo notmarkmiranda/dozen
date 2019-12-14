@@ -1,8 +1,8 @@
 class CreatePlayer < ActiveRecord::Migration[6.0]
   def change
-    create_table :players do |t|
-      t.references :game, null: false, foreign_key: true
-      t.references :user, null: false, foreign_key: true
+    create_table :players, id: :uuid do |t|
+      t.uuid :game_id
+      t.uuid :user_id
       t.integer :finishing_place
       t.float :score, default: 0.00
       t.integer :additional_expense, default: 0
@@ -10,5 +10,8 @@ class CreatePlayer < ActiveRecord::Migration[6.0]
 
       t.timestamps null: false
     end
+
+    add_index :players, :game_id
+    add_index :players, :user_id
   end
 end

@@ -1,4 +1,6 @@
 class Season < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
   belongs_to :league
   has_many :games
 

@@ -1,4 +1,6 @@
 class League < ApplicationRecord
+  self.implicit_order_column = 'created_at'
+
   attr_accessor :user_id
 
   validates :name, uniqueness: true, presence: true

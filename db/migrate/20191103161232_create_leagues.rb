@@ -1,6 +1,6 @@
 class CreateLeagues < ActiveRecord::Migration[6.0]
   def change
-    create_table :leagues do |t|
+    create_table :leagues, id: :uuid do |t|
       t.string :name
       t.string :location
       t.boolean :public_league, default: false

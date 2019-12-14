@@ -19,7 +19,6 @@ describe 'Admin can add finished player to game', type: :feature do
         it 'should redirect back to game_path and have player#user#truncated_name' do
           visit game_path(game)
 
-          #find('#player-select').find(:xpath, 'option[2]').select_option
           select(user.full_name, from: 'player-select')
           click_button('Finish player')
 
@@ -36,7 +35,6 @@ describe 'Admin can add finished player to game', type: :feature do
         it 'should create another player' do
           visit game_path(game)
 
-          #find('#player-select').find(:xpath, 'option[2]').select_option
           select(user.full_name, from: 'player-select')
           click_button 'Finish player'
 
