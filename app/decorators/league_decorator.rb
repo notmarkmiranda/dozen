@@ -8,30 +8,32 @@ class LeagueDecorator < ApplicationDecorator
   end
 
   def last_completed_game_full_date
-    last_completed_game = league.last_completed_game
     if last_completed_game
       last_completed_game.xfull_date
     end
   end
 
   def last_completed_game_pot_size
-    last_completed_game = league.last_completed_game
     last_completed_game&.pot_text
   end
 
   def last_completed_game_players_count
-    last_completed_game = league.last_completed_game
     last_completed_game&.player_text
   end
 
   def last_completed_game_winner
-    last_completed_game = league.last_completed_game
     if last_completed_game
       last_completed_game.decorate.winner_name
     end
   end
   
   def public_text
-    object.public_league ? "Public League" : "Private League"
+    league.public_league ? "Public League" : "Private League"
+  end
+
+  private
+
+  def last_completed_game
+    league.last_completed_game
   end
 end
