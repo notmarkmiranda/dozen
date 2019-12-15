@@ -18,6 +18,10 @@ class League < ApplicationRecord
     seasons.find_by(active_season: true)
   end
 
+  def last_completed_game
+    games.in_reverse_date_order.where(completed: true).limit(1).last&.decorate
+  end
+
   private
 
   def create_initial_admin
