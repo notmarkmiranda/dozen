@@ -13,7 +13,7 @@ describe 'admin can view last game results on league#show sidebar', type: :featu
       expect(page).to have_content(league.name)
 
       within('.league-show__game-results') do
-        expect(page).to have_content("Date / Time: #{last_game.full_date(last_game.date)}")
+        expect(page).to have_content("Date / Time: #{last_game.formatted_full_date}")
         expect(page).to have_content("Winner: #{last_game.winner_name}")
         expect(page).to have_content(last_game.pot_text)
         expect(page).to have_content(last_game.player_text)
