@@ -119,18 +119,7 @@
         <div class="league-show__game-results">
           <h4>Last Game Results</h4>
           <hr>
-          <% if @league.last_completed_game %>
-            <div class="league-show__last-game">
-              <b>Date / Time:</b> <%= @league.last_completed_game_full_date %><br />
-              <b>Winner:</b> <%= @league.last_completed_game_winner %><br />
-              <b>Pot Size:</b> <%= @league.last_completed_game_pot_size %><br />
-              <b># of Players:</b> <%= @league.last_completed_game_players_count %>
-            </div>
-          <% else %>
-            <div>
-              No prior game results, check back later.
-            </div>
-          <% end %>
+          <%= @league.last_completed_game_partial %>
         </div>
         <div class="league-show__next-scheduled-game mt-4">
           <h4>Next Scheduled Game</h4>

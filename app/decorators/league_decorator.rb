@@ -13,6 +13,10 @@ class LeagueDecorator < ApplicationDecorator
     end
   end
 
+  def last_completed_game_partial
+    last_completed_game ? render_last_completed_game : render_no_prior_game
+  end
+
   def last_completed_game_pot_size
     last_completed_game&.pot_text
   end
@@ -26,7 +30,7 @@ class LeagueDecorator < ApplicationDecorator
       last_completed_game.decorate.winner_name
     end
   end
-  
+
   def public_text
     league.public_league ? "Public League" : "Private League"
   end
@@ -35,5 +39,13 @@ class LeagueDecorator < ApplicationDecorator
 
   def last_completed_game
     league.last_completed_game
+  end
+
+  def render_last_completed_game
+    h.render partial: 'shared/games/last_completed_game'
+  end
+
+  def render_no_prior_game
+    h.content_tag :div, 'No prior game results, check back later.'
   end
 end
