@@ -23,6 +23,10 @@ class Game < ApplicationRecord
     !completed?
   end
 
+  def players_count
+    players.count
+  end
+
   def players_except_self(player)
     players.where.not(id: player.id)
   end
@@ -35,5 +39,9 @@ class Game < ApplicationRecord
     ActiveSupport::Deprecation.silence do
       players.where.not(id: nil, finishing_order: nil).order(finishing_order: :desc).decorate
     end
+  end
+
+  def total_pot
+    buy_in * players_count + players.sum(&:additional_expense)
   end
 end

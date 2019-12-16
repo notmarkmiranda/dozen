@@ -2,7 +2,7 @@ class LeaguesController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :destroy]
 
   def show
-    @league = League.find(params[:id])
+    @league = League.find(params[:id]).decorate
     authorize @league
   end
 

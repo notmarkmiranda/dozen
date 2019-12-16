@@ -5,6 +5,10 @@ class GameDecorator < ApplicationDecorator
     h.number_to_currency(buy_in, precision: 0)
   end
 
+  def xfull_date
+    full_date(game.date)
+  end
+
   def incomplete_class
     not_completed? ? 'text-danger' : 'completed-game'
   end
@@ -18,11 +22,11 @@ class GameDecorator < ApplicationDecorator
   end
 
   def player_text
-    completed? ? "SOMETHING" : estimated_player_text
+    completed? ? actual_player_text : estimated_player_text
   end
 
   def pot_text
-    completed? ? "SOMETHING" : estimated_pot_text
+    completed? ? actual_pot_text : estimated_pot_text
   end
 
   def rebuy_text
@@ -39,10 +43,19 @@ class GameDecorator < ApplicationDecorator
 
   def winner_name
     return 'Not completed' if game.not_completed?
-    'Oops'
+    player = game.players.find_by(finishing_place: 1)
+    player.decorate.user_full_name if player
   end
 
   private
+
+  def actual_player_text
+    players_count
+  end
+
+  def actual_pot_text
+    h.number_to_currency(game.total_pot, precision: 0)
+  end
 
   def estimated_player_text
     "<b>Estimated Players:</b> #{estimated_players_count}".html_safe
