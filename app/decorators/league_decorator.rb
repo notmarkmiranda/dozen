@@ -9,7 +9,7 @@ class LeagueDecorator < ApplicationDecorator
 
   def last_completed_game_full_date
     if last_completed_game
-      last_completed_game.xfull_date
+      last_completed_game.formatted_full_date
     end
   end
 
