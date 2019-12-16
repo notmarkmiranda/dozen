@@ -1,4 +1,5 @@
 class SeasonDecorator < ApplicationDecorator
+  include LastGameHelper
   delegate_all
 
   def active_season_class

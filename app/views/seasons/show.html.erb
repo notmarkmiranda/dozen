@@ -94,12 +94,7 @@
         <div class="season-show__game-results">
           <h4>Last Game Results</h4>
           <hr>
-          <div class="league-show__last-game">
-            <b>Date / Time:</b> October 12, 2019<br />
-            <b>Winner:</b> Mark Miranda<br />
-            <b>Pot Size:</b> $119<br />
-            <b># of Players:</b> 7
-          </div>
+          <%= @season.last_completed_game_partial %>
         </div>
         <div class="league-show__next-scheduled-game mt-4">
           <h4>Next Scheduled Game</h4>
