@@ -18,7 +18,6 @@ describe 'Admin can delete game', type: :feature, js: true do
 
       click_button "Delete game"
       page.driver.browser.switch_to.alert.accept
-      sleep(0.1)
 
       expect(current_path).to eq(league_path(league))
     end
