@@ -21,14 +21,14 @@ describe 'admin can view last game results on league#show sidebar', type: :featu
     end
   end
 
-  pending 'when there is not last game available' do
+  describe 'when there is not last game available' do
     it 'shows no game available instead' do
       visit league_path(league)
 
       expect(page).to have_content(league.name)
-      
-      within('.league-show__game-results') do
 
+      within('.league-show__game-results') do
+        expect(page).to have_content('No prior game results, check back later.')
       end
     end
   end
