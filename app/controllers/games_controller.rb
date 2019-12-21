@@ -3,7 +3,7 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id]).decorate
     authorize @game
     @player = @game.players.new
-  end 
+  end
 
   def new
     season = Season.find(game_params[:season_id])
@@ -66,13 +66,13 @@ class GamesController < ApplicationController
   end
 
   def new_user
-    @user = User.new 
+    @user = User.new
     @game = Game.find(params[:id])
   end
 
   def create_user
     game = Game.find(params[:id])
-    authorize(game)
+    authorize game
     uc = UserCreator.new(game_user_params, game)
     uc.save
     flash[:alert] = uc.alerts.join(', ')
@@ -96,8 +96,8 @@ class GamesController < ApplicationController
 
   def game_user_params
     params.require(:user).permit(
-      :email, 
-      :first_name, 
+      :email,
+      :first_name,
       :last_name
     )
   end

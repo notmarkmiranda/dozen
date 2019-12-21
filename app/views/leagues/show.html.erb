@@ -9,6 +9,7 @@
     <% end %>
     <% if policy(@league).destroy? %>
       <%= button_to "Create new season", seasons_path(season: { league_id: @league.id }), class: 'btn btn-outline-secondary mr-2' %>
+      <%= link_to 'Add new player', new_user_league_path(@league), class: 'btn btn-outline-secondary' %>
     <% end %>
   </div>
   <div class="league-show__info mt-4">
