@@ -5,7 +5,12 @@ Rails.application.routes.draw do
   get '/users/complete_profile', to: 'users#complete_profile', as: 'user_complete_profile'
 
   resources :users, only: [:show, :update]
-  resources :leagues
+  resources :leagues do
+    member do
+      get '/new-user', to: 'leagues#new_user'
+      post '/create-user', to: 'leagues#create_user'
+    end
+  end
 
   get '/public-leagues', to: 'leagues#public_leagues', as: 'public_leagues'
 

@@ -49,11 +49,33 @@ class LeaguesController < ApplicationController
     @leagues = League.public_leagues.decorate
   end
 
+  def new_user
+    @user = User.new
+    @league = League.find(params[:id])
+  end
+
+  def create_user
+    league = League.find(params[:id])
+    authorize league
+    uc = UserCreator.new(league_user_params, league)
+    uc.save
+    flash[:alert] = uc.alerts.join(', ')
+    redirect_to league
+  end
+
   private
 
   def league_params
     params.require(:league)
       .permit(:name, :location, :public_league)
       .merge(user_id: current_user&.id)
+  end
+
+  def league_user_params
+    params.require(:user).permit(
+      :email,
+      :first_name,
+      :last_name
+    )
   end
 end
