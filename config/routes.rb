@@ -36,4 +36,6 @@ Rails.application.routes.draw do
   resources :players
 
   get '/dashboard', to: 'dashboard#show', as: 'dashboard'
+
+  get '*unmatched_route', :to => 'application#render_404'
 end

@@ -1,3 +1,7 @@
 <li class="list-group-item">
-  You don't have any leagues, maybe try <%= link_to 'creating one', new_league_path %>.
+  <% if current_user %>
+    You don't have any leagues, maybe try <%= link_to 'creating one', new_league_path %>.
+  <% else %>
+    There are no public leagues just yet, if you <%= link_to 'log in', new_user_session_path %>, you can create our first one!
+  <% end %>
 </li>

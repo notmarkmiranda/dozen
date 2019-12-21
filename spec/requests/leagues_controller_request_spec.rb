@@ -48,7 +48,9 @@ describe LeaguesController, type: :request do
 
       describe 'for non-member / non-admin' do
         it 'raises pundit not authorized error' do
-          expect { get_show }.to raise_error(Pundit::NotAuthorizedError)
+          get_show
+
+          expect(response).to have_http_status(401)
         end
       end
 
@@ -56,7 +58,9 @@ describe LeaguesController, type: :request do
         before { sign_out(user) }
 
         it 'raises pundit not authorized error' do
-          expect { get_show }.to raise_error(Pundit::NotAuthorizedError)
+          get_show
+
+          expect(response).to have_http_status(401)
         end
       end
     end
@@ -165,9 +169,9 @@ describe LeaguesController, type: :request do
 
     describe 'visitor' do
       it 'raises pundit::NotAuthorizedError' do
-        expect {
-          get_edit
-        }.to raise_error(Pundit::NotAuthorizedError)
+        get_edit
+
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -208,9 +212,9 @@ describe LeaguesController, type: :request do
       let(:name) { 'Super!' }
 
       it 'raises NotAuthorizedError' do
-        expect{
-          patch_update
-        }.to raise_error(Pundit::NotAuthorizedError)
+        patch_update
+
+        expect(response).to have_http_status(401)
       end
     end
   end

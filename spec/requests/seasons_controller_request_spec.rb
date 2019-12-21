@@ -54,9 +54,9 @@ describe SeasonsController, type: :request do
         let(:role) { 0 }
 
         it 'raises Pundit::NotAuthorizedError' do
-            expect {
-              get_show
-            }.to raise_error(Pundit::NotAuthorizedError)
+          get_show
+
+          expect(response).to have_http_status(401)
         end
       end
     end
