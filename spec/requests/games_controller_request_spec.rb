@@ -38,9 +38,9 @@ describe GamesController, type: :request do
 
       describe 'when visitor' do
         it 'raises a Pundit::NotAuthorizedError' do
-          expect {
-            get_show
-          }.to raise_error(Pundit::NotAuthorizedError)
+          get_show
+
+          expect(response).to have_http_status(401)
         end
       end
     end
@@ -68,18 +68,18 @@ describe GamesController, type: :request do
         before { sign_in(user) }
 
         it 'raises an error' do
-          expect {
-            get_new
-          }.to raise_error(Pundit::NotAuthorizedError)
+          get_new
+
+          expect(response).to have_http_status(401)
         end
       end
     end
 
     describe 'when visitor' do
       it 'raises Pundit::NotAuthorizedError' do
-        expect {
-          get_new
-        }.to raise_error(Pundit::NotAuthorizedError)
+        get_new
+
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -112,18 +112,18 @@ describe GamesController, type: :request do
         let(:role) { 0 }
 
         it 'raises an error' do
-          expect {
-            post_create
-          }.to raise_error(Pundit::NotAuthorizedError)
+          post_create
+
+          expect(response).to have_http_status(401)
         end
       end
     end
 
     describe 'when visitor' do
       it 'raises an error' do
-        expect {
-          post_create
-        }.to raise_error(Pundit::NotAuthorizedError)
+        post_create
+
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -147,9 +147,9 @@ describe GamesController, type: :request do
           before { game.update(completed: true) }
 
           it 'raises an error' do
-            expect {
-              get_edit
-            }.to raise_error(Pundit::NotAuthorizedError)
+            get_edit
+
+            expect(response).to have_http_status(401)
           end
         end
       end
@@ -160,18 +160,18 @@ describe GamesController, type: :request do
         before { sign_in(user) }
 
         it 'raises an error' do
-          expect {
-            get_edit
-          }.to raise_error(Pundit::NotAuthorizedError)
+          get_edit
+
+          expect(response).to have_http_status(401)
         end
       end
     end
 
     describe 'when visitor' do
       it 'raises Pundit::NotAuthorizedError' do
-        expect {
-          get_edit
-        }.to raise_error(Pundit::NotAuthorizedError)
+        get_edit
+
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -204,18 +204,18 @@ describe GamesController, type: :request do
         let(:role) { 0 }
 
         it 'raises an error' do
-          expect {
-            patch_update
-          }.to raise_error(Pundit::NotAuthorizedError)
+          patch_update
+
+          expect(response).to have_http_status(401)
         end
       end
     end
 
     describe 'when visitor' do
       it 'raises an error' do
-        expect {
-          patch_update
-        }.to raise_error(Pundit::NotAuthorizedError)
+        patch_update
+
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -246,18 +246,18 @@ describe GamesController, type: :request do
         let(:role) { 0 }
 
         it 'raises an error' do
-          expect {
-            delete_destroy
-          }.to raise_error(Pundit::NotAuthorizedError)
+          delete_destroy
+
+          expect(response).to have_http_status(401)
         end
       end
     end
 
     describe 'when visitor' do
       it 'raises an error' do
-        expect {
-          delete_destroy
-        }.to raise_error(Pundit::NotAuthorizedError)
+        delete_destroy
+
+        expect(response).to have_http_status(401)
       end
     end
   end
@@ -288,7 +288,7 @@ describe GamesController, type: :request do
     end
 
     describe 'with rebuyers remaining' do
-      before do 
+      before do
         create_list(:player, 2, game: game)
         create(:player, game: game, additional_expense: 1, finishing_order: nil, score: nil, finishing_place: nil)
       end
@@ -300,13 +300,13 @@ describe GamesController, type: :request do
       end
     end
   end
-  
+
   describe 'POST#uncomplete' do
     subject(:post_uncomplete) { post uncomplete_game_path(game); game.reload }
 
     let(:role) { 1 }
 
-    before do 
+    before do
       game.update(completed: true)
       sign_in(user)
     end
@@ -316,6 +316,5 @@ describe GamesController, type: :request do
         post_uncomplete
       }.to change { game.completed }
     end
-
   end
 end

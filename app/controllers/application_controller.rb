@@ -1,8 +1,29 @@
 class ApplicationController < ActionController::Base
   include Pundit
 
+  rescue_from ActiveRecord::RecordNotFound, with: :on_record_not_found
+  rescue_from AbstractController::ActionNotFound, with: :on_record_not_found
+  rescue_from ActionController::RoutingError, with: :on_routing_error
+  rescue_from Pundit::NotAuthorizedError, with: :on_access_denied
+
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :store_user_location!, if: :storable_location?
+
+  def render_404
+    render 'application/404', status: 404
+  end
+
+  def on_access_denied
+    render 'application/401', status: 401
+  end
+
+  def on_record_not_found
+    render_404
+  end
+
+  def on_routing_error
+    render_404
+  end
 
   protect_from_forgery
 
