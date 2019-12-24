@@ -19,11 +19,13 @@ class GameCompleter
         player.update(finishing_place: index + 1)
         player.calculate_score(game.players.count, game.buy_in)
       end
+      @alerts << 'Game completed.'
       @game.update!(completed: true)
     elsif action == :uncomplete
       players.each do |player|
         player.update(finishing_place: nil, score: nil)
       end
+      @alerts << 'Game uncompleted'
       game.update(completed: false)
     end
   end

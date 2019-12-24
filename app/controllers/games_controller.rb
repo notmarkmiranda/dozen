@@ -62,6 +62,7 @@ class GamesController < ApplicationController
     authorize @game
     gc = GameCompleter.new(@game, params[:action])
     gc.save
+    flash[:alert] = gc.alerts.join(', ')
     redirect_to @game
   end
 
