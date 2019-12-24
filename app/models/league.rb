@@ -22,6 +22,10 @@ class League < ApplicationRecord
     games.in_reverse_date_order.where(completed: true).limit(1).last&.decorate
   end
 
+  def next_scheduled_game
+    games.incompleted.first&.decorate
+  end
+
   private
 
   def create_initial_admin
