@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'user can view next scheduled game on league show sidebar' do
+describe 'user can view next scheduled game on league show sidebar', type: :feature do
   let(:league) { create(:league, :public_league) }
 
   describe 'when a game is scheduled' do

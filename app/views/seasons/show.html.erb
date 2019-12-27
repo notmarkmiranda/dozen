@@ -96,16 +96,20 @@
           <hr>
           <%= @season.last_completed_game_partial %>
         </div>
-        <div class="league-show__next-scheduled-game mt-4">
+        <div class="season-show__next-scheduled-game mt-4">
           <h4>Next Scheduled Game</h4>
           <hr>
-          <div class="league-show__next-scheduled-game">
-            <b>Date / Time:</b> November 16, 2019<br />
-            <b>Location:</b> Mike's House<br />
-            <b>Buy In:</b> $150<br />
-            <b>Estimated Attendance:</b> 15<br />
-            <b>Estimated Pot Size:</b> $2,250<br />
-            <b>Payout:</b> 1st: $1,135 - 2nd: $675 - 3rd: $450
+          <div class="season-show__next-scheduled-game-main">
+            <% if @season.next_scheduled_game %>
+              <b>Date / Time:</b> <%= @season.next_scheduled_game.formatted_full_date %><br />
+              <b>Location:</b> Mike's House<br />
+              <b>Buy In:</b> <%= @season.next_scheduled_game.buy_in_text %><br />
+              <%= @season.next_scheduled_game.player_text %>
+              <%= @season.next_scheduled_game.pot_text %>
+              <b>Payout:</b> 1st: $1,135 - 2nd: $675 - 3rd: $450
+            <% else %>
+              There is no game scheduled yet, check back later.
+            <% end %>
           </div>
         </div>
       </aside>

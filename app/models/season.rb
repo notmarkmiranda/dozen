@@ -39,6 +39,10 @@ class Season < ApplicationRecord
     games.in_reverse_date_order.where(completed: true).limit(1).last&.decorate
   end
 
+  def next_scheduled_game
+    games.incompleted.first&.decorate
+  end
+  
   def not_completed?
     !completed?
   end
