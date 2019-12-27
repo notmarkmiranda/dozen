@@ -10,6 +10,7 @@ class Game < ApplicationRecord
 
   scope :in_date_order, -> { order(date: :asc) }
   scope :in_reverse_date_order, -> { order(date: :desc) }
+  scope :incompleted, -> { where('games.completed = ? AND date >= ?', false, Date.today).order(date: :asc) }
 
   def available_players
     all_users = season_league.memberships.map(&:user)
