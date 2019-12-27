@@ -1,0 +1,10 @@
+<% if game %>
+  <b>Date / Time:</b> <%= game.formatted_full_date %><br />
+  <b>Location:</b> Mike's House<br />
+  <b>Buy In:</b> <%= game.buy_in_text %><br />
+  <%= game.player_text %>
+  <%= game.pot_text %>
+  <b>Payout:</b> 1st: $1,135 - 2nd: $675 - 3rd: $450
+<% else %>
+  There is no game scheduled yet, check back later.
+<% end %>

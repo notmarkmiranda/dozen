@@ -126,16 +126,7 @@
           <h4>Next Scheduled Game</h4>
           <hr>
           <div class="league-show__next-scheduled-game-main">
-            <% if @league.next_scheduled_game %>
-              <b>Date / Time:</b> <%= @league.next_scheduled_game.formatted_full_date %><br />
-              <b>Location:</b> Mike's House<br />
-              <b>Buy In:</b> <%= @league.next_scheduled_game.buy_in_text %><br />
-              <%= @league.next_scheduled_game.player_text %>
-              <%= @league.next_scheduled_game.pot_text %>
-              <b>Payout:</b> 1st: $1,135 - 2nd: $675 - 3rd: $450
-            <% else %>
-              There is no game scheduled yet, check back later.
-            <% end %>
+            <%= render partial: 'shared/games/next_scheduled_game', locals: { game: @league.next_scheduled_game } %>
           </div>
         </div>
       </aside>
