@@ -1,3 +1,5 @@
+require 'humanize'
+
 class PlayerDecorator < ApplicationDecorator
   delegate_all
 
@@ -16,6 +18,14 @@ class PlayerDecorator < ApplicationDecorator
     user&.decorate&.full_name
   end
 
+  def place(index)
+    index + 1
+  end
+  
+  def place_class(index)
+    place(index).humanize
+  end
+  
   private
 
   def game

@@ -42,7 +42,7 @@
             </div>
           </div>
         </div>
-        <div class="league-show__overview-standings mt-4">
+        <div class="season-show__overview-standings mt-4">
           <h4>Standings</h4>
           <table class="table table-striped table-responsive-md">
             <thead class="thead-dark">
@@ -55,34 +55,15 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark Miranda</td>
-                <td>27.25</td>
-                <td>$127</td>
-                <td>9</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Michael Cassano</td>
-                <td>25.60</td>
-                <td>$120</td>
-                <td>9</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Tyler Merry</td>
-                <td>25.50</td>
-                <td>$119</td>
-                <td>8</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>Marshall Houston</td>
-                <td>25.20</td>
-                <td>$117</td>
-                <td>9</td>
-              </tr>
+              <% @season.standings.each_with_index do |standing, index| %>
+                <tr class="standing <%= standing.place_class(index) %>">
+                  <th scope="row"><%= standing.place(index) %></th>
+                  <td><%= standing.user_full_name %></td>
+                  <td><%= standing.cumulative_score %></td>
+                  <td>$127</td>
+                  <td><%= standing.games_count %></td>
+                </tr>
+              <% end %>
             </tbody>
           </table>
         </div>

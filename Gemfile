@@ -11,10 +11,11 @@ gem 'webpacker', '~> 4.0'
 gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.2', require: false
 
+gem 'bootstrap', '~>4.3.1'
 gem 'devise'
 gem 'draper'
+gem 'humanize'
 gem 'pundit'
-gem 'bootstrap', '~>4.3.1'
 
 group :development, :test do
   gem 'factory_bot_rails'
