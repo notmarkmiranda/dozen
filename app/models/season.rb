@@ -70,6 +70,7 @@ class Season < ApplicationRecord
   end
 
   def standings
+    return [] if players.empty?
     Standings::StandingsCompiler.standings(self)
   end
 end

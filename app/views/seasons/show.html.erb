@@ -55,6 +55,7 @@
               </tr>
             </thead>
             <tbody>
+              
               <% @season.standings.each_with_index do |standing, index| %>
                 <tr class="standing <%= standing.place_class(index) %>">
                   <th scope="row"><%= standing.place(index) %></th>
