@@ -43,6 +43,6 @@ class Game < ApplicationRecord
   end
 
   def total_pot
-    buy_in * players_count + players.sum(&:additional_expense)
+    buy_in * players_count + players.sum(:additional_expense)
   end
 end
