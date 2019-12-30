@@ -55,15 +55,22 @@
               </tr>
             </thead>
             <tbody>
-              
-              <% @season.standings.each_with_index do |standing, index| %>
-                <tr class="standing <%= standing.place_class(index) %>">
-                  <th scope="row"><%= standing.place(index) %></th>
-                  <td><%= standing.user_full_name %></td>
-                  <td><%= standing.cumulative_score %></td>
-                  <td>$127</td>
-                  <td><%= standing.games_count %></td>
+              <% if @season.standings.empty? %>
+                <tr>
+                  <td colspan="99">
+                    No games available for standings just yet.
+                  </td>
                 </tr>
+              <% else %>
+                <% @season.standings.each_with_index do |standing, index| %>
+                  <tr class="standing <%= standing.place_class(index) %>">
+                    <th scope="row"><%= standing.place(index) %></th>
+                    <td><%= standing.user_full_name %></td>
+                    <td><%= number_with_precision(standing.cumulative_score, precision: 3) %></td>
+                    <td>$127</td>
+                    <td><%= standing.games_count %></td>
+                  </tr>
+                <% end %>
               <% end %>
             </tbody>
           </table>

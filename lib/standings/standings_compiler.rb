@@ -34,7 +34,8 @@ class Standings::StandingsCompiler
      @season_users.map do |user_id|
       "(SELECT players.* FROM players INNER JOIN games ON \
        players.game_id = games.id WHERE user_id = '#{user_id}' AND \
-       games.season_id = '#{object.id}' \
+       games.season_id = '#{object.id}' AND \
+       games.completed = 'true' \
        ORDER BY score DESC LIMIT #{@active_season_games_count})"
     end.join("\nUNION ALL\n")
   end
