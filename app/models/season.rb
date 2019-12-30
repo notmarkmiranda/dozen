@@ -3,6 +3,7 @@ class Season < ApplicationRecord
 
   belongs_to :league
   has_many :games
+  has_many :players, through: :games
 
   scope :in_created_order, -> { order(created_at: :asc) }
 
@@ -66,5 +67,10 @@ class Season < ApplicationRecord
 
   def self.deactivate_all!
     update_all(active_season: false)
+  end
+
+  def standings
+    return [] if players.empty?
+    Standings::StandingsCompiler.standings(self)
   end
 end
