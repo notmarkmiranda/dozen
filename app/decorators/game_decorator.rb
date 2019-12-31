@@ -62,7 +62,7 @@ class GameDecorator < ApplicationDecorator
   end
 
   def estimated_player_text
-    "<b>Estimated Players:</b> #{estimated_players_count}<br />".html_safe
+    "<b>Estimated Players:</b> #{estimated_players_count}".html_safe
   end
 
   def estimated_pot_text
