@@ -54,11 +54,15 @@ class GameDecorator < ApplicationDecorator
   private
 
   def actual_player_text
-    players_count
+    "<b># of Players:</b> #{players_count}".html_safe
   end
 
-  def actual_pot_text
+  def actual_pot
     h.number_to_currency(game.total_pot, precision: 0)
+  end
+  
+  def actual_pot_text
+    "<b>Pot Size:</b> #{actual_pot}".html_safe
   end
 
   def estimated_player_text
