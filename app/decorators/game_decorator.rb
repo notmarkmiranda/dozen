@@ -38,11 +38,11 @@ class GameDecorator < ApplicationDecorator
   end
 
   def table_pot_text
-    completed? ? 'SOMETHING' : overview_estimated_pot_text
+    completed? ? actual_pot : overview_estimated_pot_text
   end
 
   def table_player_text
-    completed? ? 'SOMETHING' : estimated_players_count
+    completed? ? players_count : estimated_players_count
   end
 
   def winner_name
