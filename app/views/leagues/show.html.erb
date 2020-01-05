@@ -51,34 +51,23 @@
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark Miranda</td>
-                <td>27.25</td>
-                <td>$127</td>
-                <td>9</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Michael Cassano</td>
-                <td>25.60</td>
-                <td>$120</td>
-                <td>9</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>Tyler Merry</td>
-                <td>25.50</td>
-                <td>$119</td>
-                <td>8</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>Marshall Houston</td>
-                <td>25.20</td>
-                <td>$117</td>
-                <td>9</td>
-              </tr>
+              <% if @league.standings.empty? %>
+                <tr>
+                  <td colspan="99">
+                    No games available for standings just yet.
+                  </td>
+                </tr>
+              <% else %>
+                <% @league.standings.each_with_index do |standing, index| %>
+                  <tr class="standing <%= standing.place_class(index) %>">
+                    <th scope="row"><%= standing.place(index) %></th>
+                    <td><%= standing.user_full_name %></td>
+                    <td><%= number_with_precision(standing.cumulative_score, precision: 3) %></td>
+                    <td></td>
+                    <td><%= standing.games_count %></td>
+                  </tr>
+                <% end %>
+              <% end %>
             </tbody>
           </table>
         </div>

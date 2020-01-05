@@ -8,6 +8,7 @@ class League < ApplicationRecord
   has_many :memberships, dependent: :destroy
   has_many :seasons, -> { in_created_order }, class_name: 'Season', dependent: :destroy
   has_many :games, through: :seasons
+  has_many :players, through: :games
 
   after_create_commit :create_initial_admin
   after_create_commit :create_initial_season
@@ -18,12 +19,21 @@ class League < ApplicationRecord
     seasons.find_by(active_season: true)
   end
 
+  def games_count
+    games.count
+  end
+  
   def last_completed_game
     games.in_reverse_date_order.where(completed: true).limit(1).last&.decorate
   end
 
   def next_scheduled_game
     games.incompleted.first&.decorate
+  end
+
+  def standings
+    return [] if players.empty?
+    Standings::StandingsCompiler.standings(self)
   end
 
   private
