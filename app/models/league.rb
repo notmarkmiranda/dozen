@@ -44,7 +44,9 @@ class League < ApplicationRecord
   end
 
   def standings
-    return [] if players.empty? || seasons.where(count_in_standings: true).empty?
+    all_players = seasons.where(count_in_standings: true).flat_map(&:players)
+
+    return [] if all_players.empty?
     Standings::StandingsCompiler.standings(self)
   end
 

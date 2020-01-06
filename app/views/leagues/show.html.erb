@@ -51,7 +51,7 @@
               </tr>
             </thead>
             <tbody>
-              <% if @league.standings.empty? %>
+              <% if @league.standings.nil? || @league.standings.empty? %>
                 <tr>
                   <td colspan="99">
                     No games available for standings just yet.
