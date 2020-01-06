@@ -6,7 +6,7 @@
     <%= league.name %>
     <div class="league-stats">
       <small class="text-muted">
-        Game: 46 | Next Game: Not Scheduled | Average Pot: $118
+        Game: <%= league.games_count %> | Next Game: <%= league.next_scheduled_game_date %> | Average Pot: <%= league.average_pot %>
       </small>
     </div>
   </div>

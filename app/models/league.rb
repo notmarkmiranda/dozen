@@ -19,6 +19,14 @@ class League < ApplicationRecord
     seasons.find_by(active_season: true)
   end
 
+  def average_pot_calculated
+    games.completed.sum(&:total_pot) / completed_games_count
+  end
+
+  def completed_games_count
+    games.completed.count
+  end
+
   def games_count
     games.count
   end
@@ -29,6 +37,10 @@ class League < ApplicationRecord
 
   def next_scheduled_game
     games.incompleted.first&.decorate
+  end
+
+  def next_scheduled_game_date
+    next_scheduled_game ? next_scheduled_game.formatted_full_date : 'Not scheduled'
   end
 
   def standings
