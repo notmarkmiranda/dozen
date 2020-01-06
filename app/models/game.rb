@@ -8,6 +8,7 @@ class Game < ApplicationRecord
 
   delegate :league, to: :season, prefix: true
 
+  scope :completed, -> { where(completed: true) }
   scope :in_date_order, -> { order(date: :asc) }
   scope :in_reverse_date_order, -> { order(date: :desc) }
   scope :incompleted, -> { where('games.completed = ? AND date >= ?', false, Date.today).order(date: :asc) }
