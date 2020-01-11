@@ -69,8 +69,9 @@ class Season < ApplicationRecord
     update_all(active_season: false)
   end
 
-  def standings
+  def standings(limit=nil)
+    
     return [] if players.empty?
-    Standings::StandingsCompiler.standings(self)
+    Standings::StandingsCompiler.standings(self, limit)
   end
 end

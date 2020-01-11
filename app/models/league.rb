@@ -43,11 +43,12 @@ class League < ApplicationRecord
     next_scheduled_game ? next_scheduled_game.formatted_full_date : 'Not scheduled'
   end
 
-  def standings
+  def standings(limit=nil)
+    standings_limit = limit || 99
     all_players = seasons.where(count_in_standings: true).flat_map(&:players)
 
     return [] if all_players.empty?
-    Standings::StandingsCompiler.standings(self)
+    Standings::StandingsCompiler.standings(self, standings_limit)
   end
 
   private

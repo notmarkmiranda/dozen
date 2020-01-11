@@ -51,14 +51,14 @@
               </tr>
             </thead>
             <tbody>
-              <% if @league.standings.nil? || @league.standings.empty? %>
+              <% if @standings.nil? || @standings.empty? %>
                 <tr>
                   <td colspan="99">
                     No games available for standings just yet.
                   </td>
                 </tr>
               <% else %>
-                <% @league.standings.each_with_index do |standing, index| %>
+                <% @standings.each_with_index do |standing, index| %>
                   <tr class="standing <%= standing.place_class(index) %>">
                     <th scope="row"><%= standing.place(index) %></th>
                     <td><%= standing.user_full_name %></td>

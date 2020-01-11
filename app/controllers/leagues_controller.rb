@@ -4,6 +4,7 @@ class LeaguesController < ApplicationController
   def show
     @league = League.find(params[:id]).decorate
     authorize @league
+    @standings = @league.standings(10)
   end
 
   def new

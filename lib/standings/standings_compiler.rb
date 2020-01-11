@@ -1,12 +1,13 @@
 class Standings::StandingsCompiler
-  attr_reader :object
+  attr_reader :object, :limit
 
-  def initialize(object)
+  def initialize(object, limit=nil)
     @object = object
+    @limit = limit || 99
   end
 
-  def self.standings(object)
-    self.new(object).standings
+  def self.standings(object, limit)
+    self.new(object, limit).standings
   end
 
   def standings
@@ -36,7 +37,8 @@ class Standings::StandingsCompiler
     # TODO: (2020-01-04) markmiranda => LIMIT 10 needs to change to a league setting
     "SELECT user_id, SUM(score) AS cumulative_score, \
      COUNT(game_id) as games_count FROM (#{league_subquery}) AS c_players GROUP BY \
-     c_players.user_id ORDER BY cumulative_score DESC"
+     c_players.user_id ORDER BY cumulative_score DESC \
+     LIMIT #{limit}"
   end
 
   def league_subquery
