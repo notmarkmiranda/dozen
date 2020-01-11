@@ -1,7 +1,9 @@
 class SeasonsController < ApplicationController
   before_action :load_and_authorize_season, except: [:create]
 
-  def show; end
+  def show
+    @standings = @season.standings
+  end
 
   def create
     @league = League.find(season_params[:league_id])
