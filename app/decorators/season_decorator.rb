@@ -21,6 +21,10 @@ class SeasonDecorator < ApplicationDecorator
     date_and_year(games.last.date)
   end
 
+  def leader_full_name
+    season.leader&.user_full_name
+  end
+
   def league_location
     season.league.location
   end

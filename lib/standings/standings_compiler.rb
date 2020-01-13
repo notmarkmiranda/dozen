@@ -56,7 +56,8 @@ class Standings::StandingsCompiler
     # TODO: (2018-04-26) markmiranda => LIMIT 9 needs to change to a season setting
     "SELECT user_id, SUM(score) AS cumulative_score, \
      COUNT(game_id) AS games_count FROM (#{subquery}) AS c_players GROUP BY \
-     c_players.user_id ORDER BY cumulative_score DESC"
+     c_players.user_id ORDER BY cumulative_score DESC \
+     LIMIT #{limit}"
   end
 
   def subquery

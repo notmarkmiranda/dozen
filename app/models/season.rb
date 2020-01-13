@@ -44,6 +44,10 @@ class Season < ApplicationRecord
     games.in_reverse_date_order.where(completed: true).limit(1).last&.decorate
   end
 
+  def leader
+    standings(1).first
+  end
+
   def next_scheduled_game
     games.incompleted.first&.decorate
   end
@@ -74,7 +78,6 @@ class Season < ApplicationRecord
   end
 
   def standings(limit=nil)
-    
     return [] if players.empty?
     Standings::StandingsCompiler.standings(self, limit)
   end
