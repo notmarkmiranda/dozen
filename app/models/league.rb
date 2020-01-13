@@ -31,8 +31,11 @@ class League < ApplicationRecord
     games.count
   end
 
-  def games_in_reverse_date_order
-    Game.joins(:season).where('seasons.league_id = ?', self.id).order(date: :desc)
+  def games_in_reverse_date_order(limit=nil)
+    Game.joins(:season)
+      .where('seasons.league_id = ?', self.id)
+      .order(date: :desc)
+      .limit(limit)
   end
   
   def last_completed_game
