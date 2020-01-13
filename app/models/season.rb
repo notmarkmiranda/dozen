@@ -36,6 +36,10 @@ class Season < ApplicationRecord
     games.count
   end
 
+  def games_in_reverse_date_order
+    games.order(date: :desc)
+  end
+
   def last_completed_game
     games.in_reverse_date_order.where(completed: true).limit(1).last&.decorate
   end
