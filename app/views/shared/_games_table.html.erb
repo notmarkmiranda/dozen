@@ -11,7 +11,7 @@
   </thead>
   <tbody>
     <% if object.games.any? %>
-      <%= render partial: 'shared/game_row', collection: object.games.in_reverse_date_order.decorate, as: :game %>
+      <%= render partial: 'shared/game_row', collection: object.games_in_reverse_date_order.decorate, as: :game %>
     <% else %>
       <tr class="season-show__games-table">
         <td colspan="5">No games just yet, check back later!</td>

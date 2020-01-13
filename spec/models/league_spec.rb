@@ -9,6 +9,7 @@ describe League, type: :model do
   describe 'relationships' do
     it { should have_many :memberships }
     it { should have_many :seasons }
+    it { should have_many(:games).through(:seasons) }
   end
 
   describe 'methods' do
@@ -23,6 +24,26 @@ describe League, type: :model do
 
       it 'returns the active season' do
         expect(active_season).to eq(new_season)
+      end
+    end
+
+    describe '#games.in_reverse_date_order' do
+      subject { league.games_in_reverse_date_order }
+      describe 'with multiple seasons' do
+        let!(:first_season) { create(:season, league: league) }
+        let!(:second_season) { create(:season, league: league) }
+        let!(:first_game) do 
+          create(:game, season: first_season, completed: true, date: DateTime.new(2000, 1, 1))
+        end
+        
+        let!(:second_game) do 
+          create(:game, season: second_season, completed: true, date: DateTime.new(2010, 2, 3))
+        end
+
+        it 'shows the games in the correct order' do
+          expect(subject.first).to eq(second_game)
+          expect(subject.last).to eq(first_game)
+        end
       end
     end
   end
