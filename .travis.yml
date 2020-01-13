@@ -8,21 +8,16 @@ addons:
   chrome: stable
   apt:
     packages:
-      - chromium-chromedriver
+    - chromium-chromedriver
 before_script:
-  # include ChromeDriver in PATH
-  - ln --symbolic /usr/lib/chromium-browser/chromedriver "${HOME}/bin/chromedriver"
-  # start Chrome and listen on localhost
-  - google-chrome-stable --headless --disable-gpu --remote-debugging-port=9222 http://localhost &
+- cp config/database.travis.yml config/database.yml
+- psql -c 'create database travis_ci_test;' -U postgres
+- RAILS_ENV=test bundle exec rake db:create db:migrate --trace
 before_install:
 - wget https://github.com/mozilla/geckodriver/releases/download/v0.11.1/geckodriver-v0.11.1-linux64.tar.gz
 - mkdir geckodriver
 - tar -xzf geckodriver-v0.11.1-linux64.tar.gz -C geckodriver
 - export PATH=$PATH:$PWD/geckodriver
-before_script:
-- cp config/database.travis.yml config/database.yml
-- psql -c 'create database travis_ci_test;' -U postgres
-- RAILS_ENV=test bundle exec rake db:create db:migrate --trace
 cache:
   bundler: true
   directories:
@@ -42,6 +37,7 @@ script:
 deploy:
   provider: heroku
   api_key:
-    secure: QtUMruCutmPlTSj9EzTrtFr2P41+70NlXRQR7+P+JzY2SLflgmXewsssyLa9ABkmzdUSQOfxg56q6PPT2tuiFGEGgQS0jNm2qq2YoNjjuFvDKmzGsvYv2IM2fctgFeeRVE3wcyCVtREx6o4tgmBzqppTmpfPiiprecaRUkqbp+TY3WTiLAlH0vZ1Vpt4H/pLAqLI2b5EtqTl7AOd+T3KW78ge/nb5zYqMu94iQE3aDtzFcpeV1XnoONCmIU39GRSEvDNJtptwo3crPU8IqCVCfjWpOaObNQbXzEqkpIS8kPi3uB2kcHLYskMsaIOBJ6eK4FW48yC80L9/Ua2GzmKlxaU+SaQdWh14VPftuoDI9L0sJAzRdCb60+JLM88o+Vp3MiZn7KgAHpxNpADq7fQwtUkOSqG2eq20jq69t/9dBBvl0A5hp51l5ScLZk3yDPbfm+CsZTMtoVr7/M2TD0cpyQNdt8XEtaqnJfEuiFyBbM0wLkBay8UN9OB8FQZSFwoYG6hff2ugT20ZAZzQsyrEQj026tfGqbKOfA1i3sVf1xBbD0FjaBy9hO9Ce5EqIMNGfye6liNIiHF325CUC09Hddd84ellODo1Vi4OEcq0JsjFQZAPVf3GIPD37pgB0DXuHK8BdncOjcRIgCJN2JSz0gIR6TtX05qXddQ+FDq0ME=
+    secure: bHJfw07ZbYkrtbies0STEJM8ceT54C6DNK2Bbu9/r7b3V94z0zGM1eCJKmkXWCjAnNAxzflqmm6wFHt8t38HD1PY5nkj+7o+z2I119/nB8ZGgRhNQbJVrV5CnynUA56eyDyKpiKGeekkCqNCi7qVJuiqe2kvMygPyJ4/efZAK3XAsigVRR01iRsrRU0DNW/kFVuRi49RbETXB+rjoUmSqV7OsLy3mToqhveO7iu5aBIHEBGHVKGXFgotzAvXqoMmM/6xq/Vsxt0wBRUJ+kjRj6VlV2w+9pXm+8w7fMgoOb9vtGAsv1tgdfuh12eX85mlrsPvqP/qsTEuEN5mbDcwSKqhqBzZ5kRw40nXGAlsorN54hYbuyLSBkAxHRlQW7Tm+rm1sGCgolKN2CTFWBvChsvr4BkCzrmhVvBxmfOR/qAPYEJEOsr69AoOEVqUSO7u51Eqe+tRtdkLlUJn3dOanXea+FxHkMckE9bTPb+I007V0KFMeeEXVHE1YE5UOOrPgkLMQ9TxGVQryG7rD3zLhv23vIGnbojJFoUmgWkUYoJnNma2qZ9QMzQSIiVxlEeQWxrpkdCuU32a81ZHwhXMlSpCB+odExg+ZyshkxEWs/RFgAa7GuQWnEujElsjtuFXqNblkjONs6Z3t2crEOLb6x9glzp8wNwAfhI5lBymVvI=
   app: oh-hey
-  run: rake db:migrate
+  on:
+    repo: notmarkmiranda/dozen
