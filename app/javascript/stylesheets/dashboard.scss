@@ -14,7 +14,7 @@
 }
 
 
-@include media-breakpoint-only(xs) {
+@include media-breakpoint-down(sm) {
   .dashboard-actions, .league-actions, .game-actions {
     display: block;
   } 
