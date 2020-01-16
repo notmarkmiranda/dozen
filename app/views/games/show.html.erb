@@ -1,16 +1,16 @@
 <div class="container mb-4">
   <div class="game-actions">
-    <%= link_to league_path(@game.season_league), class: 'btn btn-outline-secondary mr-2' do %>
+    <%= link_to league_path(@game.season_league), class: 'btn btn-outline-secondary btn-block-xs mr-2' do %>
       <i class="fas fa-angle-left"></i> Back to League
     <% end %>
-    <%= link_to 'View Season', @game.season, class: 'btn btn-outline-secondary mr-4' %>
+    <%= link_to 'View Season', @game.season, class: 'btn btn-outline-secondary btn-block-xs mr-4' %>
     <% if policy(@game).destroy? %>
-      <%= button_to 'Delete game', @game, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger mr-2', method: :delete %>
+      <%= button_to 'Delete game', @game, data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger btn-block-xs mr-2', method: :delete %>
       <% if @game.completed? %>
-        <%= button_to 'Uncomplete game', uncomplete_game_path(@game), class: 'btn btn-outline-secondary' %>
+        <%= button_to 'Uncomplete game', uncomplete_game_path(@game), class: 'btn btn-outline-secondary btn-block-xs' %>
       <% else %>
-        <%= link_to 'Edit game', edit_game_path(@game), class: 'btn btn-outline-secondary mr-4' %>
-        <%= button_to 'Complete game', complete_game_path(@game), class: 'btn btn-outline-secondary' %>
+        <%= link_to 'Edit game', edit_game_path(@game), class: 'btn btn-outline-secondary btn-block-xs mr-4' %>
+        <%= button_to 'Complete game', complete_game_path(@game), class: 'btn btn-outline-secondary btn-block-xs' %>
       <% end %>
     <% end %>
   </div>
