@@ -1,4 +1,4 @@
-@include media-breakpoint-only(xs) {
+@include media-breakpoint-down(sm) {
   .btn-block-xs {
     display: block;
     width: 100%;
