@@ -12,3 +12,10 @@
     font-size: 0.8em
   }
 }
+
+
+@include media-breakpoint-only(xs) {
+  .dashboard-actions, .league-actions, .game-actions {
+    display: block;
+  } 
+}
