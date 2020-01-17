@@ -56,10 +56,10 @@ class SeasonDecorator < ApplicationDecorator
   private
 
   def complete_button
-    h.button_to 'Complete Season', h.season_complete_path(season), class: 'btn btn-outline-secondary mr-2'
+    h.button_to 'Complete Season', h.season_complete_path(season), class: 'btn btn-outline-secondary btn-block-xs mr-2'
   end
 
   def uncomplete_button
-    h.button_to 'Uncomplete and Activate Season', h.season_uncomplete_path(season), class: 'btn btn-outline-secondary mr-2'
+    h.button_to 'Uncomplete and Activate Season', h.season_uncomplete_path(season), class: 'btn btn-outline-secondary btn-block-xs mr-2'
   end
 end
