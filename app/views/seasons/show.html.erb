@@ -43,40 +43,10 @@
           </div>
         </div>
         <div class="season-show__overview-standings mt-4">
-          <h4>Standings</h4>
-          <table class="table table-striped table-responsive-md">
-            <thead class="thead-dark">
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Player</th>
-                <th scope="col">Points</th>
-                <th scope="col">Winnings</th>
-                <th scope="col">Games</th>
-              </tr>
-            </thead>
-            <tbody>
-              <% if @standings.empty? %>
-                <tr>
-                  <td colspan="99">
-                    No games available for standings just yet.
-                  </td>
-                </tr>
-              <% else %>
-                <% @standings.each_with_index do |standing, index| %>
-                  <tr class="standing <%= standing.place_class(index) %>">
-                    <th scope="row"><%= standing.place(index) %></th>
-                    <td><%= standing.user_full_name %></td>
-                    <td><%= number_with_precision(standing.cumulative_score, precision: 3) %></td>
-                    <td></td>
-                    <td><%= standing.games_count %></td>
-                  </tr>
-                <% end %>
-              <% end %>
-            </tbody>
-          </table>
+          <%= render partial: 'shared/standings_table' %>
         </div>
         <div class="league-show__overview-games mt-4">
-          <%= render partial: 'shared/games_table.html.erb', locals: { object: @season } %>
+          <%= render partial: 'shared/games_table', locals: { object: @season } %>
         </div>
       </div>
       <aside class="col-lg-4">
