@@ -10,4 +10,8 @@ class ApplicationDecorator < Draper::Decorator
   def full_date(date)
     date.strftime('%B %-e, %Y')
   end
+
+  def short_month_full_date(date)
+    date.strftime('%b %d, %Y')
+  end
 end
