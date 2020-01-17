@@ -7,12 +7,6 @@ class UserDecorator < ApplicationDecorator
 
   def full_name
     return object.email if object.first_name.blank?
-    "#{object.first_name} #{last_initial}".strip
-  end
-
-  private
-
-  def last_initial
-    object.last_name ? object.last_name[0] : ""
+    "#{object.first_name} #{object.last_name}".strip
   end
 end

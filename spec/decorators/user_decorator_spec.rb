@@ -36,7 +36,7 @@ describe UserDecorator, type: :decorator do
       let(:last_name) { "Miranda" }
       
       it "returns first name and last initial" do
-        expect(full_name_or_email).to eq("#{first_name} #{last_name[0]}")
+        expect(full_name_or_email).to eq("#{first_name} #{last_name}")
       end
     end
   end
