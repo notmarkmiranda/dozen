@@ -15,7 +15,7 @@
 
 
 @include media-breakpoint-down(sm) {
-  .dashboard-actions, .league-actions, .game-actions {
+  .dashboard-actions, .league-actions, .game-actions, .season-actions {
     display: block;
   } 
 }
