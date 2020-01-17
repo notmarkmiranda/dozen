@@ -13,6 +13,10 @@ class GameDecorator < ApplicationDecorator
     full_date_and_time(game.date)
   end
 
+  def formatted_short_month_full_date
+    short_month_full_date(game.date)
+  end
+
   def incomplete_class
     not_completed? ? 'text-danger' : 'completed-game'
   end
