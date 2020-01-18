@@ -32,13 +32,15 @@
           <div class="row">
             <div class="col-md-6">
               <b>Games: </b> <%= @season.games_count %><br />
-              <b>Total Money: </b> $1,432<br />
-              <b>Points Leader: </b> Mark Miranda - 13.71<br />
+              <b>Total Money: </b> <%= @season.total_moneys %><br />
+              <% if @season.leader %>
+                <b>Points Leader: </b> <%= @season.leader_full_name %> - 13.71<br />
+              <% end %>
             </div>
             <div class="col-md-6">
               <b>Start Date: </b><%= @season.start_date %><br />
               <b>End Date: </b><%= @season.end_date %><br />
-              <b>Cash Leader: </b>Michael Cassano - $193
+              <!--// <b>Cash Leader: </b>Michael Cassano - $193 //-->
             </div>
           </div>
         </div>
