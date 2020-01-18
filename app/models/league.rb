@@ -44,7 +44,7 @@ class League < ApplicationRecord
   end
   
   def last_completed_game
-    games.in_reverse_date_order.where(completed: true).limit(1).last&.decorate
+    games_in_reverse_date_order.where(completed: true).limit(1).last&.decorate
   end
 
   def leader
