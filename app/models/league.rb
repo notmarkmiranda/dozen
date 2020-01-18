@@ -27,27 +27,36 @@ class League < ApplicationRecord
     games.completed.count
   end
 
+  def first_game
+    games_in_date_order(1).first
+  end
+
   def games_count
     games.count
   end
 
   def games_in_reverse_date_order(limit=nil)
-    Game.joins(:season)
-      .where('seasons.league_id = ?', self.id)
-      .order(date: :desc)
-      .limit(limit)
+    games_in_order(limit: limit, order: :desc)
+  end
+
+  def games_in_date_order(limit=nil)
+    games_in_order(limit: limit, order: :asc)
   end
   
   def last_completed_game
     games.in_reverse_date_order.where(completed: true).limit(1).last&.decorate
   end
 
+  def leader
+    standings(1).first
+  end
+
   def next_scheduled_game
     games.incompleted.first&.decorate
   end
 
-  def next_scheduled_game_date
-    next_scheduled_game ? next_scheduled_game.formatted_full_date : 'Not scheduled'
+  def seasons_count
+    seasons.count
   end
 
   def standings(limit=nil)
@@ -58,7 +67,18 @@ class League < ApplicationRecord
     Standings::StandingsCompiler.standings(self, standings_limit)
   end
 
+  def total_pot
+    games.sum(&:total_pot)
+  end
+
   private
+
+  def games_in_order(limit: nil, order: :asc)
+    Game.joins(:season)
+      .where('seasons.league_id = ?', self.id)
+      .order(date: order)
+      .limit(limit)
+  end
 
   def create_initial_admin
     return unless user_id
