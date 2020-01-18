@@ -25,6 +25,11 @@ class SeasonDecorator < ApplicationDecorator
     season.leader&.user_full_name
   end
 
+  def leader_full_score
+    score = league.leader&.cumulative_score
+    h.number_with_precision(score, precision: 3)
+  end
+
   def league_location
     season.league.location
   end
@@ -43,6 +48,10 @@ class SeasonDecorator < ApplicationDecorator
     first_game = season.games.in_date_order&.first
     return date_and_year(first_game.date) if first_game
     "N/A"
+  end
+
+  def total_moneys
+    h.number_to_currency(season.total_pot, precision: 0)
   end
 
   def total_season_count

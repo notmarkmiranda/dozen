@@ -81,4 +81,8 @@ class Season < ApplicationRecord
     return [] if players.empty?
     Standings::StandingsCompiler.standings(self, limit)
   end
+
+  def total_pot
+    games.sum(&:total_pot)
+  end
 end
