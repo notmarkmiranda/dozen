@@ -26,15 +26,17 @@
           <hr>
           <div class="row">
             <div class="col-md-6">
-              <b>Seasons:</b> <%= @league.seasons.count %><br />
-              <b>Games Played:</b> 64<br />
-              <b>Total Money:</b> $1,290<br />
-              <b>Points Leader:</b> Michael Cassano - 24.79
+              <b>Seasons:</b> <%= @league.seasons_count %><br />
+              <b>Games Played:</b> <%= @league.completed_games_count %><br />
+              <b>Total Money:</b> <%= @league.total_moneys %><br />
+              <% if @league.leader %>
+                <b>Points Leader:</b> <%= @league.leader_full_name %> - <%= @league.leader_full_score %>
+              <% end %>
             </div>
             <div class="col-md-6">
-              <b>Start Date:</b> January 4, 2019<br />
-              <b>Next Game:</b> November 16, 2019<br />
-              <b>Cash Leader:</b> Mark Miranda - $200
+              <b>Start Date:</b> <%= @league.first_game_date %><br />
+              <b>Next Game:</b> <%= @league.next_scheduled_game_date %><br />
+              <!-- //<b>Cash Leader:</b> Mark Miranda - $200//-->
             </div>
           </div>
         </div>
