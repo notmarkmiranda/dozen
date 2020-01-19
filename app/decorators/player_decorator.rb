@@ -25,6 +25,12 @@ class PlayerDecorator < ApplicationDecorator
   def place_class(index)
     place(index).humanize
   end
+
+  def total_games_played_by_object(league_or_season)
+    klass = league_or_season.class
+    return unless klass == LeagueDecorator || klass == SeasonDecorator
+    league_or_season.players.where('players.user_id = ?', player.user_id).count
+  end
   
   private
 

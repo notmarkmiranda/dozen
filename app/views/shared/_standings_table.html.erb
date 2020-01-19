@@ -23,7 +23,7 @@
           <td><%= standing.user_full_name %></td>
           <td><%= number_with_precision(standing.cumulative_score, precision: 3) %></td>
           <!-- // <td></td>//-->
-          <td><%= standing.games_count %></td>
+          <td><%= standing.total_games_played_by_object(@league || @season) %></td>
         </tr>
       <% end %>
     <% end %>
