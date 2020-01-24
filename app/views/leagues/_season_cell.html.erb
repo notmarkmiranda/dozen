@@ -1,7 +1,7 @@
 <tr class="league-show__seasons-table <%= season.active_season_class %>" data-link="<%= season_path(season) %>">
   <td><%= season.number_in_order_text %></td>
   <td><%= season.leader_full_name %></td>
-  <td><%= season.start_date %></td>
+  <td class="d-none d-sm-table-cell"><%= season.start_date %></td>
   <td><%= season.end_date %></td>
   <td><%= season.games_count %></td>
 </tr>
