@@ -1,6 +1,6 @@
 class UserStatsController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @user = User.find(params[:id]).decorate
     authorize @user, policy_class: UserStatsPolicy
   end
 end

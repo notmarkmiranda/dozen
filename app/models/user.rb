@@ -16,4 +16,17 @@ class User < ApplicationRecord
   def member_leagues
     memberships.where(role: 0).map(&:league)
   end
+
+  def games_in_reverse_date_order(limit=nil)
+    games_in_order(limit: limit, order: :desc).decorate
+  end
+
+  private
+
+  def games_in_order(limit: nil, order: :asc)
+    Game.joins(:players)
+      .where('players.user_id = ?', self.id)
+      .order(date: order)
+      .limit(limit)
+  end
 end

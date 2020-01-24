@@ -1,4 +1,4 @@
-<h4>Games</h4>
+<h4><%= "Last #{pluralize(games.count, 'game')}" %></h4>
 <table class="table table-striped table-responsive-md">
   <thead class="thead-dark">
     <tr>
@@ -10,8 +10,8 @@
     </tr>
   </thead>
   <tbody>
-    <% if object.games.any? %>
-      <%= render partial: 'shared/game_row', collection: object.games_in_reverse_date_order(12).decorate, as: :game %>
+    <% if games.any? %>
+      <%= render partial: 'shared/game_row', collection: games, as: :game %>
     <% else %>
       <tr class="season-show__games-table">
         <td colspan="5">No games just yet, check back later!</td>

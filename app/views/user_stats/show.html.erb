@@ -1,0 +1,31 @@
+<div class="container mb-4">
+  <div class="user-stats-show__info mt-4">
+    <h2><%= @user.full_name %></h2>
+    
+    <small>Member of 2 leagues | Administrator of 1 league</small>
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-8">
+
+      <div class="user-stats-show__overview-stats">
+        <h4>User Overview</h4>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="stat"><b>Games Played:</b> 4</div>
+            <%# <div class="stat"><b>Total Moneys:</b> $125</div> %>
+          </div>
+          <div class="col-md-6">
+            <div class="stat"><b>Attendance: </b>6 out of 10 games - 60%</div>
+            <div class="stat"><b>Games won: </b>3 out of 6 games - 50%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-stats-show__games mt-4">
+        <%= render partial: 'shared/games_table', locals: { games: @user.games_in_reverse_date_order(10) } %>
+      </div>
+
+    </div>
+  </div>
+</div>

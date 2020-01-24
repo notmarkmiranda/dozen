@@ -44,7 +44,7 @@
           <%= render partial: 'shared/standings_table' %>
         </div>
         <div class="league-show__overview-games mt-4">
-          <%= render partial: 'shared/games_table', locals: { object: @league } %>
+          <%= render partial: 'shared/games_table', locals: { games: @league.games_in_reverse_date_order(12) } %>
         </div>
         <div class="league-show__overview-seasons mt-4">
           <h4>Seasons</h4>
