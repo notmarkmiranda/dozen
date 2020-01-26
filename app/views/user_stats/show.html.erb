@@ -1,9 +1,7 @@
 <div class="container mb-4">
   <div class="user-stats-show__info mt-4">
     <h2><%= @user.full_name %></h2>
-    
     <small><%= @user.administrator_and_member_count_text %></small>
-    <!--<small>Administrator of 1 league | Member of 2 leagues</small>-->
   </div>
   <div class="row mt-4">
     <div class="col-lg-8">
@@ -13,12 +11,12 @@
         <hr>
         <div class="row">
           <div class="col-md-6">
-            <div class="stat"><b>Games Played:</b> 4</div>
-            <%# <div class="stat"><b>Total Moneys:</b> $125</div> %>
+            <div class="stat"><%= @user.games_played_text %></div>
+            <div class="stat"><b>Total Moneys:</b> Not yet implemented ☹️</div>
           </div>
           <div class="col-md-6">
-            <div class="stat"><b>Attendance: </b>6 out of 10 games - 60%</div>
-            <div class="stat"><b>Games won: </b>3 out of 6 games - 50%</div>
+            <div class="stat"><%= @user.attendance_text %></div>
+            <div class="stat"><%= @user.games_won_text %></div>
           </div>
         </div>
       </div>
