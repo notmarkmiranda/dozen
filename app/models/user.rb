@@ -12,6 +12,10 @@ class User < ApplicationRecord
   def admin_leagues
     memberships.where(role: 1).map(&:league)
   end
+
+  def league_count_by_role
+    { admin: admin_leagues.count, member: member_leagues.count }
+  end
   
   def member_leagues
     memberships.where(role: 0).map(&:league)
