@@ -14,7 +14,9 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'bootstrap', '~>4.3.1'
 gem 'devise'
 gem 'draper'
+gem 'figaro'
 gem 'humanize'
+gem 'newrelic_rpm'
 gem 'pundit'
 
 group :development, :test do
