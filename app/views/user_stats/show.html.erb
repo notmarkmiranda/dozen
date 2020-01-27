@@ -1,0 +1,30 @@
+<div class="container mb-4">
+  <div class="user-stats-show__info mt-4">
+    <h2><%= @user.full_name %></h2>
+    <small><%= @user.administrator_and_member_count_text %></small>
+  </div>
+  <div class="row mt-4">
+    <div class="col-lg-8">
+
+      <div class="user-stats-show__overview-stats">
+        <h4>User Overview</h4>
+        <hr>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="stat"><%= @user.games_played_text %></div>
+            <div class="stat"><b>Total Moneys:</b> Not yet implemented ☹️</div>
+          </div>
+          <div class="col-md-6">
+            <div class="stat"><%= @user.attendance_text %></div>
+            <div class="stat"><%= @user.games_won_text %></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="user-stats-show__games mt-4">
+        <%= render partial: 'shared/games_table', locals: { games: @user.games_in_reverse_date_order(10) } %>
+      </div>
+
+    </div>
+  </div>
+</div>

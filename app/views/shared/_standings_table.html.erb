@@ -20,7 +20,7 @@
       <% @standings.each_with_index do |standing, index| %>
         <tr class="standing <%= standing.place_class(index) %>">
           <th scope="row"><%= standing.place(index) %></th>
-          <td><%= standing.user_full_name %></td>
+          <td><%= link_to standing.user_full_name, user_stats_path(standing.user_id) %></td>
           <td><%= number_with_precision(standing.cumulative_score, precision: 3) %></td>
           <!-- // <td></td>//-->
           <td><%= standing.total_games_played_by_object(@league || @season) %></td>

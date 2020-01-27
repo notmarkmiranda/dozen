@@ -36,7 +36,7 @@ class League < ApplicationRecord
   end
 
   def games_in_reverse_date_order(limit=nil)
-    games_in_order(limit: limit, order: :desc)
+    games_in_order(limit: limit, order: :desc).decorate
   end
 
   def games_in_date_order(limit=nil)

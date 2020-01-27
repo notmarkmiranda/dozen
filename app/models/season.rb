@@ -37,7 +37,7 @@ class Season < ApplicationRecord
   end
 
   def games_in_reverse_date_order(limit=nil)
-    games.order(date: :desc).limit(limit)
+    games.order(date: :desc).limit(limit).decorate
   end
 
   def last_completed_game
