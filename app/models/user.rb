@@ -41,7 +41,7 @@ class User < ApplicationRecord
   end
 
   def seasons_games_count
-    seasons = Season.joins(:players).where('players.user_id = ?', id)
+    seasons = Season.joins(:players).where('players.user_id = ?', id).distinct
     games_played_count = games_played.count
     total_games = seasons.sum(&:games_count)
     percentage = total_games.zero? ? 0.0 : (games_played_count / total_games.to_f) * 100
