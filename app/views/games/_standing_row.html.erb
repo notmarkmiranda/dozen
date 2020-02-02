@@ -22,5 +22,5 @@
   <% if @game.completed? %>
     <td><%= number_with_precision(player.score, precision: 3) %></td>
   <% end %>
-  <td class="grow"><%= link_to player.user_full_name, user_stats_path(player.user_id) %></td>
+  <td class="grow"><%= link_to_if false, player.user_full_name, user_stats_path(player.user_id) %></td>
 </tr>
