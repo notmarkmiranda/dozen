@@ -32,7 +32,6 @@ install:
 - npm i -g yarn
 - yarn
 script:
-- bundle exec rails webpacker:compile
 - bundle exec rails spec
 deploy:
   provider: heroku
