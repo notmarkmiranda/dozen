@@ -1,3 +1,5 @@
+<% content_for(:html_title) { @season.league.name } %>
+
 <div class="container">
   <div class="season-actions">
     <%= link_to league_path(@season.league), class: 'btn btn-outline-secondary btn-block-xs mr-4' do %>
