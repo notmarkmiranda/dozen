@@ -21,8 +21,8 @@ class SeasonDecorator < ApplicationDecorator
     date_and_year(games.last.date)
   end
 
-  def leader_full_name
-    season.leader&.user_full_name
+  def leader_full_name(current_user=nil)
+    season.leader&.user_display_name(current_user)
   end
 
   def leader_full_score

@@ -19,6 +19,11 @@ class UserDecorator < ApplicationDecorator
     output += percentage
   end
 
+  def display_name(current_user=nil)
+    return short_name if current_user.nil?
+    UserStatsPolicy.new(current_user, object).show? ? full_name : short_name
+  end
+
   def full_name_or_email
     object.first_name ? full_name : object.email
   end
@@ -42,5 +47,14 @@ class UserDecorator < ApplicationDecorator
     percentage = " - #{h.number_with_precision(games_won_played_count[:percentage], precision: 1)}%"
     output += percentage
     output
+  end
+
+  def last_initial
+    object.last_name[0]
+  end
+
+  def short_name
+    return object.email if object.first_name.blank?
+    "#{object.first_name} #{last_initial}".strip
   end
 end

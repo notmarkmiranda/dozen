@@ -49,10 +49,10 @@ class GameDecorator < ApplicationDecorator
     completed? ? players_count : estimated_players_count
   end
 
-  def winner_name
+  def winner_name(current_user=nil)
     return 'Not completed' if game.not_completed?
     player = game.players.find_by(finishing_place: 1)
-    player.decorate.user_full_name if player
+    player.decorate.user_display_name(current_user) if player
   end
 
   private
