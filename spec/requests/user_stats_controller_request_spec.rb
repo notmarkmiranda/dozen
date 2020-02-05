@@ -44,20 +44,20 @@ describe UserStatsController, type: :request do
         describe 'as an admin' do
           let(:role) { 1 }
 
-          it 'has a 401 status' do
+          it 'has a 200 status' do
             get_show
 
-            expect(response).to have_http_status(401)
+            expect(response).to have_http_status(200)
           end
         end
 
         describe 'as a member' do
           let(:role) { 0 } 
 
-          it 'has a 401 status' do
+          it 'has a 200 status' do
             get_show
 
-            expect(response).to have_http_status(401)
+            expect(response).to have_http_status(200)
           end
         end
       end
@@ -67,10 +67,10 @@ describe UserStatsController, type: :request do
       let(:league) { membership.league }
       let(:role) { 1 }
 
-      it 'has a 401 status' do
+      it 'has a 200 status' do
         get_show
 
-        expect(response).to have_http_status(401)
+        expect(response).to have_http_status(200)
       end
     end
   end

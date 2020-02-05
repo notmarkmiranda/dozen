@@ -14,11 +14,11 @@ describe 'Season has standings', type: :feature do
 
       within('.season-show__overview-standings') do
         within('tr.standing.one') do
-          expect(page).to have_content(first.user_full_name)
+          expect(page).to have_content(first.user_display_name)
         end
 
         within('tr.standing.five') do
-          expect(page).to have_content(last.user_full_name)
+          expect(page).to have_content(last.user_display_name)
         end
       end
     end
@@ -48,13 +48,13 @@ describe 'Season has standings', type: :feature do
 
       within('.season-show__overview-standings') do
         within('tr.standing.one') do
-          expect(page).to have_content(player_1.user_full_name)
+          expect(page).to have_content(player_1.user_display_name)
         end
         within('tr.standing.two') do
-          expect(page).to have_content(player_2.user_full_name)
+          expect(page).to have_content(player_2.user_display_name)
         end
         within('tr.standing.three') do
-          expect(page).to have_content(player_3.user_full_name)
+          expect(page).to have_content(player_3.user_display_name)
         end
       end
     end

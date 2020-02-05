@@ -1,6 +1,6 @@
 <div class="container mb-4">
   <div class="user-stats-show__info mt-4">
-    <h2><%= @user.full_name %></h2>
+    <h2><%= @user.display_name(current_user) %></h2>
     <small><%= @user.administrator_and_member_count_text %></small>
   </div>
   <div class="row mt-4">
@@ -12,7 +12,7 @@
         <div class="row">
           <div class="col-md-6">
             <div class="stat"><%= @user.games_played_text %></div>
-            <div class="stat"><b>Total Moneys:</b> Not yet implemented ☹️</div>
+            <div class="stat"><b>Total Moneys:</b> Not yet implemented</div>
           </div>
           <div class="col-md-6">
             <div class="stat"><%= @user.attendance_text %></div>
