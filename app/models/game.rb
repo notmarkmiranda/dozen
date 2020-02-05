@@ -25,6 +25,11 @@ class Game < ApplicationRecord
     !completed?
   end
 
+  def player_finishing_place(user_id, controller_name)
+    return unless controller_name == 'user_stats'
+    players.find_by_user_id(user_id)&.finishing_place
+  end
+
   def players_count
     players.count
   end

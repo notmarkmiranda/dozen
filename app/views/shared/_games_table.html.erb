@@ -2,11 +2,13 @@
 <table class="table table-striped table-responsive-md">
   <thead class="thead-dark">
     <tr>
-      <th scope="col">Date / Time</th>
+      <th scope="col">Date</th>
       <th scope="col">Winner</th>
-      <th class="d-none d-sm-table-cell" scope="col">Buy In</th>
-      <th scope="col"># of Players</th>
-      <th scope="col">Pot Size</th>
+      <th class="d-none d-sm-table-cell" scope="col"># of Players</th>
+      <th scope="col">Pot</th>
+      <% if @user_stats %>
+        <th scope="col">Place</th>
+      <% end %>
     </tr>
   </thead>
   <tbody>
