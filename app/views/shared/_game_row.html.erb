@@ -1,7 +1,9 @@
 <tr class="season-show__games-table <%= game.incomplete_class %>" data-link="<%= game_path(game) %>">
   <td><%= game.formatted_short_month_full_date %></td>
   <td><%= game.winner_name %></td>
-  <td class="d-none d-sm-block"><%= game.buy_in_text %></td>
-  <td><%= game.table_player_text %></td>
+  <td class="d-none d-sm-block"><%= game.table_player_text %></td>
   <td><%= game.table_pot_text %></td>
+  <% if @user_stats %>
+    <td><%= game.player_finishing_place(params[:id], controller_name) %></td>
+  <% end %>
 </tr>
