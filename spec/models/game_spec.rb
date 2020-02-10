@@ -2,6 +2,7 @@ require 'rails_helper'
 
 describe Game, type: :model do
   let(:game) { create(:game) }
+  let(:league) { game.season_league}
 
   describe 'validations' do
     it { should validate_presence_of :buy_in }
@@ -16,22 +17,23 @@ describe Game, type: :model do
   describe 'methods' do
     describe '#available_players' do
       subject(:game_available_players) { game.available_players }
-
-      let!(:players) { create_list(:player, 2, game: game, finishing_place: nil, additional_expense: nil, finishing_order: nil) }
-      let(:collected_players) { UserDecorator.decorate_collection(players.map(&:user)).collect { |u| [u.full_name, u.id] } }
+      let(:memberships) { create_list(:membership, 2, league: league)}
+      let(:users) { memberships.map(&:user) }
+      # let!(:players) { create_list(:player, 2, game: game, finishing_place: nil, additional_expense: 0, finishing_order: nil) }
+      let(:collected_players) { UserDecorator.decorate_collection(users).collect { |u| [u.full_name, u.id] } }
       let(:first_player) { collected_players.first }
       let(:second_player) { collected_players.last }
 
 
       it 'does not include a finished player' do
-        players[0].update(finishing_order: 1)
+        create(:player, game: game, user: users[0])
 
         expect(game_available_players).to include(second_player)
         expect(game_available_players).not_to include(first_player)
       end
       
       it 'does not include a rebuyer' do
-        players[1].update(additional_expense: 100)
+        create(:player, game: game, user: users[1], additional_expense: 100)
 
         expect(game_available_players).to include(first_player)
         expect(game_available_players).not_to include(second_player)

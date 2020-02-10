@@ -7,6 +7,7 @@ class Player < ApplicationRecord
   scope :in_place_order, ->  { order(finishing_order: :desc).decorate }
 
   validates :game, uniqueness: { scope: :user_id }
+  validate :finishing_order_or_additional_expense
 
   def additional_expense_commit
     return :delete_player if additional_expense == 0 || additional_expense.nil?
@@ -22,6 +23,13 @@ class Player < ApplicationRecord
 
   private
 
+  def finishing_order_or_additional_expense
+    # binding.pry
+    if (additional_expense.nil? || additional_expense.zero?) && finishing_order.nil?
+      errors.add(:additional_expense, 'cannot be blank')
+    end
+  end
+  
   def set_score(score)
     update!(score: score)
   end

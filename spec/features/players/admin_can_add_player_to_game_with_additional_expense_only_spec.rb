@@ -32,6 +32,17 @@ describe 'Admin can add player to game with additional expense only', type: :fea
           expect(page).not_to have_content(user.full_name)
         end
       end
+
+      it 'does not create a player without an additional expense' do
+        visit game_path(game)
+
+        find('#player-select').find(:xpath, 'option[2]').select_option
+        fill_in "Rebuy or Add-on", with: ''
+        click_button 'Add Rebuy or Add-on Only'
+
+        expect(current_path).to eq(game_path(game))
+        expect(page).to have_content("Additional expense cannot be blank")
+      end
     end
 
     describe 'is member'
