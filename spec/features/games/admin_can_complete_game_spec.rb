@@ -5,10 +5,10 @@ describe 'Admin can complete game', type: :feature do
   let(:league) { game.season_league }
   let(:membership) { create(:membership, league: league, role: 1) }
   let(:user) { membership.user }
-  let!(:player_1) { create(:player, game: game, finishing_order: first_order, additional_expense: 0, finishing_place: nil).decorate }
+  let!(:player_1) { create(:player, game: game, finishing_order: first_order, additional_expense: 1, finishing_place: nil).decorate }
   let!(:player_2) { create(:player, game: game, finishing_order: second_order, additional_expense: 1, finishing_place: nil).decorate }
   let(:first_place_score) { 2.646 }
-  let(:second_place_score) { 1.826 }
+  let(:second_place_score) { 1.764 }
 
   describe 'when admin' do
     before { login_as(user, scope: :user) }

@@ -29,7 +29,7 @@ class PlayerCreator
     elsif commit == :add_rebuy_or_add_on_only
       # TODO: What do we do here?
     end
-
+    
     if @player.save
       self.player = @player
       return true
