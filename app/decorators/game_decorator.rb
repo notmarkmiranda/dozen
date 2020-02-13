@@ -8,11 +8,7 @@ class GameDecorator < ApplicationDecorator
   def formatted_full_date
     full_date(game.date)
   end
-
-  def formatted_full_date_and_time
-    full_date_and_time(game.date)
-  end
-
+  
   def formatted_short_month_full_date
     short_month_full_date(game.date)
   end
