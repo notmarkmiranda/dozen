@@ -7,28 +7,7 @@
       <div class="card-body">
         <%= form_for @game do |f| %>
           <%= f.hidden_field :season_id, value: @game.season_id %>
-
-          <div class="form-group">
-            <%= f.label :buy_in %>
-            <%= f.text_field :buy_in, class: 'form-control' %>
-          </div>
-          <div class="form-group form-check">
-            <%= f.check_box :add_ons, class: 'form-check-input' %>
-            <%= f.label :add_ons, 'Allows Rebuys or Add Ons', class: 'form-check-label' %>
-          </div>
-          <div class="form-group">
-            <%= f.label :address %>
-            <%= f.text_field :address, class: 'form-control' %>
-          </div>
-          <div class="form-group">
-            <%= f.label :estimated_players_count, 'Estimated Player Count' %>
-            <%= f.text_field :estimated_players_count, class: 'form-control' %>
-          </div>
-          <div class="form-group">
-            <%= f.label :date, 'Date & Time' %>
-            <%= f.datetime_field :date, class: 'form-control' %>
-          </div>
-          <%= f.submit 'Schedule Game', class: 'btn btn-dark btn-block' %>
+          <%= render partial: 'game_form', locals: { button_title: 'Schedule Game', f: f } %>
         <% end %>
       </div>
     </div>
