@@ -73,6 +73,15 @@ class Season < ApplicationRecord
     update!(count_in_standings: false)
   end
 
+  def user_rank(user_id)
+    return unless user_id
+    standings = Standings::StandingsCompiler.standings(self, nil)
+    return 'N/A' unless standings
+    index = standings.pluck(:user_id).index(user_id)
+    return 'N/A' unless index
+    index + 1
+  end
+
   def self.any_active?
     find_by(active_season: true)
   end
