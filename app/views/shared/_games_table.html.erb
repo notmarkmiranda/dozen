@@ -1,4 +1,6 @@
-<h4><%= "Last #{pluralize(games.count, 'game')}" %></h4>
+<% if @user_stats %>
+  <h4><%= "Last #{pluralize(games.count, 'game')}" %></h4>
+<% end %>
 <table class="table table-striped table-responsive-md">
   <thead class="thead-dark">
     <tr>
@@ -12,11 +14,18 @@
     </tr>
   </thead>
   <tbody>
-    <% if games.any? %>
+    <% if games&.any? %>
       <%= render partial: 'shared/game_row', collection: games, as: :game %>
+      <% if @user_stats %>
+        <tr class="season-show__games-table">
+          <td colspan="99">
+              <%= link_to 'View all games', user_stats_games_path(@user) %>
+          </td>
+        </tr>
+      <% end %>
     <% else %>
       <tr class="season-show__games-table">
-        <td colspan="5">No games just yet, check back later!</td>
+        <td colspan="99">No games just yet, check back later!</td>
       </tr>
     <% end %>
   </tbody>

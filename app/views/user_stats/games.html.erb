@@ -1,0 +1,20 @@
+<div class="container mb-4">
+  <% @leagues.each do |league| %>
+    <div class="league-show__name">
+      <h2><%= league.name %></h2>
+      <div class="league-show__location text-dark">
+        <%= league.location %>
+      </div>
+    </div>
+    <% league.seasons.in_created_order.each do |season| %>
+      <div class="user-stats-games__season mb-4">
+        <h4>Season #<%= season.number_in_order %></h4>
+        <div class="league-show__location mb-2 text-dark">
+          Season Rank: <%= season.user_rank(params[:id]) %>
+        </div>
+        <%= render partial: 'shared/games_table', locals: { games: season.games_for_user(@user.id) } %>
+      </div>
+    <% end %>
+    <hr>
+  <% end %>
+</div>

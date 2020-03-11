@@ -74,4 +74,16 @@ describe UserStatsController, type: :request do
       end
     end
   end
+
+  describe 'GET#games' do
+    subject(:get_games) { get user_stats_games_path(user) }
+
+    let(:role) { 1 }
+    
+    it 'has a 200 status' do
+      get_games
+
+      expect(response).to have_http_status(200)
+    end
+  end
 end

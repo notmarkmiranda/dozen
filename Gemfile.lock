@@ -304,7 +304,7 @@ DEPENDENCIES
   newrelic_rpm
   pg (>= 0.18, < 2.0)
   pry
-  puma (~> 3.12)
+  puma (~> 3.12.4)
   pundit
   rails (~> 6.0.0)
   rspec-rails (~> 3.9.0)
