@@ -39,5 +39,9 @@ Rails.application.routes.draw do
   get '/user-stats/:id/games', to: 'user_stats#games', as: 'user_stats_games'
   get '/dashboard', to: 'dashboard#show', as: 'dashboard'
 
+  namespace :api, defaults: { format: :json } do
+    post '/login', to: 'authentication#authenticate_user', as: 'auth_user'
+  end
+
   get '*unmatched_route', :to => 'application#render_404'
 end
