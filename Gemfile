@@ -18,6 +18,7 @@ gem 'figaro'
 gem 'humanize'
 gem 'newrelic_rpm'
 gem 'pundit'
+gem 'jwt'
 
 group :development, :test do
   gem 'factory_bot_rails'
