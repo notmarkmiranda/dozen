@@ -8,7 +8,7 @@ describe Api::AuthenticationController, type: :request do
     describe 'with valid user and password' do
       let(:params) do
         {
-          email: user.email,
+          username: user.email,
           password: 'password'  
         }
       end
