@@ -36,5 +36,21 @@ describe Api::AuthenticationController, type: :request do
         expect(body).to eq(expected_return)
       end
     end
+
+    describe 'with valid user and invalid password' do
+      let(:params) do
+        {
+          username: user.email,
+          password: 'passwordz'  
+        }
+      end
+
+      it 'returns a payload' do
+        post_auth_user
+
+        body = JSON.parse(response.body)
+        expect(body).to eq({ 'errors' => ['Invalid Username / Password'] })
+      end
+    end
   end
 end
