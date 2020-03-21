@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_13_033454) do
+ActiveRecord::Schema.define(version: 2020_03_21_202616) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -71,6 +71,17 @@ ActiveRecord::Schema.define(version: 2020_02_13_033454) do
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "count_in_standings", default: true
     t.index ["league_id"], name: "index_seasons_on_league_id"
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.string "name"
+    t.string "value"
+    t.string "metric"
+    t.string "settable_type", null: false
+    t.bigint "settable_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["settable_type", "settable_id"], name: "index_settings_on_settable_type_and_settable_id"
   end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|

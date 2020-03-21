@@ -1,4 +1,6 @@
 class League < ApplicationRecord
+  include Settable
+  
   self.implicit_order_column = 'created_at'
 
   attr_accessor :user_id
