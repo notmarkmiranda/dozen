@@ -73,12 +73,12 @@ ActiveRecord::Schema.define(version: 2020_03_21_202616) do
     t.index ["league_id"], name: "index_seasons_on_league_id"
   end
 
-  create_table "settings", force: :cascade do |t|
+  create_table "settings", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "name"
     t.string "value"
     t.string "metric"
     t.string "settable_type", null: false
-    t.bigint "settable_id", null: false
+    t.uuid "settable_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["settable_type", "settable_id"], name: "index_settings_on_settable_type_and_settable_id"

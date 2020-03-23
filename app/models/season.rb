@@ -1,5 +1,7 @@
 class Season < ApplicationRecord
   include Settable
+
+  after_create :add_all_settings
   
   self.implicit_order_column = 'created_at'
 
