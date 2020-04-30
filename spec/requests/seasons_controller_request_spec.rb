@@ -141,7 +141,7 @@ describe SeasonsController, type: :request do
 
   describe 'POST#complete' do
     let(:role) { 1 }
-    subject(:post_complete) { post season_complete_path(season) }
+    subject(:post_complete) { post complete_season_path(season) }
 
     before do
       season.activate_and_uncomplete!
@@ -158,7 +158,7 @@ describe SeasonsController, type: :request do
 
   describe 'GET#confirm' do
     let(:role) { 1 }
-    subject(:get_confirm) { get season_confirm_path(season) }
+    subject(:get_confirm) { get confirm_season_path(season) }
 
     before { login_as(user) }
 
@@ -172,7 +172,7 @@ describe SeasonsController, type: :request do
   describe 'POST#count' do
     let(:role) { 1 }
 
-    subject(:post_count) { post season_count_path(season) }
+    subject(:post_count) { post count_season_path(season) }
 
     before { login_as(user) }
 
@@ -212,7 +212,7 @@ describe SeasonsController, type: :request do
   describe 'POST#deactivate' do
     let(:role) { 1 }
 
-    subject(:post_deactivate) { post season_deactivate_path(season) }
+    subject(:post_deactivate) { post deactivate_season_path(season) }
 
     before { login_as(user) }
 
@@ -236,7 +236,7 @@ describe SeasonsController, type: :request do
   describe 'POST#leave' do
     let(:role) { 1 }
 
-    subject(:post_leave) { post season_leave_path(season) }
+    subject(:post_leave) { post leave_season_path(season) }
 
     before { login_as(user) }
 
@@ -260,7 +260,7 @@ describe SeasonsController, type: :request do
   describe 'POST#uncomplete' do
     let(:role) { 1 }
 
-    subject(:post_uncomplete) { post season_uncomplete_path(season) }
+    subject(:post_uncomplete) { post uncomplete_season_path(season) }
 
     before do
       season.deactivate_and_complete!
@@ -284,7 +284,7 @@ describe SeasonsController, type: :request do
   describe 'POST#uncount' do
     let(:role) { 1 }
 
-    subject(:post_uncount) { post season_uncount_path(season) }
+    subject(:post_uncount) { post uncount_season_path(season) }
 
     before { login_as(user) }
 
@@ -319,5 +319,11 @@ describe SeasonsController, type: :request do
         expect(response).to have_http_status(302)
       end
     end
+  end
+
+  describe 'PUT#update_settings' do
+    let(:role) { 1 }
+
+    subject(:put_update_settings) { put update_settings_season_path(season) }
   end
 end

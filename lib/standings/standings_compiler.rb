@@ -13,7 +13,7 @@ class Standings::StandingsCompiler
   def standings
     players = nil
     if object.class == Season
-      @active_season_games_count = [object.games_count, 9].min
+      @active_season_games_count = [object.games_count, season_limit].min
       @season_users = object.players.pluck(:user_id).uniq
       return if @season_users.empty?
 
@@ -32,6 +32,13 @@ class Standings::StandingsCompiler
   end
 
   private
+
+  def season_limit
+    percentage = object.settings.find_by(name: 'COUNTED_GAMES_FOR_STANDINGS').value.to_f / 100
+    games_count = object.games.completed.count
+    limit = (percentage * games_count).to_i
+    limit.zero? ? 1 : limit
+  end
 
   def league_query
     # TODO: (2020-01-04) markmiranda => LIMIT 10 needs to change to a league setting
