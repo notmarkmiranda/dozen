@@ -13,7 +13,11 @@ class Standings::StandingsCompiler
   def standings
     players = nil
     if object.class == Season
-      @active_season_games_count = [object.games_count, 9].min
+      percentage = object.settings.find_by(name: 'COUNTED_GAMES_FOR_STANDINGS').value.to_f / 100
+      games_count = object.games_count
+      limit = (percentage * games_count).to_i
+      limit = limit.zero? ? 1 : limit
+      @active_season_games_count = [object.games_count, limit].min
       @season_users = object.players.pluck(:user_id).uniq
       return if @season_users.empty?
 
