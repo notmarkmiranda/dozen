@@ -9,8 +9,8 @@
         Do you want to deactivate your current season and create the new one? Or just create a new one without activating it?
       </p>
       <div class="season-confirmation__actions">
-        <%= button_to "Deactivate current season", season_deactivate_path(@season), class: 'btn btn-outline-danger btn-block mt-4' %>
-        <%= button_to "Leave current season", season_leave_path(@season), class: 'btn btn-outline-secondary btn-block mt-4' %>
+        <%= button_to "Deactivate current season", deactivate_season_path(@season), class: 'btn btn-outline-danger btn-block mt-4' %>
+        <%= button_to "Leave current season", leave_season_path(@season), class: 'btn btn-outline-secondary btn-block mt-4' %>
         <%= link_to "Cancel", league_path(@season.league), class: 'btn btn-outline-secondary btn-block mt-4'  %>
       </div>
     </div>

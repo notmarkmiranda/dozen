@@ -6,12 +6,17 @@ class SeasonDecorator < ApplicationDecorator
     "active-season" if season.active_season?
   end
 
-  def counted_class
-    season.count_in_standings? ? 'active' : 'inactive'
-  end
-
   def complete_or_uncomplete_buttons
     season.completed ? uncomplete_button : complete_button
+  end
+
+  def counted_games_percentage
+    setting = settings.find_by(name: 'COUNTED_GAMES_FOR_STANDINGS')
+    "#{setting.value}%"
+  end
+
+  def counted_class
+    season.count_in_standings? ? 'active' : 'inactive'
   end
 
   def end_date
@@ -65,10 +70,10 @@ class SeasonDecorator < ApplicationDecorator
   private
 
   def complete_button
-    h.button_to 'Complete Season', h.season_complete_path(season), class: 'btn btn-outline-secondary btn-block-xs mr-2'
+    h.button_to 'Complete Season', h.complete_season_path(season), class: 'btn btn-outline-secondary btn-block-xs mr-2'
   end
 
   def uncomplete_button
-    h.button_to 'Uncomplete and Activate Season', h.season_uncomplete_path(season), class: 'btn btn-outline-secondary btn-block-xs mr-2'
+    h.button_to 'Uncomplete and Activate Season', h.uncomplete_season_path(season), class: 'btn btn-outline-secondary btn-block-xs mr-2'
   end
 end

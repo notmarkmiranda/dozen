@@ -6,13 +6,14 @@
       <i class="fas fa-angle-left"></i> Back to League
     <% end %>
     <% if policy(@season).user_is_admin?(@season.league) %>
+
       <%= @season.complete_or_uncomplete_buttons %>
       <%= button_to "Delete Season", season_path(@season), data: { confirm: "Are you sure?" }, class: 'btn btn-outline-danger mr-2 btn-block-xs', method: :delete %>
       <div class="count-buttons btn-group-block-xs mr-4">
         <label class="btn-group-label text-center">Count in Overall Standings</label>
         <div class="btn-group" role="group">
-          <%= link_to "On", season_count_path(@season), method: :post, id: 'on-button', class: "btn btn-outline-secondary btn-block-xs #{@season.counted_class}" %>
-          <%= link_to "Off", season_uncount_path(@season), method: :post, id: 'off-button', class: "btn btn-outline-secondary btn-block-xs #{@season.uncounted_class}" %>
+          <%= link_to "On", count_season_path(@season), method: :post, id: 'on-button', class: "btn btn-outline-secondary btn-block-xs #{@season.counted_class}" %>
+          <%= link_to "Off", uncount_season_path(@season), method: :post, id: 'off-button', class: "btn btn-outline-secondary btn-block-xs #{@season.uncounted_class}" %>
         </div>
       </div>
       <%= link_to 'Schedule Game', new_game_path(game: { season_id:  @season.id }), class: 'btn btn-outline-secondary btn-block-xs mr-2' %>
@@ -42,6 +43,7 @@
             <div class="col-md-6">
               <b>Start Date: </b><%= @season.start_date %><br />
               <b>End Date: </b><%= @season.end_date %><br />
+              <b>Games Counted for Playoffs: </b><%= @season.counted_games_percentage %>
               <!--// <b>Cash Leader: </b>Michael Cassano - $193 //-->
             </div>
           </div>

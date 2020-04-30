@@ -52,6 +52,8 @@ class SeasonsController < ApplicationController
     redirect_to league_path(league)
   end
 
+  def settings; end
+
   def uncomplete
     @season.activate_and_uncomplete!
     redirect_to @season.league
@@ -69,7 +71,7 @@ class SeasonsController < ApplicationController
   end
 
   def confirmation
-    redirect_to season_confirm_path(@league.active_season)
+    redirect_to confirm_season_path(@league.active_season)
   end
 
   def load_and_authorize_season

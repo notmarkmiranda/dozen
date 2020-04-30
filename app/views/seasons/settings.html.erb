@@ -1,0 +1,21 @@
+<!-- form_for setting update path, needs to update a lot of settings // -->
+<div class="container devise-form">
+  <div class="col-md-5">
+    <div class="card">
+      <div class="card-header">
+        Season Settings
+      </div>
+    <div class="card-body">
+      <%= form_with url: update_settings_season_path, method: :put do |form| %>
+        <% @season.decorated_settings.each do |setting| %>
+          <%= fields_for :setting, setting do |ff| %>
+            <div class="form-group">
+              <%= setting.form_label_and_field(ff, setting.name) %>
+            </div>
+          <% end %>
+        <% end %>
+        <%= form.submit 'Update Settings', class: 'btn btn-dark btn-block' %>
+      <% end %>
+    </div>
+  </div>
+</div>

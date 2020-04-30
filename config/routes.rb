@@ -15,13 +15,17 @@ Rails.application.routes.draw do
   get '/public-leagues', to: 'leagues#public_leagues', as: 'public_leagues'
 
   resources :seasons do
-    get 'confirm'
-    post 'deactivate'
-    post 'leave'
-    post 'complete'
-    post 'uncomplete'
-    post 'count'
-    post 'uncount'
+    member do
+      get 'confirm'
+      post 'deactivate'
+      post 'leave'
+      post 'complete'
+      post 'uncomplete'
+      post 'count'
+      post 'uncount'
+      get 'settings'
+      put 'settings', to: 'settings#update_settings', as: 'update_settings'
+    end
   end
 
   resources :games do

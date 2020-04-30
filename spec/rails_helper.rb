@@ -113,6 +113,9 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # access to #t for i18n
+  config.include AbstractController::Translation
 end
 
 Shoulda::Matchers.configure do |config|

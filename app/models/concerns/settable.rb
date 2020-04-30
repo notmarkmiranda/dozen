@@ -13,6 +13,10 @@ module Settable
         set.assign_attributes(setting) if set.new_record?
         set.save!
       end
-    end    
+    end  
+      
+    def decorated_settings
+      settings.decorate
+    end
   end
 end

@@ -22,6 +22,9 @@ class SeasonPolicy < ApplicationPolicy
   end
 
   # NON-REST ACTIONS
+  def complete?
+    user_is_admin?(league)
+  end
 
   def confirm?
     user_is_admin?(league)
@@ -39,7 +42,11 @@ class SeasonPolicy < ApplicationPolicy
     user_is_admin?(league)
   end
 
-  def complete?
+  def settings?
+    user_is_admin?(league)
+  end
+
+  def update_settings?
     user_is_admin?(league)
   end
 
