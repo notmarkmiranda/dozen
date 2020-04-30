@@ -37,7 +37,7 @@
               <b>Games: </b> <%= @season.games_count %><br />
               <b>Total Money: </b> <%= @season.total_moneys %><br />
               <% if @season.leader %>
-                <b>Points Leader: </b> <%= @season.leader_full_name %> - 13.71<br />
+                <b>Points Leader: </b> <%= @season.leader_full_name %> - <%= @season.leader_full_score %><br />
               <% end %>
             </div>
             <div class="col-md-6">
