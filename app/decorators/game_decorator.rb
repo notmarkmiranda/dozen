@@ -25,6 +25,11 @@ class GameDecorator < ApplicationDecorator
     season.league.location
   end
 
+  def player_score(user_id)
+    score = players.find_by(user_id: user_id).score
+    h.number_with_precision(score, precision: 3)
+  end
+
   def player_text
     completed? ? actual_player_text : estimated_player_text
   end
