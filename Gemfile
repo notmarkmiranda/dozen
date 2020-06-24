@@ -25,7 +25,7 @@ group :development, :test do
   gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
   gem 'pry'
   gem 'rspec-rails', '~> 3.9.0'
-  gem 'selenium-webdriver'
+  gem 'webdrivers'
 end
 
 group :development do
