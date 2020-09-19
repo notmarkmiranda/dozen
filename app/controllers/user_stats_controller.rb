@@ -7,6 +7,7 @@ class UserStatsController < ApplicationController
   end
 
   def games
+    @user_stats = true
     @leagues = League.joins(:memberships).where('memberships.user_id = ?', @user.id)
   end
 
