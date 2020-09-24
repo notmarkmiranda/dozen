@@ -41,7 +41,7 @@ class Season < ApplicationRecord
   end
 
   def games_for_user(user_id)
-    games.joins(:players).where('players.user_id = ?', user_id).decorate
+    games.joins(:players).where('players.user_id = ?', user_id).order(date: :asc).decorate
   end
 
   def games_in_reverse_date_order(limit=nil)
