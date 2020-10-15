@@ -19,6 +19,7 @@ describe 'User can delete season', type: :feature, js: true do
 
         click_button 'Delete Season'
         page.driver.browser.switch_to.alert.accept
+        sleep(1)
 
         expect(current_path).to eq(league_path(league))
         expect(page).to have_content("Seasons: #{season_count}")

@@ -44,7 +44,7 @@ describe Player, type: :model do
       it 'calculates_score' do
         expect {
           player_calculate_score
-        }.to change { player.score }.to(15.8113883008419)
+        }.to change { player.score }.to(15.811388300841896)
       end
     end
   end
