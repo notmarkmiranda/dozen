@@ -15,6 +15,9 @@ describe 'User can schedule game from season#show', type: :feature do
     page.check 'Allows Rebuys or Add Ons'
     fill_in 'Address', with: '123 Fake St, Denver, CO 80219'
     fill_in 'Estimated Player Count', with: '15'
+    fill_in '1st', with: '50'
+    fill_in '2nd', with: '30'
+    fill_in '3rd', with: '20'
     fill_in 'Date & Time', with: '09/05/2030'
 
     click_button 'Schedule Game'
@@ -23,5 +26,8 @@ describe 'User can schedule game from season#show', type: :feature do
     expect(page).to have_content('$1,000')
     expect(page).to have_content('May 9, 2030')
     expect(page).to have_content('Allows rebuys or add-ons')
+    expect(page).to have_content('$7,500.00')
+    expect(page).to have_content('$4,500.00')
+    expect(page).to have_content('$3,000.00')
   end
 end

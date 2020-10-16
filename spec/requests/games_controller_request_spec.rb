@@ -85,7 +85,19 @@ describe GamesController, type: :request do
   end
 
   describe 'POST#create' do
-    let(:game_params) { { game: attributes_for(:game, season_id: season.id) } }
+    let(:game_params) do 
+      { 
+        game: attributes_for(
+          :game, 
+          season_id: season.id,
+          payout_schedule: {
+            "1": "70",
+            "2": "20",
+            "3": "10"
+          }
+        ) 
+      }
+    end
 
     subject(:post_create) { post games_path, params: game_params }
 
@@ -103,7 +115,7 @@ describe GamesController, type: :request do
 
         it 'has 302 status' do
           post_create
-
+          
           expect(response).to have_http_status(302)
         end
       end

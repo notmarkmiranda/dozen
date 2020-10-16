@@ -19,7 +19,6 @@ describe Game, type: :model do
       subject(:game_available_players) { game.available_players }
       let(:memberships) { create_list(:membership, 2, league: league)}
       let(:users) { memberships.map(&:user) }
-      # let!(:players) { create_list(:player, 2, game: game, finishing_place: nil, additional_expense: 0, finishing_order: nil) }
       let(:collected_players) { UserDecorator.decorate_collection(users).collect { |u| [u.full_name, u.id] } }
       let(:first_player) { collected_players.first }
       let(:second_player) { collected_players.last }

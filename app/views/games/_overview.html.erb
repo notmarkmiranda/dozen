@@ -13,3 +13,11 @@
     <%= @game.pot_text %>
   </div>
 </div>
+<hr>
+<div class="row">
+  <div class="col-md-6">
+    <b>Payout Schedule:</b> 1st: <%= @game.payout_amount('first') %>, 2nd: <%= @game.payout_amount('second') %>, 3nd: <%= @game.payout_amount('third') %>
+  </div>
+  <div class="col-md-6">
+  </div>
+</div>

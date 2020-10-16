@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_21_202616) do
+ActiveRecord::Schema.define(version: 2020_10_16_001256) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 2020_03_21_202616) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.date "date"
+    t.jsonb "payout_schedule", default: {}, null: false
     t.index ["league_id"], name: "index_games_on_league_id"
     t.index ["season_id"], name: "index_games_on_season_id"
   end
