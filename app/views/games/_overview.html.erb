@@ -6,6 +6,7 @@
     <b>Date & Time:</b> <%= @game.formatted_full_date %><br />
     <b>Address:</b> <%= @game.address %><br />
     <b>Rebuys:</b> <%= @game.rebuy_text %><br />
+    <b>Payout Schedule:</b> <br />1st: <%= @game.payout_amount('first') %><br />2nd: <%= @game.payout_amount('second') %><br />3nd: <%= @game.payout_amount('third') %>
   </div>
   <div class="col-md-6">
     <b>Buy in:</b> <%= @game.buy_in_text %><br />
@@ -16,7 +17,7 @@
 <hr>
 <div class="row">
   <div class="col-md-6">
-    <b>Payout Schedule:</b> 1st: <%= @game.payout_amount('first') %>, 2nd: <%= @game.payout_amount('second') %>, 3nd: <%= @game.payout_amount('third') %>
+    
   </div>
   <div class="col-md-6">
   </div>
