@@ -34,10 +34,14 @@ class Player < ApplicationRecord
     set_score(score)
   end
 
+  def total_expense(buy_in=nil)
+    additional = additional_expense || 0
+    additional + (buy_in || game.buy_in)
+  end
+
   private
 
   def finishing_order_or_additional_expense
-    # binding.pry
     if (additional_expense.nil? || additional_expense.zero?) && finishing_order.nil?
       errors.add(:additional_expense, 'cannot be blank')
     end
@@ -49,10 +53,5 @@ class Player < ApplicationRecord
   
   def set_score(score)
     update!(score: score)
-  end
-
-  def total_expense(buy_in)
-    additional = additional_expense || 0
-    additional + buy_in 
   end
 end
