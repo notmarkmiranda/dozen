@@ -28,6 +28,7 @@ class GameCompleter
       end
       @alerts << 'Game uncompleted'
       game.update(completed: false)
+      game.players.update(payout: 0.0)
     end
   end
 
