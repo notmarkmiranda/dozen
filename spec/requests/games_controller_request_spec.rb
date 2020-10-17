@@ -91,9 +91,9 @@ describe GamesController, type: :request do
           :game, 
           season_id: season.id,
           payout_schedule: {
-            "1": "70",
-            "2": "20",
-            "3": "10"
+            "first" => "70",
+            "second": "20",
+            "third": "10"
           }
         ) 
       }
