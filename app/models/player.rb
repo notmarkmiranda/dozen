@@ -22,6 +22,7 @@ class Player < ApplicationRecord
 
   def calculate_payout
     schedule_key = PAYOUT_KEYS[finishing_place.to_s]
+    return if schedule_key.nil?
     percentage = game.payout_schedule[schedule_key].to_f / 100
     winnings = game.total_pot * percentage
     set_payout(winnings)
