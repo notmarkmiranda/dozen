@@ -91,7 +91,8 @@ class GamesController < ApplicationController
       :add_ons,
       :address,
       :estimated_players_count,
-      :date
+      :date,
+      payout_schedule: {}
     )
   end
 

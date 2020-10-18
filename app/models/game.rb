@@ -6,6 +6,8 @@ class Game < ApplicationRecord
   belongs_to :league, optional: true
   has_many :players, dependent: :destroy
 
+  serialize :payout_schedule
+  
   delegate :league, to: :season, prefix: true
 
   scope :completed, -> { where(completed: true) }
@@ -21,8 +23,17 @@ class Game < ApplicationRecord
     decorated_users.collect { |user| [user.full_name, user.id] }
   end
 
+  def estimated_total_pot
+    buy_in * estimated_players_count + players.sum(:additional_expense)
+  end
+
   def not_completed?
     !completed?
+  end
+
+  def payout(place)
+    percentage = payout_schedule[place].to_f / 100
+    return estimated_total_pot * percentage unless completed?
   end
 
   def player_finishing_place(user_id, controller_name)

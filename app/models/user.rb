@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :memberships
   has_many :leagues, through: :memberships
+  has_many :players
   
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable

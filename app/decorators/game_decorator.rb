@@ -25,6 +25,12 @@ class GameDecorator < ApplicationDecorator
     season.league.location
   end
 
+  def payout_amount(place)
+    return nil if game.payout_schedule.empty? || game.payout_schedule[place].nil?
+    amount = game.payout(place)
+    h.number_to_currency(amount, precision: 2)
+  end
+
   def player_score(user_id)
     score = players.find_by(user_id: user_id).score
     h.number_with_precision(score, precision: 3)

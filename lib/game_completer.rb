@@ -18,6 +18,7 @@ class GameCompleter
       players.in_place_order.each_with_index do |player, index|
         player.update(finishing_place: index + 1)
         player.calculate_score(game.players.count, game.buy_in)
+        player.calculate_payout
       end
       @alerts << 'Game completed.'
       @game.update!(completed: true)
@@ -27,6 +28,7 @@ class GameCompleter
       end
       @alerts << 'Game uncompleted'
       game.update(completed: false)
+      game.players.update(payout: 0.0)
     end
   end
 

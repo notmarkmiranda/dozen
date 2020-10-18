@@ -12,7 +12,9 @@
         <div class="row">
           <div class="col-md-6">
             <div class="stat"><%= @user.games_played_text %></div>
-            <div class="stat"><b>Total Moneys:</b> Not yet implemented</div>
+            <div class="stat"><b>Total Winnings:</b> <%= @user.total_winnings %></div>
+            <div class="stat"><b>Total Buy Ins:</b> <%= @user.total_buy_ins %></div>
+            <div class="stat"><b>Net Earnings / Expense:</b> <%= @user.net_expense %></div>
           </div>
           <div class="col-md-6">
             <div class="stat"><%= @user.attendance_text %></div>

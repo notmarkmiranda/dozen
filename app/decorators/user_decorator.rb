@@ -53,8 +53,22 @@ class UserDecorator < ApplicationDecorator
     object.last_name[0]
   end
 
+  def net_expense
+    winnings = players.sum(&:payout)
+    expense = players.sum(&:total_expense)
+    h.number_to_currency((winnings - expense), precision: 2)
+  end
+
   def short_name
     return object.email if object.first_name.blank?
     "#{object.first_name} #{last_initial}".strip
+  end
+
+  def total_buy_ins
+    h.number_to_currency(players.sum(&:total_expense), precision: 2)
+  end
+
+  def total_winnings
+    h.number_to_currency(players.sum(&:payout), precision: 2)
   end
 end

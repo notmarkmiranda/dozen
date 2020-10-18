@@ -8,6 +8,7 @@ FactoryBot.define do
     address { "123 Fake St. Denver, CO 80000" }
     estimated_players_count { 25 }
     date { "2030-5-9 17:30:00" }
+    payout_schedule { { "first" => "50", "second" => "30", "third" => "20" } }
 
     factory :game_with_players do
       transient do
