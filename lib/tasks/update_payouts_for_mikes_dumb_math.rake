@@ -62,7 +62,7 @@ task update_payouts_for_mikes_dumb_math: :environment do
 
   league.games.each do |game|
     schedule = PAYOUT_SCHEDULE[game.total_pot.to_s]
-
+    next unless schedule
     first = game.players.find_by(finishing_place: 1)
     second = game.players.find_by(finishing_place: 2)
     third = game.players.find_by(finishing_place: 3)
