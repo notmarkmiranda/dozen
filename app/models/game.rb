@@ -34,6 +34,7 @@ class Game < ApplicationRecord
   def payout(place)
     percentage = payout_schedule[place].to_f / 100
     return estimated_total_pot * percentage unless completed?
+    total_pot * percentage
   end
 
   def player_finishing_place(user_id, controller_name)
