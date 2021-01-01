@@ -4,8 +4,10 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col" class="full-width-cell">Player</th>
+      <% if net_earnings %>
+        <th scope="col">Net Earnings</th>
+      <% end %>
       <th scope="col">Points</th>
-      <!-- //<th scope="col">Winnings</th> //-->
       <th scope="col">Games</th>
     </tr>
   </thead>
@@ -21,8 +23,10 @@
         <tr class="standing <%= standing.place_class(index) %>">
           <th scope="row"><%= standing.place(index) %></th>
           <td><%= link_to standing.user_display_name(current_user), user_stats_path(standing.user_id) %></td>
+          <% if net_earnings %>
+            <td><%= standing.payout_by_season(@season) %></td>
+          <% end %>
           <td><%= number_with_precision(standing.cumulative_score, precision: 3) %></td>
-          <!-- // <td></td>//-->
           <td><%= standing.total_games_played_by_object(@league || @season) %></td>
         </tr>
       <% end %>
