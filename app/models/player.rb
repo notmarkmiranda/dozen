@@ -47,7 +47,7 @@ class Player < ApplicationRecord
   end
 
   def self.expenses
-    sum { |player| player.game.buy_in + player.additional_expense }
+    sum { |player| player.game.buy_in + (player.additional_expense || 0) }
   end
 
   def total_expense(buy_in=nil)
