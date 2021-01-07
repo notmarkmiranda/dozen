@@ -7,7 +7,9 @@
       <% if net_earnings %>
         <th scope="col">Net Earnings</th>
       <% end %>
-      <th scope="col">Points</th>
+      <% unless net_earnings %>
+        <th scope="col">Points</th>
+      <% end %>
       <th scope="col">Games</th>
     </tr>
   </thead>
@@ -26,7 +28,9 @@
           <% if net_earnings %>
             <td><%= standing.payout_by_season(@season) %></td>
           <% end %>
-          <td><%= number_with_precision(standing.cumulative_score, precision: 3) %></td>
+          <% if standing.respond_to?(:cumulative_score) %>
+            <td><%= number_with_precision(standing.cumulative_score, precision: 3) %></td>
+          <% end %>
           <td><%= standing.total_games_played_by_object(@league || @season) %></td>
         </tr>
       <% end %>

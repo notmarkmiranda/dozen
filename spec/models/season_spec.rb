@@ -1,7 +1,11 @@
 require 'rails_helper'
 
 describe Season, type: :model do
-  describe 'validations'
+  describe 'validations' do
+    let(:scoring_enums) { { points: 0, net_earnings: 1 } }
+
+    it { should define_enum_for(:scoring_system).with_values(scoring_enums) }
+  end
 
   describe 'relationships' do
     it { should belong_to :league }

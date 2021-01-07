@@ -5,7 +5,6 @@ Membership.destroy_all
 User.destroy_all
 puts "##### YOLO! #####"
 
-
 admin_user = User.find_or_create_by(first_name: "Mark", last_name: "Miranda", email: "notmarkmiranda@gmail.com")
 admin_user.password = "password"
 admin_user.save

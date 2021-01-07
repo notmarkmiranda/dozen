@@ -1,23 +1,32 @@
 class Standings::StandingsCompiler
   attr_reader :object, :limit
 
+  def self.standings(object, limit)
+    self.new(object, limit).standings
+  end
+  
   def initialize(object, limit=nil)
     @object = object
     @limit = limit || 99
   end
 
-  def self.standings(object, limit)
-    self.new(object, limit).standings
-  end
-
   def standings
     players = nil
     if object.class == Season
-      @active_season_games_count = [object.games_count, season_limit].min
-      @season_users = object.players.pluck(:user_id).uniq
-      return if @season_users.empty?
+      if object.points?
+        @active_season_games_count = [object.games_count, season_limit].min
+        @season_users = object.players.pluck(:user_id).uniq
+        return if @season_users.empty?
 
-      players = Player.find_by_sql(query)
+        players = Player.find_by_sql(query)
+      elsif object.net_earnings?
+        players = Player.
+          joins(:game).
+          where("games.season_id = ? AND games.completed = TRUE", object.id).
+          uniq { |pl| pl.user_id }.
+          sort_by { |pl| -pl.net_earnings_by_season(object) }
+          
+      end
     elsif object.class == League
       @league_games_count = [object.games_count, 10].min
       @league_users = object.players
@@ -57,6 +66,14 @@ class Standings::StandingsCompiler
        games.completed = 'true' \ 
        ORDER BY score DESC LIMIT #{@league_games_count})"
     end.join("\nUNION ALL\n")
+  end
+
+  def net_earnings_query
+    "SELECT user_id, (SUM(payout) - SUM(games.buy_in)) AS earnings \
+    FROM players AS c_players \
+    INNER JOIN games ON c_players.game_id = games.id \
+    AND games.season_id = '#{object.id}' \
+    GROUP BY c_players.user_id ORDER BY earnings DESC"
   end
 
   def query
