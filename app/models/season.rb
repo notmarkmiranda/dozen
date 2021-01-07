@@ -96,7 +96,7 @@ class Season < ApplicationRecord
   end
 
   def standings(limit=nil)
-    return [] if players.empty?
+    return [] if players.empty? || games.completed.empty?
     Standings::StandingsCompiler.standings(self, limit)
   end
 
