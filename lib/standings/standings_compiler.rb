@@ -20,6 +20,7 @@ class Standings::StandingsCompiler
 
         players = Player.find_by_sql(query)
       elsif object.net_earnings?
+        return if object.games.completed.empty?
         players = Player.
           joins(:game).
           where("games.season_id = ? AND games.completed = TRUE", object.id).
