@@ -11,6 +11,8 @@ class Player < ApplicationRecord
   belongs_to :user
 
   scope :in_place_order, ->  { order(finishing_order: :desc).decorate }
+  scope :by_season, -> (season) { joins(:game).where("games.season_id = ?", season.id) }
+  scope :completed_games, -> { joins(:game).where("games.completed = ?", true) }
 
   validates :game, uniqueness: { scope: :user_id }
   validate :finishing_order_or_additional_expense
@@ -33,6 +35,19 @@ class Player < ApplicationRecord
     denominator = finishing_place + 1
     score = ((Math.sqrt(numerator) / denominator))
     set_score(score)
+  end
+
+  def net_earnings_by_season(season)
+    players = self.user.players.by_season(season).completed_games
+    players.earnings - players.expenses
+  end
+
+  def self.earnings
+    sum(&:payout)
+  end
+
+  def self.expenses
+    sum { |player| player.game.buy_in + player.additional_expense }
   end
 
   def total_expense(buy_in=nil)

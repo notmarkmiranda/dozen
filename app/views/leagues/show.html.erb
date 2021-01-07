@@ -43,7 +43,7 @@
           </div>
         </div>
         <div class="league-show__overview-standings mt-4">
-          <%= render partial: 'shared/standings_table' %>
+          <%= render partial: 'shared/standings_table', locals: { net_earnings: false } %>
         </div>
         <div class="league-show__overview-games mt-4">
           <%= render partial: 'shared/games_table', locals: { games: @league.games_in_reverse_date_order(12) } %>

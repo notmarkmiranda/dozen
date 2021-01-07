@@ -47,5 +47,18 @@ describe Player, type: :model do
         }.to change { player.score }.to(15.811388300841896)
       end
     end
+
+    describe '#net_earnings_by_season' do
+      subject(:player_net_earnings) { player1.net_earnings_by_season(season) }
+      let(:game) { create(:game_with_players) }
+      let(:season) { game.season }
+      let(:player1) { game.players.in_place_order.first }
+
+      before { player1.update(additional_expense: 37)}
+
+      it 'returns net earnings for a player by season' do
+        expect(player_net_earnings).to eq(113)
+      end
+    end
   end
 end

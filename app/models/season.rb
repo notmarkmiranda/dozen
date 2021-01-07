@@ -1,6 +1,7 @@
 class Season < ApplicationRecord
   include Settable
 
+  enum scoring_system: { points: 0, net_earnings: 1 }
   after_create :add_all_settings
   
   self.implicit_order_column = 'created_at'

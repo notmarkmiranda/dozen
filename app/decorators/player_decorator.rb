@@ -17,8 +17,14 @@ class PlayerDecorator < ApplicationDecorator
   def user_display_name(current_user=nil)
     user&.decorate&.display_name(current_user)
   end
+
   def user_full_name
     user&.decorate&.full_name
+  end
+
+  def payout_by_season(season)
+    net_earnings = player.net_earnings_by_season(season)
+    h.number_to_currency(net_earnings, precision: 2)
   end
 
   def place(index)
