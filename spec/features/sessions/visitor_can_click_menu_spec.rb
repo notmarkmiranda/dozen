@@ -7,13 +7,13 @@ describe 'Visitor can click menu', type: :feature, js: true do
     # Resize to cause bootstrap to show the menu
     page.driver.browser.manage.window.resize_to(400,200)
 
-    # The page should not show the menu until we click the menu
+    # The page should not show the menu until we click the menu toggler
     expect(page).to have_no_css '.navbar-collapse'
 
-    # Click the menu
+    # Click the menu toggler
     page.find(:xpath, "//button[@class='navbar-toggler']").click
 
-    # Now the page should show the menu
+    # Now the page should show the navbar contents
     expect(page).to have_css '.navbar-collapse'
   end
 end
