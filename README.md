@@ -4,6 +4,12 @@
 
 # Getting Started
 
+## How to run the tests
+
+```
+rspec
+```
+
 ## Docker
 
 Clone the repo
