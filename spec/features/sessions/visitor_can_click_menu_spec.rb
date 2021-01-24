@@ -1,9 +1,7 @@
 require 'rails_helper'
 
-describe 'Visitor can click menu', type: :feature do
+describe 'Visitor can click menu', type: :feature, js: true do
   it 'attempt to click the menu' do
-    Capybara.default_driver = :selenium
-
     visit "/"
 
     # Resize to cause bootstrap to show the menu
