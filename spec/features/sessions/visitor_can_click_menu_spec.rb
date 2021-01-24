@@ -2,7 +2,7 @@ require 'rails_helper'
 
 describe 'Visitor can click menu', type: :feature, js: true do
   it 'attempt to click the menu' do
-    visit "/"
+    visit root_path
 
     # Resize to cause bootstrap to show the menu
     page.driver.browser.manage.window.resize_to(400,200)
