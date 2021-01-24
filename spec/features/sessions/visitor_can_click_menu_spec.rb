@@ -8,7 +8,7 @@ describe 'Visitor can click menu', type: :feature do
     page.driver.browser.manage.window.resize_to(400,200)
   end
 
-  it 'redirected to dashboard path' do
+  it 'attempt to click the menu' do
     visit "/"
 
     # The page should not show the menu until we click the menu
