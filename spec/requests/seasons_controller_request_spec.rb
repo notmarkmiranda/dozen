@@ -326,4 +326,18 @@ describe SeasonsController, type: :request do
 
     subject(:put_update_settings) { put update_settings_season_path(season) }
   end
+
+  describe 'PUT#scoring_system' do
+    let(:role) { 1 }
+    subject(:put_scoring_system) { put scoring_system_season_path(season), params: {:season => {scoring_system: "net_earnings"}} }
+    before do
+      season.points!
+      sign_in(user)
+    end
+
+    it "toggles scoring system to net earnings" do
+      expect { put_scoring_system }.to change { season.reload; season.scoring_system }
+
+    end
+  end
 end
