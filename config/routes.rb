@@ -25,6 +25,7 @@ Rails.application.routes.draw do
       post 'uncount'
       get 'settings'
       put 'settings', to: 'settings#update_settings', as: 'update_settings'
+      put 'scoring_system'
     end
   end
 
