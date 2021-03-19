@@ -64,10 +64,15 @@ class SeasonsController < ApplicationController
     redirect_to @season
   end
 
+  def scoring_system
+    @season.send("#{season_params[:scoring_system]}!")
+    redirect_to @season
+  end
+
   private
 
   def season_params
-    params.require(:season).permit(:league_id, :active_season, :completed)
+    params.require(:season).permit(:league_id, :active_season, :completed, :scoring_system)
   end
 
   def confirmation
