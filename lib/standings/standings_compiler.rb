@@ -29,7 +29,7 @@ class Standings::StandingsCompiler
           
       end
     elsif object.class == League
-      @league_games_count = [object.games_count, 10].min
+      @league_games_count = [object.games_count, 10].max
       @league_users = object.players
         .where('seasons.count_in_standings = ?', true)
         .pluck(:user_id).uniq
