@@ -94,5 +94,16 @@ describe Game, type: :model do
         end
       end
     end
+
+    describe '#game_number_in_season' do
+      let(:season) { create(:season) }
+      let!(:games) { create_list(:game, 3, season: season) }
+
+      it 'returns the number of a game in the season by date order' do
+        expect(games[0].game_number_in_season).to eq(1)
+        expect(games[1].game_number_in_season).to eq(2)
+        expect(games[2].game_number_in_season).to eq(3)
+      end
+    end
   end
 end

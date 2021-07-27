@@ -27,6 +27,10 @@ class Game < ApplicationRecord
     buy_in * estimated_players_count + players.sum(:additional_expense)
   end
 
+  def game_number_in_season
+    season.games.in_date_order.index(self) + 1
+  end
+
   def not_completed?
     !completed?
   end
