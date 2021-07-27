@@ -1,5 +1,5 @@
 <h4>Game Overview</h4>
-<small class="text-muted">Game #10 of <%= link_to "Season ##{@game.season.number_in_order}", @game.season %></small>
+<small class="text-muted">Game <%= @game.game_number_in_season %> of <%= link_to "Season ##{@game.season.number_in_order}", @game.season %></small>
 <hr>
 <div class="row">
   <div class="col-md-6">
