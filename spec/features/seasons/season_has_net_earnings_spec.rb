@@ -7,6 +7,7 @@ describe "Season has net earnings", type: :feature do
     let(:user) { game.players.last.user }
 
     before do 
+      season.net_earnings!
       login_as(user, scope: :user)
     end
 

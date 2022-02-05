@@ -29,7 +29,7 @@ class Standings::StandingsCompiler
           
       end
     elsif object.class == League
-      @league_games_count = [object.games_count, 10].min
+      @league_games_count = [object.games_count, 10].max
       @league_users = object.players
         .where('seasons.count_in_standings = ?', true)
         .pluck(:user_id).uniq
@@ -54,8 +54,7 @@ class Standings::StandingsCompiler
     # TODO: (2020-01-04) markmiranda => LIMIT 10 needs to change to a league setting
     "SELECT user_id, SUM(score) AS cumulative_score, \
      COUNT(game_id) as games_count FROM (#{league_subquery}) AS c_players GROUP BY \
-     c_players.user_id ORDER BY cumulative_score DESC \
-     LIMIT #{limit}"
+     c_players.user_id ORDER BY cumulative_score DESC"
   end
 
   def league_subquery
