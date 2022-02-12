@@ -64,8 +64,13 @@ class SeasonsController < ApplicationController
     redirect_to @season
   end
 
-  def scoring_system
-    @season.send("#{season_params[:scoring_system]}!")
+  def points
+    @season.update! scoring_system: 0
+    redirect_to @season
+  end
+
+  def net_earnings
+    @season.update! scoring_system: 1
     redirect_to @season
   end
 

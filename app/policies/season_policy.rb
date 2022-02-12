@@ -62,6 +62,14 @@ class SeasonPolicy < ApplicationPolicy
     user_is_admin?(league)
   end
 
+  def points?
+    user_is_admin?(league)
+  end
+
+  def net_earnings?
+    user_is_admin?(league)
+  end
+
   class Scope < Scope
     def resolve
       scope.all

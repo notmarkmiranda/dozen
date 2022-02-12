@@ -19,6 +19,14 @@ class SeasonDecorator < ApplicationDecorator
     season.count_in_standings? ? 'active' : 'inactive'
   end
 
+  def scoring_by_points
+    season.scoring_system == 0 ? 'active' : 'inactive'
+  end
+
+  def scoring_by_net_earnings
+    season.scoring_system == 1 ? 'active' : 'inactive'
+  end
+
   def end_date
     games = season.games.in_date_order
     return 'Still in Progress' if games.any? && season.not_completed?

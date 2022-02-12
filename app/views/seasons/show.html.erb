@@ -16,6 +16,13 @@
           <%= link_to "Off", uncount_season_path(@season), method: :post, id: 'off-button', class: "btn btn-outline-secondary btn-block-xs #{@season.uncounted_class}" %>
         </div>
       </div>
+      <div class="`scoring-buttons` btn-group-block-xs mr-4">
+        <label class="btn-group-label text-center">Scoring Method</label>
+        <div class="btn-group" role="group">
+          <%= link_to "Points", points_season_path(@season), method: :post, id: 'points-button', class: "btn btn-outline-secondary btn-block-xs #{@season.scoring_by_points}" %>
+          <%= link_to "Net Earnings", net_earnings_season_path(@season), method: :post, id: 'earnings-button', class: "btn btn-outline-secondary btn-block-xs #{@season.scoring_by_net_earnings}" %>
+        </div>
+      </div>
       <%= link_to 'Schedule Game', new_game_path(game: { season_id:  @season.id }), class: 'btn btn-outline-secondary btn-block-xs mr-2' %>
     <% end %>
   </div>

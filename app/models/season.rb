@@ -29,6 +29,14 @@ class Season < ApplicationRecord
     update!(count_in_standings: true)
   end
 
+  def points!
+    update!(scoring_system: 0)
+  end
+
+  def earnings!
+    update!(scoring_system: 1)
+  end
+
   def deactivate!
     update!(active_season: false)
   end

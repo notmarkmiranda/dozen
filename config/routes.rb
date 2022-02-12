@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       get 'settings'
       put 'settings', to: 'settings#update_settings', as: 'update_settings'
       put 'scoring_system'
+      post 'points'
+      post 'net_earnings'
     end
   end
 
