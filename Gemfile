@@ -19,6 +19,7 @@ gem 'humanize'
 gem 'newrelic_rpm'
 gem 'pundit'
 gem 'jwt'
+gem 'sendgrid-ruby'
 
 group :development, :test do
   gem 'factory_bot_rails'
