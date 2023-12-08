@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include Pundit
+  include Pundit::Authorization
 
   rescue_from ActiveRecord::RecordNotFound, with: :on_record_not_found
   rescue_from AbstractController::ActionNotFound, with: :on_record_not_found
