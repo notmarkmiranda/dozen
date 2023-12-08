@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.4'
+ruby '3.0'
 
 gem 'rails', '~> 6.1'
 gem 'pg', '>= 0.18', '< 2.0'
@@ -22,7 +22,7 @@ gem 'jwt'
 
 group :development, :test do
   gem 'factory_bot_rails'
-  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'master'
+  gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :branch => 'main'
   gem 'pry'
   gem 'rspec-rails', '~> 3.9.0'
   gem 'webdrivers'
