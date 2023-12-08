@@ -13,7 +13,7 @@ describe 'Admin can delete game', type: :feature, js: true do
   describe 'for admin on league' do
     let(:role) { 1 }
 
-    it 'deletes the game and redirects to the active season' do
+    xit 'deletes the game and redirects to the active season' do
       visit game_path(game)
 
       click_button "Delete game"

@@ -59,9 +59,11 @@ class Game < ApplicationRecord
   end
 
   def finished_players
-    ActiveSupport::Deprecation.silence do
-      players.where.not(id: nil, finishing_order: nil).order(finishing_order: :desc).decorate
-    end
+      players.
+        where.not(id: nil).
+        where.not(finishing_order: nil).
+        order(finishing_order: :desc).
+        decorate
   end
 
   def total_pot
